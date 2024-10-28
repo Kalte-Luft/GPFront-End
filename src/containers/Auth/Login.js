@@ -67,7 +67,7 @@ class Login extends Component {
                     <p className="title-form">Login</p>
                     <div className="form-group input-with-icon">
                         <i className="fas fa-envelope"></i>
-                        <label for="email">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input type="email" className="form-control" name="email" placeholder="Enter your Email" 
                         value={this.state.email}
                         onChange={(event) => this.handleOnChangeEmail(event)}
@@ -75,7 +75,7 @@ class Login extends Component {
                     </div>
                     <div className="form-group input-with-icon">
                         <i className="fas fa-lock"></i>
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input type="password" className="form-control" name="password" placeholder="Enter your Password" 
                         value={this.state.password}
                         onChange={(event) => this.handleOnChangePassword(event)}
@@ -83,7 +83,7 @@ class Login extends Component {
                     </div>
                     <div className="form-check">
                         <input type="checkbox" className="form-check-input" id="remember"/>
-                        <label className="form-check-label" for="remember">Remember me</label>
+                        <label className="form-check-label" htmlFor="remember">Remember me</label>
                         <a href="#" className=" float-right">Forgot password?</a>
                     </div>
                     <div className = "col-12" style={{color:'red'}}>
