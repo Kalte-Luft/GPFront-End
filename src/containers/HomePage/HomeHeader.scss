@@ -1,0 +1,102 @@
+.home-header-container {
+    height: 60px;
+    width: 100%;
+    padding: 0 10%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    .home-header-content {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        .left-content {
+            width: 25%;
+            display: flex;
+            align-items: center;
+            .header-logo {
+                background: url("../../assets/images/LogoPany.png") center
+                    center no-repeat;
+                height: 90%;
+                width: 100%;
+                background-size: contain;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+            .menu-icon {
+                i {
+                    font-size: 27px;
+                    color: #5f5f5f;
+                    cursor: pointer;
+                }
+                &:hover {
+                    i {
+                        color: #000;
+                    }
+                }
+            }
+        }
+        .center-content {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            .search-box {
+                position: relative;
+                display: flex;
+                align-items: center;
+                width: 90%;
+                i {
+                    position: absolute;
+                    left: 10px; /* Khoảng cách từ mép trái đến icon */
+                    font-size: 16px;
+                    color: #888;
+                }
+                input {
+                    background-color: #fff;
+                    width: 100%;
+                    padding: 10px 10px 10px 35px; /* Padding bên trái để có khoảng trống cho icon */
+                    font-size: 16px;
+                    border-radius: 8px;
+                    border: 1.2px solid #c7c7c7;
+                    outline: none;
+                    box-sizing: border-box;
+                }
+            }
+        }
+        .right-content {
+            width: 25%;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            
+            .btn {
+                display: flex;
+                align-items: center;
+                
+                background: transparent;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                color: #333;
+                transition: background-color 0.3s ease;
+                i {
+                    margin-right: 4px;
+                    font-size: 18px;
+                }
+            }
+            @media (max-width: 1068px) {
+                .btn span {
+                    display: none;
+                }
+            
+                .btn {
+                    padding: 10px; /* Điều chỉnh padding để icon vẫn căn chỉnh đẹp */
+                    width: 40px;   /* Hoặc kích thước cố định khác tùy nhu cầu */
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
