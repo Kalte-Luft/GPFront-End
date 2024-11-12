@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HomeHeader from './HomeHeader';
+import Banner from './Section/Banner';
 class HomePage extends Component {
 
     render() {
        
         return (
                <div>
-                   <HomeHeader />   
+                    <HomeHeader />   
+                    <Banner />
                 </div>
         );
     }

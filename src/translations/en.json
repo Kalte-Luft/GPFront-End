@@ -1,4 +1,11 @@
 {
+    "home-header":{
+        "login": "Login",
+        "home": "Home",
+        "campaign": "Campaign",
+        "reality": "Reality",
+        "fund" : "Fund"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

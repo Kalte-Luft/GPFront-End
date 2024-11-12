@@ -1,4 +1,11 @@
 {
+    "home-header":{
+        "login": "Đăng nhập",
+        "home": "Trang chủ",
+        "campaign": "Chiến dịch",
+        "reality": "Thực tế",
+        "fund" : "Quỹ"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",
