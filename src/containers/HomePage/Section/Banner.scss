@@ -1,18 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 .banner-container {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    position: relative;
-    min-height: 100vh;
-    overflow-y: hidden;
-    z-index: 1;
-    .banner-content {
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
         height: 100vh;
+        
         img {
             position: absolute;
             top: 0;
@@ -33,7 +27,7 @@
             font-weight: 700;
             transition: margin-top 0.2s ease-out;
         }
-    }
+    
     .sec {
         position: relative;
         background-color: #003329;
