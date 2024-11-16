@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import HomeHeader from './HomeHeader';
 import Banner from './Section/Banner';
+import './HomePage.scss';
+import CustomScrollbars from '../../components/CustomScrollbars';
+
 class HomePage extends Component {
+    scrollbarsRef = createRef();
 
     render() {
-       
         return (
-               <div>
-                    <HomeHeader />   
-                    <Banner />
+            
+                <div className='web-body' ref={this.scrollbarsRef}  style={{ overflowY: "scroll", height: "100vh" }}>
+                    <HomeHeader />
+                    <Banner scrollbarsRef={this.scrollbarsRef} />
                 </div>
+        
         );
     }
-
 }
 
 const mapStateToProps = state => {
@@ -23,8 +27,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-    };
+    return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
