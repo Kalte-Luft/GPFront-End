@@ -33,7 +33,7 @@ class HomeHeader extends Component {
                         <div className="dropdown">
                             <button className="dropbtn">
                                 <i className="fas fa-globe"></i>
-                                <i class="fas fa-caret-down"></i>
+                                <i className="fas fa-caret-down"></i>
                             </button>
                             <div className="dropdown-content">
                                 <a className="VN" href="#" onClick={()=> this.changeLanguage(LANGUAGES.VI)}>

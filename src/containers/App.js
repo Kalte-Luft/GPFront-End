@@ -44,7 +44,6 @@ class App extends Component {
                         {this.props.isLoggedIn && <Header />}
 
                         <span className="content-container">
-                            <CustomScrollbars style={{height:'100vh',width: '100%'}}>
                                 <Switch>
                                     <Route
                                         path={path.HOME}
@@ -66,7 +65,6 @@ class App extends Component {
                                         component={HomePage}
                                     />
                                 </Switch>
-                            </CustomScrollbars>
                         </span>
 
                         <ToastContainer
