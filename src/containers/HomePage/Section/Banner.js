@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import "./Banner.scss";
 import hill1 from "../../../assets/images/hill1.png";
@@ -9,83 +9,71 @@ import hill5 from "../../../assets/images/hill5.png";
 import tree from "../../../assets/images/tree.png";
 import leaf from "../../../assets/images/leaf.png";
 import plant from "../../../assets/images/plant.png";
-import CustomScrollbars from "../../../components/CustomScrollbars";
+import deer from "../../../assets/images/deer.png";
 
-class Banner extends Component {
-    textRef = createRef();
-    leafRef = createRef();
-    hill1Ref = createRef();
-    hill4Ref = createRef();
-    hill5Ref = createRef();
+const Banner = ({ scrollbarsRef }) => {
+    const textRef = useRef();
+    const leafRef = useRef();
+    const hill1Ref = useRef();
+    const hill4Ref = useRef();
+    const hill5Ref = useRef();
 
-    componentDidMount() {
-        if (this.props.scrollbarsRef.current) {
-            this.props.scrollbarsRef.current.view.addEventListener("scroll", this.handleScroll);
-            console.log("Scroll event listener added to CustomScrollbars");
-        }
-    }
+    useEffect(() => {
+        const handleScroll = () => {
+            const value = scrollbarsRef.current.scrollTop;
+            console.log("ScrollY Value:", value);
 
-    componentWillUnmount() {
-        if (this.props.scrollbarsRef.current) {
-            this.props.scrollbarsRef.current.view.removeEventListener("scroll", this.handleScroll);
-            console.log("Scroll event listener removed from CustomScrollbars");
-        }
-    }
+            if (textRef.current) {
+                console.log("Updating text marginTop");
+                textRef.current.style.marginTop = value * 2.5 + "px";
+            }
+            if (leafRef.current) {
+                console.log("Updating leaf top");
+                leafRef.current.style.top = value * -1.5 + "px";
+            }
+            if (hill5Ref.current) {
+                console.log("Updating hill5 left");
+                hill5Ref.current.style.left = value * 1.5 + "px";
+            }
+            if (hill4Ref.current) {
+                console.log("Updating hill4 left");
+                hill4Ref.current.style.left = value * -1.5 + "px";
+            }
+            if (hill1Ref.current) {
+                console.log("Updating hill1 top");
+                hill1Ref.current.style.top = value * 1 + "px";
+            }
+        };
 
-    handleScroll = () => {
-        const value = this.props.scrollbarsRef.current.view.scrollTop;
-        console.log("ScrollY Value:", value);
+        if (scrollbarsRef.current) {
+            scrollbarsRef.current.addEventListener("scroll", handleScroll);
+            console.log("Scroll event listener added to web-body");
+        }
 
-        if (this.textRef.current) {
-            console.log("Updating text marginTop");
-            this.textRef.current.style.marginTop = value * 2.5 + "px";
-        }
-        if (this.leafRef.current) {
-            console.log("Updating leaf top");
-            this.leafRef.current.style.top = value * -1.5 + "px";
-        }
-        if (this.hill5Ref.current) {
-            console.log("Updating hill5 left");
-            this.hill5Ref.current.style.left = value * 1.5 + "px";
-        }
-        if (this.hill4Ref.current) {
-            console.log("Updating hill4 left");
-            this.hill4Ref.current.style.left = value * -1.5 + "px";
-        }
-        if (this.hill1Ref.current) {
-            console.log("Updating hill1 top");
-            this.hill1Ref.current.style.top = value * 1 + "px";
-        }
-    };
+        return () => {
+            if (scrollbarsRef.current) {
+                scrollbarsRef.current.removeEventListener("scroll", handleScroll);
+                console.log("Scroll event listener removed from web-body");
+            }
+        };
+    }, [scrollbarsRef]);
 
-    render() {
-        return (
-            //  <CustomScrollbars style={{height:'100vh',width: '100%'}}> 
-            <div className="banner-container" >
-                <div className="banner-content" >
-                    <img ref={this.hill1Ref} src={hill1} id="hill1" alt="hill1" />
-                    <img src={hill2} id="hill2" alt="hill2" />
-                    <img src={hill3} id="hill3" alt="hill3" />
-                    <img ref={this.hill4Ref} src={hill4} id="hill4" alt="hill4" />
-                    <img ref={this.hill5Ref} src={hill5} id="hill5" alt="hill5" />
-                    <img src={tree} id="tree" alt="tree" />
-                    <h2 className="text" ref={this.textRef} id="text">GreenPaws</h2>
-                    <img ref={this.leafRef} src={leaf} id="leaf" alt="leaf" />
-                    <img src={plant} id="plant" alt="plant" />
-                </div>
-                <div className="sec">
-                    <h2>Scrolling Effect</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
-                        libero fugiat ut omnis mollitia inventore cum earum ipsum nesciunt sed quis
-                        facere amet, sequi consectetur eius quidem quo ratione similique eveniet laborum.
-                    </p>
-                </div>
-            </div>
-            // </CustomScrollbars>
-        );
-    }
-}
+    return (
+        <div className="banner-container">
+            <img ref={hill1Ref} src={hill1} id="hill1" alt="hill1" />
+            <img src={hill2} id="hill2" alt="hill2" />
+            <img src={hill3} id="hill3" alt="hill3" />
+            <img ref={hill4Ref} src={hill4} id="hill4" alt="hill4" />
+            <img ref={hill5Ref} src={hill5} id="hill5" alt="hill5" />
+            <img src={tree} id="tree" alt="tree" />
+            
+            <h2 className="text" ref={textRef} id="text">GreenPaws</h2>
+            <img ref={leafRef} src={leaf} id="leaf" alt="leaf" />
+            <img src={plant} id="plant" alt="plant" />
+            <img src={deer} id="deer" alt="deer" />
+        </div>
+    );
+};
 
 const mapStateToProps = (state) => {
     return {
