@@ -1,6 +1,6 @@
 export const path = {
     HOME: '/',
-    HOME_PAGE: '/home',
+    HOMEPAGE: '/home', //trang home
     LOGIN: '/login',
     LOG_OUT: '/logout',
     SYSTEM: '/system'

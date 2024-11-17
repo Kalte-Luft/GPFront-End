@@ -17,18 +17,29 @@ class HomeHeader extends Component {
                     <div className="left-content">
                         <div className="header-logo"></div>
                     </div>
-                    <div className="center-content">                                             
+                    <div className="center-content">
                         <button className="btn">
-                            <span><FormattedMessage id="home-header.home"/></span>
+                            <span><FormattedMessage id="home-header.home" /></span>
                         </button>
                         <button className="btn">
-                            <span><FormattedMessage id="home-header.reality"/></span>
+                            <span> About </span>
                         </button>
                         <button className="btn">
-                            <span><FormattedMessage id="home-header.campaign"/></span>
+                            <span><FormattedMessage id="home-header.reality" /></span>
                         </button>
                         <button className="btn">
-                            <span><FormattedMessage id="home-header.fund"/></span>
+                            <span><FormattedMessage id="home-header.campaign" /></span>
+                        </button>
+                        {/* <button className="btn">
+                            <span><FormattedMessage id="home-header.fund" /></span>
+                        </button> */}
+                           <button className="btn">
+                            <span>Contact us</span>
+                        </button>
+                    </div>
+                    <div className="right-content">
+                        <button className ="btn btn-right">
+                            Donate
                         </button>
                         <div className="dropdown">
                             <button className="dropbtn">
@@ -46,11 +57,11 @@ class HomeHeader extends Component {
                                 </a>
                             </div>                           
                         </div>
-                        <button className="btn login-btn">
+                        <button className="btn login-btn-right">
                             <i className="fas fa-user"></i>
                             <span><FormattedMessage id="home-header.login"/></span>
                         </button>
-                    </div>
+                        </div>
                 </div>
             </div>
         );

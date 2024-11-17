@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import HomeHeader from './HomeHeader';
 import Banner from './Section/Banner';
 import Infor from './Section/Infor';
+import HomeFooter from './HomeFooter';
+import './Footer.scss';
 import './HomePage.scss';
 import CustomScrollbars from '../../components/CustomScrollbars';
 
@@ -16,6 +18,7 @@ class HomePage extends Component {
                     <HomeHeader />
                     <Banner scrollbarsRef={this.scrollbarsRef} />
                     <Infor />
+                    <HomeFooter />
                 </div>
         
         );
