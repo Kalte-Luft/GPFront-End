@@ -23,19 +23,19 @@ const Banner = ({ scrollbarsRef }) => {
             const value = scrollbarsRef.current.scrollTop;
 
             if (textRef.current) {
-                textRef.current.style.marginTop = value * 2.5 + "px";
+                textRef.current.style.marginTop = value * 2 + "px";
             }
             if (leafRef.current) {
-                leafRef.current.style.top = value * -1.5 + "px";
+                leafRef.current.style.top = value * -1 + "px";
             }
             if (leafRef.current) {
-                leafRef.current.style.left = value * 1.5 + "px";
+                leafRef.current.style.left = value * 1 + "px";
             }
             if (hill5Ref.current) {
-                hill5Ref.current.style.left = value * 1.5 + "px";
+                hill5Ref.current.style.left = value * 1 + "px";
             }
             if (hill4Ref.current) {
-                hill4Ref.current.style.left = value * -1.5 + "px";
+                hill4Ref.current.style.left = value * -1 + "px";
             }
             if (hill1Ref.current) {
                 hill1Ref.current.style.top = value * 1 + "px";
@@ -61,11 +61,12 @@ const Banner = ({ scrollbarsRef }) => {
             <img ref={hill4Ref} src={hill4} id="hill4" alt="hill4" />
             <img ref={hill5Ref} src={hill5} id="hill5" alt="hill5" />
             <img src={tree} id="tree" alt="tree" />
-            
+            <div className="shadow"></div>
             <h2 className="text" ref={textRef} id="text">GreenPaws</h2>
             <img ref={leafRef} src={leaf} id="leaf" alt="leaf" />
+            <img src={deer} id="deer" alt="deer"/>
             <img src={plant} id="plant" alt="plant" />
-            <img src={deer} id="deer" alt="deer" />
+            
         </div>
     );
 };

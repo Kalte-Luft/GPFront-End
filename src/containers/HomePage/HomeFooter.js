@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl'; //đa ngôn ngữ
-
+import './Footer.scss';
 
 
 class HomeFooter extends Component {

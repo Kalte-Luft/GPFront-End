@@ -30,9 +30,6 @@ class HomeHeader extends Component {
                         <button className="btn">
                             <span><FormattedMessage id="home-header.campaign" /></span>
                         </button>
-                        {/* <button className="btn">
-                            <span><FormattedMessage id="home-header.fund" /></span>
-                        </button> */}
                            <button className="btn">
                             <span>Contact us</span>
                         </button>

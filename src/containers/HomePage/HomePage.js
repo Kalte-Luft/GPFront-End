@@ -2,12 +2,15 @@ import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import HomeHeader from './HomeHeader';
 import Banner from './Section/Banner';
-import Infor from './Section/Infor';
+import Join from './Section/Join';
+import Method from './Section/Method';
 import HomeFooter from './HomeFooter';
-import './Footer.scss';
 import './HomePage.scss';
-import CustomScrollbars from '../../components/CustomScrollbars';
-
+import Approach from './Section/Approach';
+import EthicalStandards from './Section/EthicalStandards';
+import Reality from './Section/Reality';
+import Partners from './Section/Partners';
+import Calculator from './Section/Calculator';
 class HomePage extends Component {
     scrollbarsRef = createRef();
 
@@ -17,7 +20,13 @@ class HomePage extends Component {
                 <div className='web-body' ref={this.scrollbarsRef} style={{overflowY:'scroll'}}>
                     <HomeHeader />
                     <Banner scrollbarsRef={this.scrollbarsRef} />
-                    <Infor />
+                    <Join/>
+                    <Method/>
+                    <Approach/>
+                    <EthicalStandards/>
+                    <Reality/>
+                    <Partners/>
+                    <Calculator/>
                     <HomeFooter />
                 </div>
         

@@ -1,0 +1,54 @@
+.method-container{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    .method-content{
+        height: 100%;
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        .left-content{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: left;
+            h1{
+                font-size: 4rem;
+                font-weight: 700;
+                margin-bottom: 20px;
+                color: #1A4F45;
+            }
+            h3{
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 20px;
+                color: #1A4F45;
+            }
+            p{
+                width: 100%;
+                font-size: 1.3rem;
+                font-weight: 400;
+                margin-bottom: 20px;
+                color: #1A4F45;
+                letter-spacing: 2px;
+                text-align: justify;
+            }
+        }
+        .right-content{
+            width: 50%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .leopard-img{
+                background: url('../../../assets/images/leopard.png') center center no-repeat;
+                background-size: cover;
+                height: 100%;
+                width: 100%;
+            }
+            
+        }
+    }
+}
