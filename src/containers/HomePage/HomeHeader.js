@@ -36,11 +36,6 @@ class HomeHeader extends Component {
                            <button className="btn">
                             <span>Contact us</span>
                         </button>
-                    </div>
-                    <div className="right-content">
-                        <button className ="btn btn-right">
-                            Donate
-                        </button>
                         <div className="dropdown">
                             <button className="dropbtn">
                                 <i className="fas fa-globe"></i>
@@ -57,6 +52,12 @@ class HomeHeader extends Component {
                                 </a>
                             </div>                           
                         </div>
+                    </div>
+                    <div className="right-content">
+                        <button className ="btn btn-right">
+                            Donate
+                        </button>
+                        
                         <button className="btn login-btn-right">
                             <i className="fas fa-user"></i>
                             <span><FormattedMessage id="home-header.login"/></span>

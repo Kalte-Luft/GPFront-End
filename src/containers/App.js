@@ -17,8 +17,9 @@ import System from '../routes/System';
 import { CustomToastCloseButton } from '../components/CustomToast';
 
 import HomePage from './HomePage/HomePage.js'; //import HomePage 
-
+import About from './About/AboutUs.js'; //import AboutUs
 import CustomScrollbars from '../components/CustomScrollbars.js';
+import AboutUs from './About/AboutUs.js';
 
 class App extends Component {
 
@@ -56,6 +57,7 @@ class App extends Component {
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} /> {/*hàm bọc để check xem người dùng đã đăng nhập hay ch*/}
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
+                                    <Route path={path.ABOUTUS} component={AboutUs} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

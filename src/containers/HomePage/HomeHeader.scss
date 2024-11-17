@@ -55,37 +55,9 @@
                     font-size: 18px;
                 }
             }
-        }
-
-        .right-content {
-            width: 30%;
-            display: flex;
-            float: right;
-            justify-content: center;
-            align-items: center;
-            flex-direction: row;
-            gap: 5px;
-            .btn {
-                display: flex;
-                align-items: center;
-                // background: transparent;
-                // border: transparent;
-                border-radius: 30px;
-                cursor: pointer;
-                font-size: 20px;
-                color: #fbfbfb;
-                // transition: background-color 0.3s ease;
-                height: 40px;
-                padding: 15px 25px;
-               background-color: #359381;
-                i {
-                    margin-right: 6px;
-                    font-size: 19px;
-                }
-            }
             .dropdown {
                 width: 10%;
-                min-width: 40px;
+                min-width: 65px;
                 position: relative;
                 display: inline-block;
                 margin-left: 12px;
@@ -104,7 +76,7 @@
                     cursor: pointer;
                     
                     i{
-                        color: #f75d5d;
+                        color: #359381;
                         margin-right: 3px;
                     }
                 }
@@ -135,6 +107,35 @@
                     
                 }
             }
+        }
+
+        .right-content {
+            width: 30%;
+            display: flex;
+            float: right;
+            justify-content: left;
+            align-items: center;
+            flex-direction: row;
+            gap: 65px;
+            .btn {
+                display: flex;
+                align-items: center;
+                // background: transparent;
+                // border: transparent;
+                border-radius: 10px;
+                cursor: pointer;
+                font-size: 16px;
+                color: #fbfbfb;
+                // transition: background-color 0.3s ease;
+                height: 45px;
+                padding: 15px 25px;
+                background-color: #359381;
+                i {
+                    margin-right: 6px;
+                    font-size: 19px;
+                }
+            }
+            
             
         }
        

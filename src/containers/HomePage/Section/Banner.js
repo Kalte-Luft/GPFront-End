@@ -21,39 +21,34 @@ const Banner = ({ scrollbarsRef }) => {
     useEffect(() => {
         const handleScroll = () => {
             const value = scrollbarsRef.current.scrollTop;
-            console.log("ScrollY Value:", value);
 
             if (textRef.current) {
-                console.log("Updating text marginTop");
                 textRef.current.style.marginTop = value * 2.5 + "px";
             }
             if (leafRef.current) {
-                console.log("Updating leaf top");
                 leafRef.current.style.top = value * -1.5 + "px";
             }
+            if (leafRef.current) {
+                leafRef.current.style.left = value * 1.5 + "px";
+            }
             if (hill5Ref.current) {
-                console.log("Updating hill5 left");
                 hill5Ref.current.style.left = value * 1.5 + "px";
             }
             if (hill4Ref.current) {
-                console.log("Updating hill4 left");
                 hill4Ref.current.style.left = value * -1.5 + "px";
             }
             if (hill1Ref.current) {
-                console.log("Updating hill1 top");
                 hill1Ref.current.style.top = value * 1 + "px";
             }
         };
 
         if (scrollbarsRef.current) {
             scrollbarsRef.current.addEventListener("scroll", handleScroll);
-            console.log("Scroll event listener added to web-body");
         }
 
         return () => {
             if (scrollbarsRef.current) {
                 scrollbarsRef.current.removeEventListener("scroll", handleScroll);
-                console.log("Scroll event listener removed from web-body");
             }
         };
     }, [scrollbarsRef]);
