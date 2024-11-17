@@ -29,9 +29,9 @@ const Calculator = () => {
         <div className="calculator-container" >
             <div className="calculator-content">
                 <div className="filter">
-                    <h1>Calculate Your Carbon Footprint</h1>
-                    <p>Do you want to help strengthen climate change resilience for your future?</p>
-                    <button className="btn">Calculate Your Footprint</button>
+                    <h1 data-aoe="popInBottom">Calculate Your Carbon Footprint</h1>
+                    <p data-aoe="popInBottom">Do you want to help strengthen climate change resilience for your future?</p>
+                    <button className="btn" data-aoe="popInBottom">Calculate Your Footprint</button>
                 </div>
             </div>
         </div>
