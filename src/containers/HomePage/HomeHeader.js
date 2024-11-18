@@ -29,8 +29,8 @@ class HomeHeader extends Component {
                         <button className="btn" onClick={() => this.handleNavigate('/about')}>
                             <span><FormattedMessage id="home-header.about" /></span>
                         </button>
-                        <button className="btn">
-                            <span><FormattedMessage id="home-header.reality" /></span>
+                        <button className="btn" onClick={() => this.handleNavigate('/status')}>
+                            <span><FormattedMessage id="home-header.status" /></span>
                         </button>
                         <button className="btn">
                             <span><FormattedMessage id="home-header.campaign" /></span>

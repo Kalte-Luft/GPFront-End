@@ -6,6 +6,7 @@ export const path = {
     SYSTEM: '/system',
     ABOUTUS: '/about',
     CONTACTUS: '/contact',
+    STATUS: '/status'
 };
 
 export const LANGUAGES = {

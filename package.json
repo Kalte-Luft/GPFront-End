@@ -10,6 +10,8 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.3.3",
     "connected-react-router": "^6.9.1",
+    "echarts": "^5.5.1",
+    "echarts-for-react": "^3.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.0",
     "node-sass": "^6.0.0",
