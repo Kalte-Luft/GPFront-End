@@ -4,7 +4,10 @@
         "home": "Trang chủ",
         "campaign": "Chiến dịch",
         "reality": "Thực tế",
-        "fund" : "Quỹ"
+        "donate": "Quyên góp",
+        "about": "Về chúng tôi",
+        "contact": "Liên hệ"
+
     },
     "common": {
         "add": "Thêm",

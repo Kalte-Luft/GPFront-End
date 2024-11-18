@@ -27,7 +27,7 @@ class HomeHeader extends Component {
                             <span><FormattedMessage id="home-header.home" /></span>
                         </button>
                         <button className="btn" onClick={() => this.handleNavigate('/about')}>
-                            <span> About </span>
+                            <span><FormattedMessage id="home-header.about" /></span>
                         </button>
                         <button className="btn">
                             <span><FormattedMessage id="home-header.reality" /></span>
@@ -36,7 +36,7 @@ class HomeHeader extends Component {
                             <span><FormattedMessage id="home-header.campaign" /></span>
                         </button>
                            <button className="btn" onClick={() => this.handleNavigate('/contact')}>
-                            <span>Contact us</span>
+                            <span><FormattedMessage id="home-header.contact" /></span>
                         </button>
                         <div className="dropdown">
                             <button className="dropbtn">
@@ -57,7 +57,7 @@ class HomeHeader extends Component {
                     </div>
                     <div className="right-content">
                         <button className ="btn btn-right">
-                            Donate
+                            <FormattedMessage id="home-header.donate" />
                         </button>
                         
                         <button className="btn login-btn-right">

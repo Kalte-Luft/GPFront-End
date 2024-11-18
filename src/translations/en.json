@@ -4,7 +4,9 @@
         "home": "Home",
         "campaign": "Campaign",
         "reality": "Reality",
-        "fund" : "Fund"
+        "donate": "Donate",
+        "about": "About" ,
+        "contact": "Contact"       
     },
     "common": {
         "add": "Add",
