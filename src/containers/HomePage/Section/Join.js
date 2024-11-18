@@ -19,7 +19,7 @@ const Join = (props) => {
       observeRootThreshold: [0, 0.5, 0.75, 1],
       intersectionRatio: 0.5,
       once: false,
-      speed: 1300,
+      speed: 1500,
       delay: 0,
       timingFunction: "linear",
     });

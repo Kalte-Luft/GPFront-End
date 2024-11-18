@@ -1,82 +1,63 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl'; //đa ngôn ngữ
-import './Footer.scss';
+import React from "react";
+import { connect } from "react-redux";
+import "./HomeFooter.scss";
 
-
-class HomeFooter extends Component {
-
-	render() {
-		return (
-			<div className="footer-background">
-
-				<div className="footer-content">
-					<div className="footer-content-top-background">
-						<div className="footer-content-top">
-							<div className="footer-content-top-left">
-								<div className="logo"></div>
-							</div>
-							<div className="footer-content-top-center-left">
-								<ul>
-									<li ><a href="#" >Blog</a></li>
-									<li ><a href="#" >About</a></li>
-									<li ><a href="#" >Services</a></li>
-									<li ><a href="#" >Campaign</a></li>
-									<li ><a href="#" >Projects</a></li>
-									<li ><a href="#" >Contact Us</a></li>
-									<li ><a href="#" >terms &amp; Conditions </a></li>
-									<li ><a href="#" >Cookie policy</a></li>
-									<li ><a href="#" >Privacy</a></li>
-								</ul>
-							</div>
-							<div className="footer-content-top-center-right">
-								<ul>
-									<li ><a href="#" >Da Nang</a></li>
-									<li ><a href="#" >Binh Dinh</a></li>
-									<li ><a href="#" >Hue</a></li>
-									<li ><a href="#" >Dak Lak</a></li>
-
-								</ul>
-							</div>
-							<div className="footer-content-top-right">
-								<h3>Newsletter sign up</h3>
-								<div className="input-email">
-									<label>Email</label>
-									<input type="email" 
-									/>
-									</div>
-									< div className="sign-up-email">
-                            <button className="submit" 
-							//</div>onClick={() => { this.handleLogin() }}
-							><b>Sign up</b></button>
-                        </div>
-								
-							</div>
-						</div>
-						<div className="footer-content-bottom">
-							<p>&copy; 2024 Greenpaws : Khanh &amp; Nghia Registered Charity Viet-Han
-								<a target="_blank" href="https://www.facebook.com/profile.php?id=100048034400458"> &#8594; Click here &#8592; </a>
-							</p>
-						</div>
+const HomeFooter = () => {
+    return (
+        <div className="footer-container">
+            <div className="footer-content">
+				<div className="logo"></div>
+				<div className="menu">
+					<div className="menu-item">
+						<a>About</a>
+						<a>Contact Us</a>
+						<a>Reality</a>
+						<a>Campaign</a>
+						<a>Donate</a>
+						<a>Terms & Conditions</a>
+						<a>Cookie policy</a>
+						<a>Privacy Policy</a>
 					</div>
 				</div>
-
+				<div className="branch">
+					<div className="branch-item">
+						<a>Đà Nẵng</a>
+						<a>Bình Định</a>
+						<a>Huế</a>
+						<a>Quảng Nam</a>
+					</div>
+				</div>
+				<div className="mail">
+					<div className="mail-title">
+						<h1>Newsletter sign up</h1>
+					</div>
+					<div className="mail-input">
+						<h1>Email:</h1>
+						<input type="text" placeholder="Enter your email address"/>
+					</div>
+					<div className="sign-up">
+						<button className="btn">Sign up</button>
+					</div>
+				</div>
 			</div>
-		);
-	}
+			<div className="hr"></div>
+			<div className="copy-right">
+				<p>© 2021 Reality. All rights reserved</p>
+			</div>
 
-}
-
-const mapStateToProps = state => { //lấy biến thông qua state
-	return {
-		isLoggedIn: state.user.isLoggedIn,
-		language: state.app.language,
-	};
+        </div>
+    );
 };
 
-const mapDispatchToProps = dispatch => { //fire action event của redux
-	return {
-	};
+const mapStateToProps = (state) => {
+    return {
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
+    };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeFooter); //bộc 2 lớp dữ liệu từ store ra ngoài, kết nối redux với react
+const mapDispatchToProps = (dispatch) => {
+    return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeFooter);
