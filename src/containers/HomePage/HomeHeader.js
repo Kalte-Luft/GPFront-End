@@ -35,7 +35,7 @@ class HomeHeader extends Component {
                         <button className="btn">
                             <span><FormattedMessage id="home-header.campaign" /></span>
                         </button>
-                           <button className="btn">
+                           <button className="btn" onClick={() => this.handleNavigate('/contact')}>
                             <span>Contact us</span>
                         </button>
                         <div className="dropdown">

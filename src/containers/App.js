@@ -20,6 +20,7 @@ import HomePage from './HomePage/HomePage.js'; //import HomePage
 import About from './About/AboutUs.js'; //import AboutUs
 import CustomScrollbars from '../components/CustomScrollbars.js';
 import AboutUs from './About/AboutUs.js';
+import ContactUs from './Contact/ContactUs.js';
 
 class App extends Component {
 
@@ -58,6 +59,7 @@ class App extends Component {
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.ABOUTUS} component={AboutUs} />
+                                    <Route path={path.CONTACTUS} component={ContactUs} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

@@ -8,6 +8,7 @@ class AboutHeader extends Component {
 	render() {
 		return (
 			<div className="about-container">
+				<div className='transparent'></div>
 				<div className="about-banner">
 					<div className="content-up">		
 						<h1>About Greenpaw</h1>

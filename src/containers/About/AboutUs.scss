@@ -1,16 +1,13 @@
-.home-header-container {
-	height          : 90px;
-	width           : 100%;
-	background-color: transparent;
-	display         : flex;
-	align-items     : center;
-	justify-content : space-between;
-	position        : relative;
-	z-index         : 2;
-}
+
 
 .about-container {
+	.transparent{
+		background-color: transparent;
+		height: 90px;
+		width: 100%;
+	}
 	.about-banner {
+		
 		margin               : 0;
 		padding              : 0;
 		background-image     : url('../../assets/images/bg-about.jpg');
