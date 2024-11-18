@@ -3,7 +3,8 @@ export const path = {
     HOMEPAGE: '/home', //trang home
     LOGIN: '/login',
     LOG_OUT: '/logout',
-    SYSTEM: '/system'
+    SYSTEM: '/system',
+    ABOUTUS: '/about',
 };
 
 export const LANGUAGES = {

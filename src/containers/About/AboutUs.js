@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HomeHeader from '../HomePage/HomeHeader';
 import HomeFooter from '../HomePage/HomeFooter';
+import AboutHeader from './Section/AboutHeader';
 import './AboutUs.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,10 +11,13 @@ class AboutUs extends Component {
 
 	render() {
 
-
 		return (
 			<div>
-				<HomeHeader />
+				<HomeHeader 
+				/>
+
+				<AboutHeader
+				/>
 				
 				<HomeFooter
 				/>
