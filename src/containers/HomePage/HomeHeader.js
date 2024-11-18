@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import "./HomeHeader.scss";
 import VN from "../../assets/images/VN.svg";
@@ -10,6 +11,10 @@ class HomeHeader extends Component {
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language);
     };
+    handleNavigate = (path) => {
+        this.props.history.push(path);
+    };
+    
     render() {
         return (
             <div className="home-header-container">
@@ -18,10 +23,10 @@ class HomeHeader extends Component {
                         <div className="header-logo"></div>
                     </div>
                     <div className="center-content">
-                        <button className="btn">
+                        <button className="btn" onClick={() => this.handleNavigate('/')}>
                             <span><FormattedMessage id="home-header.home" /></span>
                         </button>
-                        <button className="btn">
+                        <button className="btn" onClick={() => this.handleNavigate('/about')}>
                             <span> About </span>
                         </button>
                         <button className="btn">
@@ -79,4 +84,6 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));
+
+

@@ -50,7 +50,7 @@ const Join = (props) => {
             communities thrive. Together, we can help the earth
             heal.
           </p>
-          <button className="btn" data-aoe="fadeInUp" data-aoe-delay="500">
+          <button className="btn" data-aoe="fadeIn">
             <span>Discover Now</span>
           </button>
         </div>
