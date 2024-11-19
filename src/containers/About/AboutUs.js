@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import HomeHeader from '../HomePage/HomeHeader';
 import HomeFooter from '../HomePage/HomeFooter';
 import AboutHeader from './Section/AboutHeader';
+import WhoAreGP from './Section/WhoAreGP';
+import VisionMission from './Section/VisionMission';
+import WhyYouSupport from './Section/WhyYouSupport';
+import OurStory from './Section/OurStory';
 import './AboutUs.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,6 +23,18 @@ class AboutUs extends Component {
 				<AboutHeader
 				/>
 				
+				<WhoAreGP
+				/>
+
+				<VisionMission
+				/>
+
+				<WhyYouSupport
+				/>
+
+				<OurStory
+				/>
+
 				<HomeFooter
 				/>
 			</div>

@@ -1,0 +1,51 @@
+.OurStory-container {
+	height: 1500px;
+	width : 100%;
+
+	.core-value {
+		height    : 35%;
+		margin-top: 20px;
+		cursor    : pointer;
+
+		.core-value-content {
+			background-image   : url("../../../assets/images/Core-value.png");
+			background-repeat  : no-repeat;
+			background-size    : cover;
+			background-position: center;
+			width              : 100%;
+			height             : 100%;
+			margin-top         : 76px;
+		}
+	}
+
+	.our-projects {
+		height: 35%;
+		cursor: pointer;
+
+		.our-projects-content {
+			background-image   : url("../../../assets/images/OurProjects.png");
+			background-repeat  : no-repeat;
+			background-size    : cover;
+			background-position: center;
+			width              : 100%;
+			height             : 100%;
+			margin-top         : 12px;
+		}
+
+		.btn-our-projects {
+			margin-right    : 528px;
+			background-color: #45625D;
+			color           : white;
+			font-size       : 15px;
+			width           : 16%;
+			border-radius   : 5%;
+			height          : 50px;
+			margin-top      : 16px;
+			float           : right;
+		}
+	}
+
+	.OurStory-content {
+		height: 30%;
+	}
+}

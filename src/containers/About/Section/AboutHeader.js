@@ -10,11 +10,10 @@ class AboutHeader extends Component {
 			<div className="about-container">
 				<div className='transparent'></div>
 				<div className="about-banner">
-					<div className="content-up">		
+					<div className="content-up">
 						<h1>About Greenpaw</h1>
 					</div>
 				</div>
-
 			</div>
 		);
 	}

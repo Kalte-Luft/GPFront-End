@@ -42,7 +42,7 @@ const HomeFooter = () => {
 			</div>
 			<div className="hr"></div>
 			<div className="copy-right">
-				<p>© 2021 Reality. All rights reserved</p>
+				<p>© 2024 Reality. All rights reserved</p>
 			</div>
 
         </div>
