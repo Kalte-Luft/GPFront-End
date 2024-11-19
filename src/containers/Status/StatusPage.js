@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import StatusBanner from "./Section/StatusBanner";
+import CarbonBanner from "./Section/CarbonBanner";
 import HomeHeader from "../HomePage/HomeHeader";
 import HomeFooter from "../HomePage/HomeFooter";
-import Chart from "./Section/Chart";
+import Chart from "./Section/CarbonChart";
+import Forest from "./Section/Forest";
+import GarbageBanner from "./Section/GarbageBanner";
+import GarbageChart from "./Section/GarbageChart";
 
 class Status extends Component {
   render() {
@@ -11,9 +15,11 @@ class Status extends Component {
       <div>
         <HomeHeader />
         <StatusBanner />
-        <div className="status-content" style={{height:'100vh'}}>
-          <Chart />
-        </div>
+        <CarbonBanner />
+        <Chart />
+        <Forest />
+        <GarbageBanner />
+        <GarbageChart/>
         <HomeFooter />
       </div>
     );

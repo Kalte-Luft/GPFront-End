@@ -1,9 +1,10 @@
-import React from "react";
+import {React, useEffect} from "react";
 import { connect } from "react-redux";
 import ReactECharts from "echarts-for-react";
-import "./Chart.scss";
+import "./CarbonChart.scss";
+import Aoe from "aoejs";
 
-const Chart = () => {
+const CarbonChart = () => {
     const colors = ['#5470C6', '#EE6666'];
 
   // Cấu hình biểu đồ ECharts
@@ -44,7 +45,7 @@ const Chart = () => {
           }
         },
         // prettier-ignore
-        data: ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12']
+        data: ['2024-1', '2024-2', '2024-3', '2024-4', '2024-5', '2024-6', '2024-7', '2024-8', '2024-9', '2024-10', '2024-11', '2024-12']
       },
       {
         type: 'category',
@@ -69,17 +70,24 @@ const Chart = () => {
           }
         },
         // prettier-ignore
-        data: ['2015-1', '2015-2', '2015-3', '2015-4', '2015-5', '2015-6', '2015-7', '2015-8', '2015-9', '2015-10', '2015-11', '2015-12']
+        data: ['2023-1', '2023-2', '2023-3', '2023-4', '2023-5', '2023-6', '2023-7', '2023-8', '2023-9', '2023-10', '2023-11', '2023-12']
       }
     ],
     yAxis: [
       {
-        type: 'value'
-      }
+        type: 'value',
+        name: 'Emissions',
+        axisLabel: {
+          formatter: '{value} ton', // Thêm đơn vị vào nhãn
+        },
+       
+        min: 9, // Giá trị tối thiểu
+        max: 13, // Giá trị tối đa
+      },
     ],
     series: [
       {
-        name: 'Năm (2015)',
+        name: 'Năm (2023)',
         type: 'line',
         xAxisIndex: 1,
         smooth: true,
@@ -87,29 +95,55 @@ const Chart = () => {
           focus: 'series'
         },
         data: [
-          2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
+          10.5, 9.8, 11.2, 10.9, 11.5, 12.0, 11.8, 12.3, 11.7, 12.1, 11.9, 12.4
         ]
       },
       {
-        name: 'Năm (2016)',
+        name: 'Năm (2024)',
         type: 'line',
         smooth: true,
         emphasis: {
           focus: 'series'
         },
         data: [
-          3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7
+          10.7, 9.9, 11.4, 11.0, 11.6, 12.2, 12.0, 12.5, 11.8, 12.3, 12.0, 12.6
         ]
       }
     ]
   };
+  // Hook useEffect để khởi tạo Aoejs
+  useEffect(() => {
+    // Khởi tạo Aoe
+    const aoe = new Aoe();
+    aoe.init({
+      attributes: {
+        dataset: "data-aoe", // Chỉ định thuộc tính `data-aoe` để áp dụng hiệu ứng
+        delay: "data-aoe-delay",
+        speed: "data-aoe-speed",
+      },
+      observerRoot: null,
+      observeRootMargin: "0px",
+      observeRootThreshold: [0, 0.5, 0.75, 1],
+      intersectionRatio: 0.5,
+      once: false,
+      speed: 1500,
+      delay: 0,
+      timingFunction: "linear",
+    });
 
+    // Clean-up để ngắt kết nối observers khi component unmount
+    return () => {
+      aoe.disconnectObservers();
+    };
+  }, []); // Chạy sau khi component render lần đầu tiên
   return (
     <div className="chart-container">
-    <div className="chart-content">
-      <h2>Biểu đồ khí thải carbon năm 2015 và 2016</h2>
-      <ReactECharts option={option} style={{ height: "400px", width: "100%" }} />
-    </div>
+      <div className="filter">
+        <div className="chart-content" data-aoe="popInBottom">
+          <h2>Carbon emissions chart 2023 and 2024</h2>
+          <ReactECharts option={option} style={{ height: "400px", width: "100%" }} />
+        </div>
+      </div>
     </div>
   );
 };
@@ -121,4 +155,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Chart);
+export default connect(mapStateToProps)(CarbonChart);
