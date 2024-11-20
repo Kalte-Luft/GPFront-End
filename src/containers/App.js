@@ -47,7 +47,7 @@ class App extends Component {
             <Fragment>
                 {/* lưu lại data sau đăng nhập trên front-end*/}
                 <Router history={history}>
-                    <div className="main-container">
+                    <div className="main-container" style={{fontFamily: "futura bt"}}>
                         {/* nếu logging r thì render tới header */}
                         {this.props.isLoggedIn && <Header />}
 
