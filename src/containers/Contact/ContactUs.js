@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HomeHeader from '../HomePage/HomeHeader';
 import HomeFooter from '../HomePage/HomeFooter';
+import ContactGreenpaw from './Section/ContactGreenpaw';
 class ContactUs extends Component {
 
 	render() {
 
 		return (
 			<div>
-				<HomeHeader 
+				<HomeHeader
 				/>
 
-				
-				
+				<ContactGreenpaw
+				/>
+
 				<HomeFooter
 				/>
 			</div>
