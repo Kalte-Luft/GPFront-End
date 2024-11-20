@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
+import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import "./Join.scss";
 import Aoe from 'aoejs';  // Import Aoejs
 
 const Join = (props) => {
+  const handleNavigate = (path) => {
+      props.history.push(path);
+  };
   // Hook useEffect để khởi tạo Aoejs
   useEffect(() => {
     // Khởi tạo Aoe
@@ -50,8 +54,8 @@ const Join = (props) => {
             communities thrive. Together, we can help the earth
             heal.
           </p>
-          <button className="btn" data-aoe="fadeIn">
-            <span>Discover Now</span>
+          <button className="btn" data-aoe="fadeIn" onClick={()=> handleNavigate('/campaign')}>
+            <span>Discover Now <i class="fa fa-chevron-down"></i></span>
           </button>
         </div>
       </div>
@@ -70,4 +74,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Join);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Join));

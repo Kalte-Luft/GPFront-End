@@ -32,7 +32,7 @@ class HomeHeader extends Component {
                         <button className="btn" onClick={() => this.handleNavigate('/status')}>
                             <span><FormattedMessage id="home-header.status" /></span>
                         </button>
-                        <button className="btn">
+                        <button className="btn" onClick={() => this.handleNavigate('/campaign')}>
                             <span><FormattedMessage id="home-header.campaign" /></span>
                         </button>
                            <button className="btn" onClick={() => this.handleNavigate('/contact')}>

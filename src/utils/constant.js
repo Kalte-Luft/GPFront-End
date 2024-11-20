@@ -6,7 +6,8 @@ export const path = {
     SYSTEM: '/system',
     ABOUTUS: '/about',
     CONTACTUS: '/contact',
-    STATUS: '/status'
+    STATUS: '/status',
+    CAMPAIGN: '/campaign',
 };
 
 export const LANGUAGES = {
