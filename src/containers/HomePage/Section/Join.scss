@@ -21,25 +21,24 @@
             align-items: center;
             
             .title-1 {
-                font-size: 4rem;
-                font-weight: 700;
+                font-size: 5rem;
+                font-weight: bolder;
                 margin-bottom: 20px;
                 color: #1A4F45;
             }
             .title-2 {
-                font-size: 4rem;
-                font-weight: 700;
+                font-size: 5rem;
+                font-weight: bolder;
                 margin-bottom: 20px;
                 color: #6AA5A9;
             }
             .description {
                 width: 60%;
                 text-align: center;
-                font-size: 1.3rem;
-                font-weight: 400;
+                font-size: 1.5rem;
+                font-weight: 500;
                 margin-bottom: 20px;
                 color: #1A4F45;
-                letter-spacing: 2px;
             }
             .btn{
                 height: 50px;
@@ -47,7 +46,7 @@
                 color: white;
                 padding: 10px 20px;
                 border-radius: 5px;
-                font-size: 1.3rem;
+                font-size: 1.5rem;
                 font-weight: 500;
                 cursor: pointer;
                 transition: all 0.3s;

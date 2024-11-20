@@ -21,6 +21,7 @@ import CustomScrollbars from '../components/CustomScrollbars.js';
 import AboutUs from './About/AboutUs.js';
 import ContactUs from './Contact/ContactUs.js';
 import Status from './Status/StatusPage.js';
+import Campaign from './Campaign/CampaignPage.js';
 
 class App extends Component {
 
@@ -61,6 +62,7 @@ class App extends Component {
                                     <Route path={path.ABOUTUS} component={AboutUs} />
                                     <Route path={path.CONTACTUS} component={ContactUs} />
                                     <Route path={path.STATUS} component={Status} />
+                                    <Route path={path.CAMPAIGN} component={Campaign} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 import "./Calculator.scss";
 import Aoe from "aoejs"; // Import Aoejs
-const Calculator = () => {
+const Calculator = (props) => {
+    const handleNavigate = (path) => {
+        props.history.push(path);
+    }
     useEffect(() => {
         const aoe = new Aoe();
         aoe.init({
@@ -31,7 +35,7 @@ const Calculator = () => {
                 <div className="filter">
                     <h1 data-aoe="popInBottom">Calculate Your Carbon Footprint</h1>
                     <p data-aoe="popInBottom">Do you want to help strengthen climate change resilience for your future?</p>
-                    <button className="btn" data-aoe="popInBottom">Calculate Your Footprint</button>
+                    <button className="btn" data-aoe="popInBottom" onClick={()=> handleNavigate('/campaign')}>Calculate Your Footprint <i class="fa fa-chevron-right"></i></button>
                 </div>
             </div>
         </div>
@@ -49,4 +53,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Calculator);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Calculator));

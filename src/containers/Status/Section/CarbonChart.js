@@ -87,7 +87,7 @@ const CarbonChart = () => {
     ],
     series: [
       {
-        name: 'Năm (2023)',
+        name: '(2023)',
         type: 'line',
         xAxisIndex: 1,
         smooth: true,
@@ -99,7 +99,7 @@ const CarbonChart = () => {
         ]
       },
       {
-        name: 'Năm (2024)',
+        name: '(2024)',
         type: 'line',
         smooth: true,
         emphasis: {

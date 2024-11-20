@@ -34,19 +34,17 @@ const GarbageBanner = (props) => {
         <div className="garbage-banner-container">
             <div className="garbage-banner-content">
                 <div className="left-content" data-aoe="popInBottom">
-                    <h1>Rác thải</h1>
+                    <h1>Waste</h1>
 
                     <p>
-                        Rác thải, đặc biệt là nhựa và các chất thải khó phân
-                        hủy, đang gây ra những tác động nghiêm trọng đối với
-                        động vật hoang dã trên toàn cầu. Các loài động vật
-                        thường xuyên bị mắc kẹt hoặc nuốt phải rác thải, dẫn đến
-                        nguy cơ tử vong cao.
+                        Waste, especially plastic and non-degradable materials,
+                        is causing severe impacts on wildlife worldwide. Animals
+                        often get entangled in or ingest waste, leading to a
+                        high risk of mortality.
                     </p>
                     <p>
-                        Ngoài ra, rác thải cũng làm ô nhiễm môi trường sống của
-                        động vật, ảnh hưởng đến các hệ sinh thái tự nhiên mà
-                        chúng phụ thuộc vào.
+                        In addition, waste also pollutes the animals' habitats,
+                        affecting the natural ecosystems they rely on.
                     </p>
                 </div>
                 <div className="right-content" data-aoe="popInBottom">

@@ -9,8 +9,8 @@ const StatusBanner = () => {
             <div className='transparent'></div>
             <div className="status-banner-content">
                 <div className="gradient">
-                    <h1>Thực trạng</h1>
-                    <p>Thực trạng của môi trường sống động vật hoang dã tại Việt Nam</p>
+                    <h1>Status</h1>
+                    <p>The current state of wildlife habitats in Vietnam</p>
                 </div>
             </div>
 
