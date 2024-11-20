@@ -1,4 +1,4 @@
-import { React, useEffect,useState } from "react";
+import { React, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import ReactECharts from "echarts-for-react";
 import "./GarbageChart.scss";
@@ -7,10 +7,10 @@ import Aoe from "aoejs";
 const GarbageChart = () => {
     // Dữ liệu cho các loại rác thải
     const wasteData = [
-        { name: "Sinh hoạt", value: 28000000, color: "#359381" },
-        { name: "Công nghiệp", value: 8000000, color: "#6AA5A9" },
-        { name: "Y tế", value: 1000000, color: "#5a8869" },
-        { name: "Xây dựng", value: 5000000, color: "#18433C" },
+        { name: "Household", value: 28000000, color: "#359381" },
+        { name: "Industrial", value: 8000000, color: "#6AA5A9" },
+        { name: "Medical", value: 1000000, color: "#5a8869" },
+        { name: "Construction", value: 5000000, color: "#18433C" },
     ];
 
     // Tổng lượng rác thải
@@ -22,7 +22,6 @@ const GarbageChart = () => {
     // Lọc dữ liệu theo trạng thái hiển thị
     const filteredData = wasteData.filter((_, idx) => selectedCategories[idx]);
 
-
     // Cấu hình biểu đồ tròn ECharts
     const option = {
         tooltip: {
@@ -31,7 +30,7 @@ const GarbageChart = () => {
         },
         series: [
             {
-                name: "Rác thải",
+                name: "Waste Type",
                 type: "pie",
                 radius: "50%",
                 data: filteredData.map((item) => ({
@@ -66,7 +65,6 @@ const GarbageChart = () => {
         setSelectedCategories(updatedCategories);
     };
 
-
     // Hook useEffect để khởi tạo Aoejs
     useEffect(() => {
         // Khởi tạo Aoe
@@ -97,8 +95,11 @@ const GarbageChart = () => {
         <div className="garbage-container">
             <div className="chart-content">
                 <div className="left-content" data-aoe="hitLeft">
-                    <div className="household"  onClick={() => toggleCategory(0)}>
-                        <a>Rác Thải Sinh Hoạt</a>
+                    <div
+                        className="household"
+                        onClick={() => toggleCategory(0)}
+                    >
+                        <a>Household Waste</a>
                         <button className="btn">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -115,18 +116,19 @@ const GarbageChart = () => {
                                 <path d="M18.28,39.62c.26-3.19,1.44-6.77,6.33-6.85,4.32-.07,8.37,5.91,8.17,11.69-.14,4.1-1.24,7.72-6.29,7.69C22.1,52.15,18.14,46.36,18.28,39.62Z"></path>
                             </svg>
                         </button>
-                        
                     </div>
-                    <div className="industrial" onClick={() => toggleCategory(1)}>
-                        <a>Rác Thải Công Nghiệp</a>
-                        <button className="btn" >
+                    <div
+                        className="industrial"
+                        onClick={() => toggleCategory(1)}
+                    >
+                        <a>Industrial Waste</a>
+                        <button className="btn">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 100 100"
                                 id="1307318704"
                                 className="svg u_1307318704"
                                 data-icon-name="general_paw_print"
-                                
                             >
                                 {" "}
                                 <path d="M44.79,78.81c-2.09.36-4.2.62-6.27,1.09-4.53,1-8.61.38-11.38-3.57-3-4.26-3.24-9.24-.24-13.3A155.84,155.84,0,0,1,42.06,45.36c4.81-4.81,11.73-3.6,15.84,2.38,3.86,5.62,7.39,11.49,10.85,17.37,2.89,4.92,3,10-.75,14.54S59.7,83.23,55,81.27C51.78,79.9,48.49,78.54,44.79,78.81Z"></path>
@@ -136,12 +138,14 @@ const GarbageChart = () => {
                                 <path d="M18.28,39.62c.26-3.19,1.44-6.77,6.33-6.85,4.32-.07,8.37,5.91,8.17,11.69-.14,4.1-1.24,7.72-6.29,7.69C22.1,52.15,18.14,46.36,18.28,39.62Z"></path>
                             </svg>
                         </button>
-                        
                     </div>
                 </div>
-                <div className="center-content" >
-                    <h2>Biểu đồ tỉ lệ các loại rác thải tại Việt Nam</h2>
-                    <div data-aoe="ball" style={{ height: "600px", width: "100%" }}>
+                <div className="center-content">
+                    <h2>The percentage of different types of waste in Vietnam.</h2>
+                    <div
+                        data-aoe="ball"
+                        style={{ height: "600px", width: "100%" }}
+                    >
                         <ReactECharts
                             option={option}
                             style={{ height: "100%", width: "100%" }}
@@ -150,7 +154,7 @@ const GarbageChart = () => {
                 </div>
                 <div className="right-content" data-aoe="hitRight">
                     <div className="medical" onClick={() => toggleCategory(2)}>
-                        <button className="btn" >
+                        <button className="btn">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 100 100"
@@ -166,10 +170,13 @@ const GarbageChart = () => {
                                 <path d="M18.28,39.62c.26-3.19,1.44-6.77,6.33-6.85,4.32-.07,8.37,5.91,8.17,11.69-.14,4.1-1.24,7.72-6.29,7.69C22.1,52.15,18.14,46.36,18.28,39.62Z"></path>
                             </svg>
                         </button>
-                        <a>Rác Thải Y Tế</a>
+                        <a>Medical Waste</a>
                     </div>
-                    <div className="construction" onClick={() => toggleCategory(3)} >
-                        <button className="btn" >
+                    <div
+                        className="construction"
+                        onClick={() => toggleCategory(3)}
+                    >
+                        <button className="btn">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 100 100"
@@ -185,7 +192,7 @@ const GarbageChart = () => {
                                 <path d="M18.28,39.62c.26-3.19,1.44-6.77,6.33-6.85,4.32-.07,8.37,5.91,8.17,11.69-.14,4.1-1.24,7.72-6.29,7.69C22.1,52.15,18.14,46.36,18.28,39.62Z"></path>
                             </svg>
                         </button>
-                        <a>Rác Thải Xây Dựng</a>
+                        <a>Construction Waste</a>
                     </div>
                 </div>
             </div>

@@ -21,10 +21,10 @@ const HomeFooter = () => {
 				</div>
 				<div className="branch">
 					<div className="branch-item">
-						<a>Đà Nẵng</a>
-						<a>Bình Định</a>
-						<a>Huế</a>
-						<a>Quảng Nam</a>
+						<a>Da Nang</a>
+						<a>Binh Dinh</a>
+						<a>Hue</a>
+						<a>Quang Nam</a>
 					</div>
 				</div>
 				<div className="mail">
