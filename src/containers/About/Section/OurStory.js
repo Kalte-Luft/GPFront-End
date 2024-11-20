@@ -4,7 +4,9 @@ import { FormattedMessage } from 'react-intl'; //đa ngôn ngữ
 import "./OurStory.scss";
 
 class OurStory extends Component {
-
+haha=() => {
+	alert ("hehe");
+}
 	render() {
 		return (
 			<div className="OurStory-container">
@@ -15,7 +17,7 @@ class OurStory extends Component {
 				<div className="our-projects">
 					<div className="our-projects-content">
 					</div>
-					<button type ="submit" className="btn btn-our-projects">Our Projects</button>
+					<button className="btn btn-our-projects" onClick={() => this.haha()}>Our Projects</button>
 				</div>
 				<div className="OurStory-content">
 				</div>
