@@ -7,6 +7,7 @@ import WhoAreGP from './Section/WhoAreGP';
 import VisionMission from './Section/VisionMission';
 import WhyYouSupport from './Section/WhyYouSupport';
 import OurStory from './Section/OurStory';
+import StartYourCacbon from './Section/StartYourCacbon';
 import './AboutUs.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -17,12 +18,12 @@ class AboutUs extends Component {
 
 		return (
 			<div>
-				<HomeHeader 
+				<HomeHeader
 				/>
 
 				<AboutHeader
 				/>
-				
+
 				<WhoAreGP
 				/>
 
@@ -35,8 +36,12 @@ class AboutUs extends Component {
 				<OurStory
 				/>
 
+				<StartYourCacbon
+				/>
+
 				<HomeFooter
 				/>
+
 			</div>
 		);
 	}
