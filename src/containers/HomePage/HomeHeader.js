@@ -56,7 +56,7 @@ class HomeHeader extends Component {
                         </div>
                     </div>
                     <div className="right-content">
-                        <button className ="btn btn-right">
+                        <button className ="btn btn-right" onClick ={()=> {this.handleNavigate('/donate')}}>
                             <FormattedMessage id="home-header.donate" />
                         </button>
                         

@@ -8,6 +8,7 @@ export const path = {
     CONTACTUS: '/contact',
     STATUS: '/status',
     CAMPAIGN: '/campaign',
+    DONATE:'/donate',
 };
 
 export const LANGUAGES = {

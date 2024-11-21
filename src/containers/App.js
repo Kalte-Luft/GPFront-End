@@ -22,6 +22,7 @@ import AboutUs from './About/AboutUs.js';
 import ContactUs from './Contact/ContactUs.js';
 import Status from './Status/StatusPage.js';
 import Campaign from './Campaign/CampaignPage.js';
+import DonateUs from './Donate/DonateUs.js'
 
 class App extends Component {
 
@@ -63,6 +64,7 @@ class App extends Component {
                                     <Route path={path.CONTACTUS} component={ContactUs} />
                                     <Route path={path.STATUS} component={Status} />
                                     <Route path={path.CAMPAIGN} component={Campaign} />
+                                    <Route path={path.DONATE} component={DonateUs} />
                                 </Switch>
                             </CustomScrollbars>
                         </div>

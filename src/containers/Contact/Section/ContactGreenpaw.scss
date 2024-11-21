@@ -31,10 +31,9 @@
 				align-items     : center;
 
 				.text-contact {
-					display: flex;
-
+					display        : flex;
 					color          : white;
-					font-size      : 60px;
+					font-size      : 90px;
 					justify-content: center;
 					padding-top    : 180px;
 					font-weight    : 900;
@@ -71,7 +70,7 @@
 						h3 {
 							text-align   : left;
 							margin-right : 250px;
-							font-size    : 30px;
+							font-size    : 37px;
 							color        : #45625d;
 							direction    : ltr;
 							font-weight  : 900;
@@ -110,6 +109,10 @@
 					/* Căn lề trái */
 					align-items    : flex-start;
 
+					p {
+						font-size: 21px;
+					}
+
 					/* Căn lề trên cùng */
 					.bottom-content-right-content {
 						text-align  : left;
@@ -123,12 +126,14 @@
 						.fa-map-marker-alt {
 							font-size   : 36px;
 							padding-left: 10px;
+							color       : #45625d;
 						}
 
 						.fa-envelope {
 							margin-top  : 40px;
 							font-size   : 36px;
 							padding-left: 10px;
+							color       : #45625d;
 						}
 					}
 				}
