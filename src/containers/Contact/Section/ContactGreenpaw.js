@@ -4,15 +4,7 @@ import { FormattedMessage } from 'react-intl'; //đa ngôn ngữ
 import "./ContactGreenpaw.scss";
 
 class ContactGreenpaw extends Component {
-	constructor(props) {
-		super(props);
-	}
-	// handleCalculateNowClick = () => {
-	// 	alert('thành công');
-	// };
-	// handleContactUsBtn = () => {
-	// 	window.location.href = '/contact';
-	// };
+	
 	render() {
 		return (
 			<div className="ContactGreenpaw-container">
