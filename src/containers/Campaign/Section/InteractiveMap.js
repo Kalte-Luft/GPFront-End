@@ -1,4 +1,4 @@
-import React, { useEffect, useRef,useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import "./InteractiveMap.scss";
 import $ from "jquery";
@@ -75,7 +75,6 @@ const InteractiveMap = () => {
         { id: "BaRiaVungTau", name: "Ba Ria - Vung Tau", number: 2 },
         { id: "AnGiang", name: "An Giang", number: 1 },
     ];
-    
 
     const findProvince = (id) => {
         for (let i = 0; i < library.length; i++) {
@@ -121,7 +120,11 @@ const InteractiveMap = () => {
                 <div className="filter"></div>
                 <div className="info-box" ref={infoBoxRef}>
                     {selectedProvince && (
-                        <div dangerouslySetInnerHTML={{ __html: displayProvince(selectedProvince) }} />
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: displayProvince(selectedProvince),
+                            }}
+                        />
                     )}
                 </div>
                 <div className="map-box">

@@ -1,12 +1,12 @@
 #customers {
-    font-family    : Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width          : 100%;
+    width: 100%;
 }
 
 #customers td,
 #customers th {
-    border : 1px solid #ddd;
+    border: 1px solid #ddd;
     padding: 8px;
 }
 
@@ -19,71 +19,69 @@
 }
 
 #customers th {
-    padding-top     : 12px;
-    padding-bottom  : 12px;
-    text-align      : left;
-    background-color: #04AA6D;
-    color           : white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04aa6d;
+    color: white;
 }
-
 .btn-edit {
-    width     : 50px;
-    border    : none;
-    outline   : none;
-    background: transparent;
-    color     : orange;
-
+    margin-right: 8px;
+    width: 50px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(153, 100, 0);
     &:hover {
         background-color: transparent !important;
-        color           : orange !important;
+        color: rgb(105, 68, 0);
     }
 }
-
 .btn-delete {
-    width     : 50px;
-    border    : none;
-    outline   : none;
-    background: transparent;
-    color     : red;
-
+    width: 25px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(153, 0, 0);
     &:hover {
         background-color: transparent !important;
-        color           : red !important;
+        color: rgb(105, 0, 0);
     }
 }
-
 .modal-user-container {
-    .modal-content {
-        .modal-header {
-            button {
-                background-color: transparent !important;
-                color           : white;
-                border          : none;
-                font-size       : 27px;
-            }
-        }
+  .modal-content{
+    .modal-header{
+      justify-content: space-between;
+      button{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: white;
+        font-size: 27px;
+      }
     }
-
+  }
     .modal-user-body {
-        display  : flex;
-        gap      : 15px;
+        display: flex;
+        gap: 15px;
         flex-wrap: wrap;
-
         .input-container {
-            display       : flex;
+            display: flex;
             flex-direction: column;
-            width         : 49%;
-
-            &.max-width-input {
-                width: 100%;
-            }
-
-            input {
+            width: calc(100% / 2 - 10px);
+        
+        &.input-container-full {
+            width: 100%;
+        }
+            .form-control {
                 border-radius: 3px;
-                border       : 1px solid grey;
-                height       : 30px;
-                outline      : none;
-                padding      : 0 10px;
+                border: 1px solid rgba(128, 128, 128, 0.773);
+                height: 33px;
+                outline: none;
+                padding: 0 10px;
+                
             }
         }
     }

@@ -1,196 +1,200 @@
-import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-
-import './UserManage.scss'; //import css
-import { getAllUsers, createNewUserService, deleteUserService, editUserService } from '../../services/userService'; //ham call api
-
-import { emitter } from '../../utils/emitter'; //import emitter
-import ModalUser from './ModalUser';
-import ModalEditUser from './ModalEditUser';
-
-class UserManage extends Component { //khoi tao component UserManage
-
-    constructor(props) { //khoi tao constructor de khoi tao state
+import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
+import "./UserManage.scss";
+import {
+    getAllUsers,
+    createNewUserService,
+    deleteUserService,
+    editUserService
+} from "../../services/userService";
+import ModalUser from "./ModalUser";
+import ModalEditUser from "./ModalEditUser";
+import { emitter } from "../../utils/emitter";
+class UserManage extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            arrUsers: [], //khoi tao mang arrUsers 
-            isOpenModalUser: false, //khi an nut moi hien modal
-            isOpenModalEditUser: false, //khi an nut edit hien modal
-            userEdit: {} //khoi tao userEdit de chua thong tin user can edit
+            //giống với hàm khởi tạo trong OOP
+            arrUsers: [],
+            isOpenModalUser: false,
+            isOpenModalEditUser: false,
+            userEdit: {},
+        };
+    }
+
+    async componentDidMount() {
+        await this.getAllUsersFromReact();
+    }
+    getAllUsersFromReact = async () => {
+        let response = await getAllUsers("ALL");
+        if (response && response.errCode === 0) {
+            this.setState({
+                //dùng để re-render lại component
+                arrUsers: response.users,
+            });
         }
-    }
-
-
-    async componentDidMount() {  //goi api khi component duoc render
-        await this.getAllUsersFromReact(); //goi ham getAllUsers de lay du lieu
-    }
-
-    getAllUsersFromReact = async () => { //ham lay du lieu tu api
-        let response = await getAllUsers('ALL');//goi ham getAllUsers tu userService
-        if (response && response.errCode === 0) { //neu response tra ve errCode = 0 
-            this.setState({  //set state de render lai giao dien
-                arrUsers: response.users
-            })
-        }
-    }
-
-
+    };
     handleAddNewUser = () => {
         this.setState({
-            isOpenModalUser: true, //set isOpenModalUser = true de hien modal
-        })
-    }
-
+            isOpenModalUser: true,
+        });
+    };
     toggleUserModal = () => {
         this.setState({
-            isOpenModalUser: !this.state.isOpenModalUser, //doi trang thai cua isOpenModalUser
-        })
-    }
-
-    toggleUserEditModal = () => {
+            isOpenModalUser: !this.state.isOpenModalUser,
+        });
+    };
+    toggleEditUserModal = () => {
         this.setState({
             isOpenModalEditUser: !this.state.isOpenModalEditUser,
-        })
-    }
-
-    /* life - cycle
-    1. run component
-    2. Did mount (set state)    mount = born
-    3. render
-    */
-
-    createNewUser = async (data) => { //ham them user moi
+        });
+    };
+    createNewUser = async (data) => {
         try {
-            let response = await createNewUserService(data); //goi ham createNewUserService tu userService
-            if (response && response.errCode !== 0) { //neu response tra ve errCode khac 0
-                alert(response.errMessage) //thong bao loi
+            let response = await createNewUserService(data);
+            if (response && response.errCode !== 0) {
+                alert(response.errMessage);
             } else {
-                await this.getAllUsers(); //goi ham getAllUsers de lay du lieu
-                this.setState({ //set state de render lai giao dien
-                    isOpenModalUser: false //dong modal khi them user thanh cong
-                })
-
-                emitter.emit('EVENT_CLEAR_MODAL_DATA'); //emit su kien EVENT_CLEAR_MODAL_DATA de clear data
+                await this.getAllUsersFromReact();
+                this.setState({
+                    isOpenModalUser: false,
+                });
+                emitter.emit("EVENT_CLEAR_MODAL_DATA");
             }
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            console.log("createNewUser error: ", error);
         }
-    }
-
-    handleDeleteUser = async (user) => {   //ham xoa user
+    };
+    handleDeleteUser = async (user) => {
         try {
-            let res = await (user.id); //goi ham deleteUserService tu userService de xoa user
-            if (res && res.errCode === 0) { //neu response tra ve errCode = 0  
-                await this.getAllUsersFromReact(); //goi ham getAllUsers de lay du lieu 
-
+            let response = await deleteUserService(user.id);
+            if (response && response.errCode === 0) {
+                await this.getAllUsersFromReact();
             } else {
-                alert(res.errMessage) //thong bao loi
+                alert(response.errMessage);
             }
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            console.log("handleDeleteUser error: ", error);
         }
-
-    }
-
+    };
     handleEditUser = (user) => {
         this.setState({
-            isOpenModalEditUser: true, //set isOpenModalUser = true de hien modal
-            userEdit: user, //gan userEdit = user can edit
-        })
-    }
-
-    doEditUser = async (user) => {
+            isOpenModalEditUser: true,
+            userEdit: user,
+        });
+    };
+    doEditUser = async (data) => {
         try {
-            let res = await editUserService(user); //goi ham editUserService tu userService de edit user
-            if (res && res.errCode === 0) {
+            let response = await editUserService(data);
+            if (response && response.errCode === 0) {
                 this.setState({
-                    isOpenModalEditUser: false //dong modal khi edit user thanh cong
-                })
-
-                await this.getAllUsersFromReact(); //goi ham getAllUsers de lay du lieu
-            } else {
-                alert(res.errCode) //thong bao loi
+                    isOpenModalEditUser: false,
+                });
+                await this.getAllUsersFromReact();
+            }else {
+                alert(response.errCode);
             }
-
-        } catch (e) {
-            console.log(e)
+        } catch (error) {
+            console.log("doEditUser error: ", error);
         }
-
-    }
-
+    };
+    //life cycle
+    // Run component
+    // 1. constructor -> init state
+    // 2. did mount -> set state
+    // 3. render (re-render)
 
     render() {
+        console.log("check state: ", this.state);
         let arrUsers = this.state.arrUsers;
-        console.log(arrUsers) //in ra mang arrUsers de kiem tra
         return (
-            <div className="users-container" >
+            <div className="users-container">
                 <ModalUser
-                    isOpen={this.state.isOpenModalUser} //truyen vao isOpenModalUser
-                    toggleFromParent={this.toggleUserModal} //truyen vao ham toggleUserModal de dong modal
-                    createNewUser={this.createNewUser} //truyen vao ham createNewUser de them user moi
+                    isOpen={this.state.isOpenModalUser}
+                    toggleFromParent={this.toggleUserModal}
+                    createNewUser={this.createNewUser}
                 />
-
-                {
-                    this.state.isOpenModalEditUser && //neu isOpenModalEditUser = true thi hien modal
+                {this.state.isOpenModalEditUser && (
                     <ModalEditUser
-                        isOpen={this.state.isOpenModalEditUser} //truyen vao isOpenModalUser
-                        toggleFromParent={this.toggleUserEditModal} //truyen vao ham toggleUserModal de dong modal
+                        isOpen={this.state.isOpenModalEditUser}
+                        toggleFromParent={this.toggleEditUserModal}
                         currentUser={this.state.userEdit}
-                        editUser={this.doEditUser} //truyen vao ham createNewUser de them user moi
+                        editUser = {this.doEditUser}
                     />
-                }
-                <div className="title text-center">Manage users by Khanh</div>
+                )}
+
+                <div className="title text-center">Manage users with Nghia & Khanh</div>
                 <div className="mx-1">
                     <button
                         className="btn btn-primary px-3"
                         onClick={() => this.handleAddNewUser()}
-                    ><i className="fas fa-plus"></i>Add new users</button>
+                    >
+                        <i className="fa fa-plus"></i> Add new user
+                    </button>
                 </div>
-                <div className="users-table mt-3 mx-1">
+                <div className="users-table mt-3 mx-2">
                     <table id="customers">
-                        <tbody>
+                        <thead>
                             <tr>
+                                <th>ID</th>
+                                <th>Name</th>
                                 <th>Email</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Phone</th>
                                 <th>Address</th>
-                                <th>Actions</th>
+                                <th>Action</th>
                             </tr>
-
-                            {arrUsers && arrUsers.map((item, index) => {  //in vong lap dung map
-                                console.log('Khanh check map ', item, index)
-                                return (
-                                    <tr key={index}>
-                                        <td>{item.email}</td>
-                                        <td>{item.firstName}</td>
-                                        <td>{item.lastName}</td>
-                                        <td>{item.address}</td>
-                                        <td>
-                                            <button className="btn-edit" onClick={() => { this.handleEditUser(item) }}><i className="fas fa-pencil-alt"></i></button>
-                                            <button className="btn-delete" onClick={() => { this.handleDeleteUser(item) }}><i className="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                            }
+                        </thead>
+                        <tbody>
+                            {arrUsers &&
+                                arrUsers.map((item, index) => {
+                                    console.log("check map: ", item, index);
+                                    return (
+                                        <tr key={index}>
+                                            <td>{item.id}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.email}</td>
+                                            <td>{item.phone}</td>
+                                            <td>{item.address}</td>
+                                            <td>
+                                                <button className="btn-edit">
+                                                    <i
+                                                        className="fa fa-pencil-alt"
+                                                        onClick={() =>
+                                                            this.handleEditUser(
+                                                                item
+                                                            )
+                                                        }
+                                                    ></i>
+                                                </button>
+                                                <button
+                                                    className="btn-delete"
+                                                    onClick={() =>
+                                                        this.handleDeleteUser(
+                                                            item
+                                                        )
+                                                    }
+                                                >
+                                                    <i className="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                         </tbody>
                     </table>
                 </div>
-            </div >
+            </div>
         );
     }
-
 }
 
-const mapStateToProps = state => {
-    return {
-    };
+const mapStateToProps = (state) => {
+    return {};
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-    };
+const mapDispatchToProps = (dispatch) => {
+    return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
