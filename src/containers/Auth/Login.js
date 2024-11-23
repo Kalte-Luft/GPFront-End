@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from "connected-react-router";
-
+import { withRouter } from 'react-router-dom';
 import * as actions from "../../store/actions";
 
 import './Login.scss';
@@ -43,6 +43,7 @@ class Login extends Component {
             }
             if(data && data.errCode === 0) {
                 this.props.userLoginSuccess(data.user);
+                this.props.navigate('/home');
             }
         } catch (error) {
             // console.log(error);
@@ -56,6 +57,9 @@ class Login extends Component {
             }
         }
     }
+    handleNavigate = (path) => {
+        this.props.history.push(path);
+    };
 
     render() {
 
@@ -88,7 +92,7 @@ class Login extends Component {
                         {this.state.errMessage}
                     </div>
                     <button type="submit" className="btn btn-dark btn-block" onClick={() => {this.handleLogin()}}>Login </button>
-                    <p className="text-center mt-3">Don't have an account? <a href="#">Sign Up</a></p>
+                    <p className="text-center mt-3">Don't have an account? <a onClick={() => this.handleNavigate("/signup")}>Sign Up</a></p>
                     <hr/>
                     
                     <button className="btn-light col-12">
@@ -120,4 +124,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

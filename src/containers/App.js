@@ -6,13 +6,12 @@ import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
 
 
-import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
+import { userIsAuthenticated, userIsNotAuthenticated} from '../hoc/authentication';
 
 import { path } from '../utils'
 
 import Home from '../routes/Home';
 import Login from './Auth/Login';
-import Header from './Header/Header';
 import System from '../routes/System';
 import { CustomToastCloseButton } from '../components/CustomToast';
 
@@ -23,6 +22,7 @@ import ContactUs from './Contact/ContactUs.js';
 import Status from './Status/StatusPage.js';
 import Campaign from './Campaign/CampaignPage.js';
 import DonateUs from './Donate/DonateUs.js'
+import Signup from './Auth/Signup.js';
 
 class App extends Component {
 
@@ -51,7 +51,6 @@ class App extends Component {
                 <Router history={history}>
                     <div className="main-container" style={{fontFamily: "futura bt"}}>
                         {/* nếu logging r thì render tới header */}
-                        {this.props.isLoggedIn && <Header />}
 
                         <div className="content-container">
                             <CustomScrollbars style ={{height: '100vh', width: '100%'}}>
@@ -59,6 +58,7 @@ class App extends Component {
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} /> {/*hàm bọc để check xem người dùng đã đăng nhập hay ch*/}
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    <Route path={path.SIGNUP} component={Signup} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.ABOUTUS} component={AboutUs} />
                                     <Route path={path.CONTACTUS} component={ContactUs} />
@@ -85,7 +85,8 @@ class App extends Component {
 const mapStateToProps = state => {
     return {
         started: state.app.started,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        isAdmin: state.user.isAdmin
     };
 };
 

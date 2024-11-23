@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
+import * as actions from "../../store/actions";
 import "./HomeHeader.scss";
 import VN from "../../assets/images/VN.svg";
 import UK from "../../assets/images/UK.svg";
@@ -16,6 +17,7 @@ class HomeHeader extends Component {
     };
     
     render() {
+        const { processLogout, userInfo } = this.props;
         return (
             <div className="home-header-container">
                 <div className="home-header-content">
@@ -23,7 +25,7 @@ class HomeHeader extends Component {
                         <div className="header-logo"></div>
                     </div>
                     <div className="center-content">
-                        <button className="btn" onClick={() => this.handleNavigate('/')}>
+                        <button className="btn" onClick={() => this.handleNavigate('/home')}>
                             <span><FormattedMessage id="home-header.home" /></span>
                         </button>
                         <button className="btn" onClick={() => this.handleNavigate('/about')}>
@@ -56,14 +58,36 @@ class HomeHeader extends Component {
                         </div>
                     </div>
                     <div className="right-content">
-                        <button className ="btn btn-right" onClick ={()=> {this.handleNavigate('/donate')}}>
+                        <button className ="btn " onClick ={()=> {this.handleNavigate('/donate')}}>
                             <FormattedMessage id="home-header.donate" />
                         </button>
                         
-                        <button className="btn login-btn-right">
-                            <i className="fas fa-user"></i>
-                            <span><FormattedMessage id="home-header.login"/></span>
-                        </button>
+                        {this.props.isLoggedIn === false && (
+                            <button className ="btn " onClick ={()=> {this.handleNavigate('/login')}}>
+                                <FormattedMessage id="home-header.login" />
+                            </button>
+                        )}
+                        {this.props.isLoggedIn === true && (
+                            <div className ="drop-info">
+                                <button className="dropbtn">
+                                {userInfo && userInfo.name ? userInfo.name : ''}
+                                <i className="fas fa-caret-down"></i>
+                            </button>
+                            <div className="dropdown-content">
+                                {this.props.userInfo && this.props.userInfo.role === "admin" && (
+                                    <a className="system-manager" href="#" onClick={()=> {this.handleNavigate('/system')}} >
+                                        <FormattedMessage id="home-header.system-manager" />
+                                    </a>
+                                )}
+                                <a className="logout" href="#" onClick={processLogout} >
+                                    <FormattedMessage id="home-header.logout" />
+                                </a>
+                                <a className="account-manager" href="#" >
+                                    <FormattedMessage id="home-header.profile" />
+                                </a>
+                            </div> 
+                            </div>
+                        )}
                         </div>
                 </div>
             </div>
@@ -75,12 +99,15 @@ const mapStateToProps = (state) => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        userInfo: state.user.userInfo
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+        processLogout: () => dispatch(actions.processLogout()),
+       
     };
 };
 

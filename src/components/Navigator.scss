@@ -32,9 +32,22 @@
             .menu {
                 width: 205px;
                 padding: 0 15px;
-                height: 35px;
+                height: 45px;
                 line-height: 35px;
                 text-transform: none;
+                &.active{
+                    a{
+                        
+                        color: rgb(255, 255, 255) !important;
+                    }
+                    background-color: #0071BA;
+                }
+                &:hover {
+                    a{
+                        color: rgb(0, 0, 0) !important;
+                    }
+                    background-color: #0071BA;
+                }
                 .menu-link {
                     text-decoration: none;
                     color: $text-in-light;

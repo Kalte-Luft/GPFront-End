@@ -22,10 +22,11 @@ class UserManage extends Component {
             userEdit: {},
         };
     }
-
+    //hàm này dùng để gọi API
     async componentDidMount() {
         await this.getAllUsersFromReact();
     }
+    //hàm này dùng để gọi API
     getAllUsersFromReact = async () => {
         let response = await getAllUsers("ALL");
         if (response && response.errCode === 0) {
@@ -35,21 +36,25 @@ class UserManage extends Component {
             });
         }
     };
+    //hàm này dùng để mở modal
     handleAddNewUser = () => {
         this.setState({
             isOpenModalUser: true,
         });
     };
+    //hàm này dùng để đóng mở modal
     toggleUserModal = () => {
         this.setState({
             isOpenModalUser: !this.state.isOpenModalUser,
         });
     };
+    //hàm này dùng để đóng mở modal
     toggleEditUserModal = () => {
         this.setState({
             isOpenModalEditUser: !this.state.isOpenModalEditUser,
         });
     };
+    //hàm này dùng để tạo mới user
     createNewUser = async (data) => {
         try {
             let response = await createNewUserService(data);
@@ -66,6 +71,7 @@ class UserManage extends Component {
             console.log("createNewUser error: ", error);
         }
     };
+    //hàm này dùng để xóa user
     handleDeleteUser = async (user) => {
         try {
             let response = await deleteUserService(user.id);
@@ -84,6 +90,7 @@ class UserManage extends Component {
             userEdit: user,
         });
     };
+    //hàm này dùng để sửa user
     doEditUser = async (data) => {
         try {
             let response = await editUserService(data);
@@ -140,6 +147,7 @@ class UserManage extends Component {
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Action</th>
@@ -154,6 +162,7 @@ class UserManage extends Component {
                                             <td>{item.id}</td>
                                             <td>{item.name}</td>
                                             <td>{item.email}</td>
+                                            <td>{item.role}</td>
                                             <td>{item.phone}</td>
                                             <td>{item.address}</td>
                                             <td>

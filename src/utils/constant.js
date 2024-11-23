@@ -9,6 +9,7 @@ export const path = {
     STATUS: '/status',
     CAMPAIGN: '/campaign',
     DONATE:'/donate',
+    SIGNUP: '/signup',
 };
 
 export const LANGUAGES = {

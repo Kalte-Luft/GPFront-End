@@ -4,28 +4,36 @@ import { connect } from "react-redux";
 import { emitter } from "../../utils/emitter";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 class ModalUser extends Component {
+    //hàm này dùng để khởi tạo state hoặc bind các function
     constructor(props) {
         super(props);
         this.state = {
             email: "",
             password: "",
             phone: "",
+            name: "",
+            address: "",
         };
         this.listenToEmitter();
     }
+    //hàm này dùng để lắng nghe sự kiện từ emitter
     listenToEmitter = () => {
         emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
             this.setState({
                 email: "",
                 password: "",
                 phone: "",
+                name: "",
+                address: "",
             });
         });
     }
     componentDidMount() { }
+    //hàm này dùng để đóng mở modal
     toggle = () => {
         this.props.toggleFromParent();
     };
+    //hàm này dùng để lưu giá trị của input vào state
     handleOnChangeInput = (event, id) => {
         //good code
         let copyState = { ...this.state };
@@ -34,9 +42,10 @@ class ModalUser extends Component {
             ...copyState,
         });
     }
+    //hàm này dùng để kiểm tra xem input có đúng không
     checkValidateInput = () => {
         let isValid = true;
-        let arrInput = ["email", "password", "phone"];
+        let arrInput = ["email", "password", "phone", "name", "address"];
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -46,10 +55,11 @@ class ModalUser extends Component {
         }
         return isValid;
     }
+    //hàm này dùng để thêm mới user
     handleAddNewUser = () => {
         let isValid = this.checkValidateInput();
         if (isValid === true) {
-            this.props.createNewUser(this.state);
+            this.props.createNewUser(this.state);//gọi hàm createNewUser từ props, ở đây là từ mapDispatchToProps
         }
     }
     render() {
@@ -84,6 +94,20 @@ class ModalUser extends Component {
                             <input type="phone" 
                             onChange={(event) => this.handleOnChangeInput(event, "phone")}
                             value={this.state.phone}
+                            className="form-control" />
+                        </div>
+                        <div className="input-container">
+                            <label>Name</label>
+                            <input type="text" 
+                            onChange={(event) => this.handleOnChangeInput(event, "name")}
+                            value={this.state.name}
+                            className="form-control" />
+                        </div>
+                        <div className="input-container">
+                            <label>Address</label>
+                            <input type="text" 
+                            onChange={(event) => this.handleOnChangeInput(event, "address")}
+                            value={this.state.address}
                             className="form-control" />
                         </div>
                     </div>

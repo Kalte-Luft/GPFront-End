@@ -13,6 +13,7 @@ class ModalEditUser extends Component {
             email: "",
             phone: "",
             address: "",
+            role: "",
         };
     }
     componentDidMount() {
@@ -24,6 +25,7 @@ class ModalEditUser extends Component {
                 email: user.email,
                 phone: user.phone,
                 address: user.address,
+                role: user.role,
             });
         }
     }
@@ -40,7 +42,7 @@ class ModalEditUser extends Component {
     };
     checkValidateInput = () => {
         let isValid = true;
-        let arrInput = ["name", "email", "phone", "address"];
+        let arrInput = ["name", "email", "phone", "address", "role"];
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -112,6 +114,20 @@ class ModalEditUser extends Component {
                                 value={this.state.address}
                                 className="form-control"
                             />
+                        </div>
+                        <div className="input-container">
+                            <label>Role</label>
+                            {/* dropdown */}
+                            <select
+                                className="form-control"
+                                value={this.state.role}
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(event, "role")
+                                }
+                            >
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
                         </div>
                     </div>
                 </ModalBody>
