@@ -5,6 +5,10 @@ import "./WhoAreGP.scss";
 
 class WhoAreGP extends Component {
 
+	handleDonateClick =() => {
+		window.location.href = '/donate';
+	}
+
 	render() {
 		return (
 			<div className="WhoAreGP">
@@ -16,7 +20,7 @@ class WhoAreGP extends Component {
 							</div>
 							<div className="paragraph-bottom">
 								<p>Greenpaw is part of Nghia and Khanh registered charity Viet-Han Project. Greenpaw is a platform for people and organisations to become carbon neutral and protect that planet’s oxygen system. Greenpaw partner with projects which work with ecological design principles to regenerate entire ecosystems to a thriving biodiverse state, whilst supporting local communities, Indigenous tribes and traditional peoples.</p>
-								<button type="submit" className="btn btn-donate" >
+								<button type="submit" className="btn btn-donate " onClick={this.handleDonateClick} >
 									Donate
 								</button>
 							</div>

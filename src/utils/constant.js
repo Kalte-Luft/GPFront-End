@@ -10,6 +10,7 @@ export const path = {
     CAMPAIGN: '/campaign',
     DONATE:'/donate',
     SIGNUP: '/signup',
+    PRODUCT:'/product',
 };
 
 export const LANGUAGES = {
