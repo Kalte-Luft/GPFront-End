@@ -1,0 +1,85 @@
+.ended-container {
+    background-color: #ffffff;
+    padding: 20px 0;
+    margin: 60px 0px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    .ended-title{
+        text-align: left;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #359381;
+        margin-left: 100px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        i{
+            color: #359381;
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+    }
+    .ended-content {
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 0px 50px;
+        .ended-item{
+            overflow: hidden; /* Ẩn phần thừa của ảnh */
+            position: relative;
+            z-index: 2; 
+            background-color: #ffffff;
+            img{
+                height: 50vh;
+                width: 25em;
+                border-radius: 10px;
+                object-fit: cover;
+                object-position: center center;
+                position: relative;
+                z-index: 1;
+            }
+        }
+        
+        .slick-prev {
+            background-color: transparent !important;
+            border-radius: 50% !important;
+            left: -10 !important;
+            z-index: 100;
+            height: 40px !important;
+            width: 40px !important;
+            &:hover {
+                color: #393939 !important;
+            }
+            &:before {
+                font-size: 40px !important;
+                color: #787878 !important;
+            }
+        }
+        .slick-next {
+            background-color: transparent !important;
+            border-radius: 50% !important;
+            right: 10 !important;
+            height: 40px !important;
+            width: 40px !important;
+            &:hover {
+                color: #393939 !important;
+            }
+            &:before {
+                font-size: 40px !important;
+                color: #787878 !important;
+            }
+        }
+    }
+}
+
+.slick-track{
+
+  .slick-slide {
+    display: flex !important;
+    justify-content: center;
+  }
+  
+  .slick-slide > div {
+    margin: 0 10px !important; 
+  }
+}
+
+

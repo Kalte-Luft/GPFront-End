@@ -21,7 +21,7 @@ const CampaignSelection = () => {
                     </div>
                     <div className="infor">
                         <div className="infor-title">
-                            <h1>Dit me cuoc doi thu vien lol</h1>
+                            <h1>Overview - Da Nang</h1>
                             <div className="dividing-line" />
                         </div>
                         <div className="infor-content-1">
@@ -44,14 +44,14 @@ const CampaignSelection = () => {
                             <div className="active-campaigns">
                                 <div className="dividing-line" />
                                 <div className="active-campaigns-title">
-                                    Active Campaign
+                                    Ended Campaign
                                 </div>
                                 <div className="active-campaigns-number">8</div>
                             </div>
                             <div className="completed-campaigns">
                                 <div className="dividing-line" />
                                 <div className="completed-campaigns-title">
-                                    Completed Campaign
+                                    Ongoing Campaign
                                 </div>
                                 <div className="completed-campaigns-number">
                                     7
@@ -60,7 +60,7 @@ const CampaignSelection = () => {
                             <div className="past-campaigns">
                                 <div className="dividing-line" />
                                 <div className="past-campaigns-title">
-                                    Past Campaign
+                                    Upcoming Campaign
                                 </div>
                                 <div className="past-campaigns-number">1</div>
                             </div>
