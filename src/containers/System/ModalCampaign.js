@@ -2,16 +2,21 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { emitter } from "../../utils/emitter";
+import { getAllProvinces } from "../../services/campaignService";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 class ModalCampaign extends Component {
     //hàm này dùng để khởi tạo state hoặc bind các function
     constructor(props) {
         super(props);
         this.state = {
-            "title": "",
-            "description": "",
-            "imageUrl": "",
-            
+            title: "",
+            provinceList: [],
+            description: "",
+            status: "",
+            target_amount: "",
+            current_amount: "",
+            start_date: new Date(),
+            end_date: new Date(),
         };
         this.listenToEmitter();
     }
@@ -19,19 +24,46 @@ class ModalCampaign extends Component {
     listenToEmitter = () => {
         emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
             this.setState({
-                email: "",
-                password: "",
-                phone: "",
-                name: "",
-                address: "",
+                title: "",
+                provinceList: [],
+                description: "",
+                status: "",
+                target_amount: "",
+                current_amount: "",
+                start_date: new Date(),
+                end_date: new Date(),
             });
         });
+    };
+    componentDidMount() {
+        this.loadProvinces();
     }
-    componentDidMount() { }
     //hàm này dùng để đóng mở modal
     toggle = () => {
         this.props.toggleFromParent();
     };
+
+    // Hàm tải danh sách tỉnh từ API
+    loadProvinces = async () => {
+        try {
+            let response = await getAllProvinces("ALL"); // Gọi API
+            console.log("Response: ", response);
+            if (response && response.errCode === 0) {
+                this.setState({
+                    provinceList: response.Provinces || [], // Đảm bảo luôn gán giá trị mảng
+                });
+                console.log("Data: ", response.Provinces);
+            } else {
+                console.error(
+                    "Failed to fetch provinces: ",
+                    response.errMessage
+                );
+            }
+        } catch (error) {
+            console.error("Error while fetching provinces: ", error);
+        }
+    };
+
     //hàm này dùng để lưu giá trị của input vào state
     handleOnChangeInput = (event, id) => {
         //good code
@@ -40,11 +72,22 @@ class ModalCampaign extends Component {
         this.setState({
             ...copyState,
         });
-    }
+    };
+
     //hàm này dùng để kiểm tra xem input có đúng không
     checkValidateInput = () => {
         let isValid = true;
-        let arrInput = ["email", "password", "phone", "name", "address"];
+        let arrInput = [
+            "title",
+            "province_id",
+            "description",
+            "status",
+            "target_amount",
+            "current_amount",
+            "start_date",
+            "end_date",
+        ];
+        console.log("arrInput: ", arrInput);
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -53,21 +96,21 @@ class ModalCampaign extends Component {
             }
         }
         return isValid;
-    }
+    };
     //hàm này dùng để thêm mới campaign
     handleAddNewCampaign = () => {
         let isValid = this.checkValidateInput();
         if (isValid === true) {
-            this.props.createNewCampaign(this.state);//gọi hàm createNewCampaign từ props, ở đây là từ mapDispatchToProps
+            this.props.createNewCampaign(this.state); //gọi hàm createNewCampaign từ props, ở đây là từ mapDispatchToProps
         }
-    }
+    };
     render() {
         return (
             <Modal
                 isOpen={this.props.isOpen}
                 toggle={() => this.toggle()}
                 className={"modal-campaign-container"}
-                size = "lg"
+                size="lg"
             >
                 <ModalHeader toggle={() => this.toggle()}>
                     Create a new campaign
@@ -75,47 +118,134 @@ class ModalCampaign extends Component {
                 <ModalBody>
                     <div className="modal-campaign-body">
                         <div className="input-container">
-                            <label>Email</label>
-                            <input type="text" 
-                            onChange={(event) => this.handleOnChangeInput(event, "email")}
-                            value={this.state.email}
-                            className="form-control" />
+                            <label>Title</label>
+                            <input
+                                type="text"
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(event, "title")
+                                }
+                                value={this.state.title}
+                                className="form-control"
+                            />
+                        </div>
+                       
+                        <div className="input-container">
+                            <label>Province</label>
+                            <select
+                                className="form-control"
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(event, "province_id")
+                                }
+                                value={this.state.province_id}
+                            >
+                                <option value="">Select a Province</option>
+                                {this.state.provinceList.map((province) => (
+                                    <option
+                                        key={province.id}
+                                        value={province.id}
+                                    >
+                                        {province.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="input-container">
-                            <label>Password</label>
-                            <input type="password" 
-                            onChange={(event) => this.handleOnChangeInput(event, "password")}
-                            value={this.state.password}
-                            className="form-control" />
+                            <label>Status</label>
+                            <select
+                                className="form-control"
+                                value={this.state.status}
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(event, "status")
+                                }
+                            >
+                                <option value="">Select status</option>
+                                <option value="ongoing">Ongoing </option>
+                                <option value="upcoming">Upcoming</option>
+                                <option value="ended">Ended</option>
+                            </select>
                         </div>
                         <div className="input-container">
-                            <label>Phone</label>
-                            <input type="phone" 
-                            onChange={(event) => this.handleOnChangeInput(event, "phone")}
-                            value={this.state.phone}
-                            className="form-control" />
+                            <label>Target Amount</label>
+                            <input
+                                type="text"
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "target_amount"
+                                    )
+                                }
+                                value={this.state.target_amount}
+                                className="form-control"
+                            />
                         </div>
                         <div className="input-container">
-                            <label>Name</label>
-                            <input type="text" 
-                            onChange={(event) => this.handleOnChangeInput(event, "name")}
-                            value={this.state.name}
-                            className="form-control" />
+                            <label>Current Amount</label>
+                            <input
+                                type="text"
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "current_amount"
+                                    )
+                                }
+                                value={this.state.current_amount}
+                                className="form-control"
+                            />
                         </div>
                         <div className="input-container">
-                            <label>Address</label>
-                            <input type="text" 
-                            onChange={(event) => this.handleOnChangeInput(event, "address")}
-                            value={this.state.address}
-                            className="form-control" />
+                            <label>Start Date</label>
+                            <input
+                                type="date"
+                                className="form-control"
+                                value={this.state.start_date}
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "start_date"
+                                    )
+                                }
+                            />
+                        </div>
+                        <div className="input-container">
+                            <label>End Date</label>
+                            <input
+                                type="date"
+                                className="form-control"
+                                value={this.state.end_date}
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(event, "end_date")
+                                }
+                            />
+                        </div>
+                        <div className="input-container">
+                            <label>Description</label>
+                            <textarea
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "description"
+                                    )
+                                }
+                                value={this.state.description}
+                                className="form-control"
+                                rows="4"
+                            />
                         </div>
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" className=" px-3" onClick={() => this.handleAddNewCampaign()}>
+                    <Button
+                        color="primary"
+                        className=" px-3"
+                        onClick={() => this.handleAddNewCampaign()}
+                    >
                         Add New
                     </Button>{" "}
-                    <Button color="secondary" className=" px-3" onClick={() => this.toggle()}>
+                    <Button
+                        color="secondary"
+                        className=" px-3"
+                        onClick={() => this.toggle()}
+                    >
                         Close
                     </Button>
                 </ModalFooter>

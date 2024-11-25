@@ -156,6 +156,7 @@ class CampaignManage extends Component {
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Partner</th>
+                                <th>Donor Number</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -179,11 +180,18 @@ class CampaignManage extends Component {
                                                     ? item.partners.map(
                                                           (partner, index) =>
                                                               index ===
-                                                              item.partners.length - 1 
-                                                              ? partner.name
-                                                              : `${partner.name}, `
+                                                              item.partners
+                                                                  .length -
+                                                                  1
+                                                                  ? partner.name
+                                                                  : `${partner.name}, `
                                                       )
                                                     : "No Partner"}
+                                            </td>
+                                            <td>
+                                                {item.donations.length > 0
+                                                    ? item.donations.length
+                                                    : "No Donor"}
                                             </td>
 
                                             <td>

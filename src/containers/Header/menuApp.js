@@ -14,6 +14,10 @@ export const adminMenu = [
                 name: 'menu.admin.manage-donation',link : '/system/donation-manage',
                
             },
+            {
+                name: 'menu.admin.back-to-home',link : '/home',
+               
+            },
 
 
             

@@ -16,6 +16,7 @@ class ModalEditUser extends Component {
             role: "",
         };
     }
+    //hàm này để lấy dữ liệu từ props truyền vào và set vào state
     componentDidMount() {
         let user = this.props.currentUser;
         if (!_.isEmpty(user)) {

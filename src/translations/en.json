@@ -17,7 +17,9 @@
             "system": "System", 
             "manage-user": "Manage Users System",
             "manage-campaign": "Manage Campaign System",
-            "manage-donation": "Manage Donation System"         
+            "manage-donation": "Manage Donation System",
+            "back-to-home": "◄ Back to Home"
+
         }
     }
 

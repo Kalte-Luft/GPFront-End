@@ -1,20 +1,33 @@
 import axios from "../axios";
 const getAllCampaigns = (inputId) => {
     return axios.get(`/api/get-all-campaigns?id=${inputId}`);
-}
+};
 const createNewCampaignService = (data) => {
-    return axios.post("/api/create-new-campaign", data);
+    return axios.post("/api/create-campaign", data);
+    console.log("data", data);
 };
 
 const deleteCampaignService = (campaignId) => {
-    return axios.delete(`/api/delete-campaign`, { //goi phuong thuc delete 
-        data: { //truyen tham so vao 
-            id: campaignId      //truyen id cua campaign can xoa
-        }
+    return axios.delete(`/api/delete-campaign`, {
+        //goi phuong thuc delete
+        data: {
+            //truyen tham so vao
+            id: campaignId, //truyen id cua campaign can xoa
+        },
     });
-}
+};
 const editCampaignService = (inputData) => {
-    return axios.put("/api/edit-user", inputData);
+    return axios.put("/api/update-campaign", inputData);
 };
 
-export { getAllCampaigns, createNewCampaignService, deleteCampaignService, editCampaignService };
+const getAllProvinces = (inputId) => {
+    return axios.get(`/api/get-all-provinces?id=${inputId}`);
+};
+
+export {
+    getAllCampaigns,
+    createNewCampaignService,
+    deleteCampaignService,
+    editCampaignService,
+    getAllProvinces,
+};
