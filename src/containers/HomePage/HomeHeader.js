@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import "./HomeHeader.scss";
@@ -15,7 +15,7 @@ class HomeHeader extends Component {
     handleNavigate = (path) => {
         this.props.history.push(path);
     };
-    
+
     render() {
         const { processLogout, userInfo } = this.props;
         return (
@@ -25,20 +25,45 @@ class HomeHeader extends Component {
                         <div className="header-logo"></div>
                     </div>
                     <div className="center-content">
-                        <button className="btn" onClick={() => this.handleNavigate('/home')}>
-                            <span><FormattedMessage id="home-header.home" /></span>
+                        <button
+                            className="btn"
+                            onClick={() => this.handleNavigate("/home")}
+                        >
+                            <span>
+                                <FormattedMessage id="home-header.home" />
+                            </span>
                         </button>
-                        <button className="btn" onClick={() => this.handleNavigate('/about')}>
-                            <span><FormattedMessage id="home-header.about" /></span>
+                        <button
+                            className="btn"
+                            onClick={() => this.handleNavigate("/about")}
+                        >
+                            <span>
+                                <FormattedMessage id="home-header.about" />
+                            </span>
                         </button>
-                        <button className="btn" onClick={() => this.handleNavigate('/status')}>
-                            <span><FormattedMessage id="home-header.status" /></span>
+                        <button
+                            className="btn"
+                            onClick={() => this.handleNavigate("/status")}
+                        >
+                            <span>
+                                <FormattedMessage id="home-header.status" />
+                            </span>
                         </button>
-                        <button className="btn" onClick={() => this.handleNavigate('/campaign')}>
-                            <span><FormattedMessage id="home-header.campaign" /></span>
+                        <button
+                            className="btn"
+                            onClick={() => this.handleNavigate("/campaign")}
+                        >
+                            <span>
+                                <FormattedMessage id="home-header.campaign" />
+                            </span>
                         </button>
-                           <button className="btn" onClick={() => this.handleNavigate('/contact')}>
-                            <span><FormattedMessage id="home-header.contact" /></span>
+                        <button
+                            className="btn"
+                            onClick={() => this.handleNavigate("/contact")}
+                        >
+                            <span>
+                                <FormattedMessage id="home-header.contact" />
+                            </span>
                         </button>
                         <div className="dropdown">
                             <button className="dropbtn">
@@ -46,49 +71,110 @@ class HomeHeader extends Component {
                                 <i className="fas fa-caret-down"></i>
                             </button>
                             <div className="dropdown-content">
-                                <a className="VN" href="#" onClick={()=> this.changeLanguage(LANGUAGES.VI)}>
-                                <img src={VN} alt="Vietnam Flag" style={{ width: '16px', marginRight: '5px' }} />
+                                <a
+                                    className="VN"
+                                    href="#"
+                                    onClick={() =>
+                                        this.changeLanguage(LANGUAGES.VI)
+                                    }
+                                >
+                                    <img
+                                        src={VN}
+                                        alt="Vietnam Flag"
+                                        style={{
+                                            width: "16px",
+                                            marginRight: "5px",
+                                        }}
+                                    />
                                     Tiếng Việt
                                 </a>
-                                <a className="EN" href="#" onClick={()=> this.changeLanguage(LANGUAGES.EN)}>
-                                <img src={UK} alt="United Kingdom Flag" style={{ width: '16px', marginRight: '5px' }} />
+                                <a
+                                    className="EN"
+                                    href="#"
+                                    onClick={() =>
+                                        this.changeLanguage(LANGUAGES.EN)
+                                    }
+                                >
+                                    <img
+                                        src={UK}
+                                        alt="United Kingdom Flag"
+                                        style={{
+                                            width: "16px",
+                                            marginRight: "5px",
+                                        }}
+                                    />
                                     English
                                 </a>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
                     <div className="right-content">
-                        <button className ="btn " onClick ={()=> {this.handleNavigate('/donate')}}>
+                        <button
+                            className="btn "
+                            onClick={() => {
+                                this.handleNavigate("/donate");
+                            }}
+                        >
                             <FormattedMessage id="home-header.donate" />
                         </button>
-                        
+
                         {this.props.isLoggedIn === false && (
-                            <button className ="btn " onClick ={()=> {this.handleNavigate('/login')}}>
+                            <button
+                                className="btn "
+                                onClick={() => {
+                                    this.handleNavigate("/login");
+                                }}
+                            >
                                 <FormattedMessage id="home-header.login" />
                             </button>
                         )}
                         {this.props.isLoggedIn === true && (
-                            <div className ="drop-info">
+                            <div className="drop-info">
                                 <button className="dropbtn">
-                                {userInfo && userInfo.name ? userInfo.name : ''}
-                                <i className="fas fa-caret-down"></i>
-                            </button>
-                            <div className="dropdown-content">
-                                {this.props.userInfo && this.props.userInfo.role === "admin" && (
-                                    <a className="system-manager" href="#" onClick={()=> {this.handleNavigate('/system')}} >
-                                        <FormattedMessage id="home-header.system-manager" />
+                                    <p>{userInfo && userInfo.name
+                                        ? userInfo.name
+                                        : ""}</p>
+                                    <i className="fas fa-caret-down"></i>
+                                </button>
+                                <div className="dropdown-content">
+                                    {this.props.userInfo &&
+                                        this.props.userInfo.role ===
+                                            "admin" && (
+                                            <a
+                                                className="system-manager"
+                                                href="#"
+                                                onClick={() => {
+                                                    this.handleNavigate(
+                                                        "/system"
+                                                    );
+                                                }}
+                                            >
+                                                <i
+                                                    class="fa fa-cog"
+                                                    aria-hidden="true"
+                                                ></i>
+                                                <FormattedMessage id="home-header.system-manager" />
+                                            </a>
+                                        )}
+                                    <a className="account-manager" href="#">
+                                        <i
+                                            class="fa fa-user"
+                                            aria-hidden="true"
+                                        ></i>
+                                        <FormattedMessage id="home-header.profile" />
                                     </a>
-                                )}
-                                <a className="logout" href="#" onClick={processLogout} >
-                                    <FormattedMessage id="home-header.logout" />
-                                </a>
-                                <a className="account-manager" href="#" >
-                                    <FormattedMessage id="home-header.profile" />
-                                </a>
-                            </div> 
+                                    <a
+                                        className="logout"
+                                        href="#"
+                                        onClick={processLogout}
+                                    >
+                                        <i className="fas fa-sign-out-alt"></i>
+                                        <FormattedMessage id="home-header.logout" />
+                                    </a>
+                                </div>
                             </div>
                         )}
-                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -99,18 +185,18 @@ const mapStateToProps = (state) => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
-        userInfo: state.user.userInfo
+        userInfo: state.user.userInfo,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+        changeLanguageAppRedux: (language) =>
+            dispatch(changeLanguageApp(language)),
         processLogout: () => dispatch(actions.processLogout()),
-       
     };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));
-
-
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(HomeHeader)
+);

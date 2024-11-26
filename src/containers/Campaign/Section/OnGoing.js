@@ -13,7 +13,7 @@ class OnGoing extends Component {
             centerPadding: "10px",
             slidesToShow: 3,
             slidesToScroll: 1,
-            autoplay: true,
+            autoplay: false,
             speed: 1000,
             autoplaySpeed: 3000,
             pauseOnHover: false,
@@ -33,11 +33,11 @@ class OnGoing extends Component {
                                 alt="ongoing"
                             />
                             <div class="text-overlay">
-                                <h1>Campaign C</h1>
+                                <h1>Campaign A</h1>
                                 <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
                                 </p>
                             </div>
-                            <div className="filter">Read more...</div>
+                            <div className="filter">Read More...</div>
                         </div>
                         <div className="ongoing-item" >
                             <img
@@ -45,6 +45,12 @@ class OnGoing extends Component {
                                 src="https://th.bing.com/th/id/OIP.0sbaLUdVI3x6oL-880GktwHaE7?rs=1&pid=ImgDetMain"
                                 alt="ongoing"
                             />
+                            <div class="text-overlay">
+                                <h1>Campaign B</h1>
+                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
+                                </p>
+                            </div>
+                            <div className="filter">Read More...</div>
                         </div>
                     <div className="ongoing-item" >
                             <img
@@ -52,6 +58,12 @@ class OnGoing extends Component {
                                 src="https://toquoc.mediacdn.vn/280518851207290880/2022/8/15/f48a290cecf52eab77e4-1-1660532019040535652705.jpg"
                                 alt="ongoing"
                             />
+                            <div class="text-overlay">
+                                <h1>Campaign D</h1>
+                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
+                                </p>
+                            </div>
+                            <div className="filter">Read More...</div>
                         </div>
                         <div className="ongoing-item" >
                             <img
@@ -59,6 +71,12 @@ class OnGoing extends Component {
                                 src="https://th.bing.com/th/id/OIP.RwHZYBPb3VmPE74sUB_mhQHaEy?rs=1&pid=ImgDetMain"
                                 alt="ongoing"
                             />
+                            <div class="text-overlay">
+                                <h1>Campaign E</h1>
+                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
+                                </p>
+                            </div>
+                            <div className="filter">Read More...</div>
                         </div>
                         <div className="ongoing-item" >
                             <img
@@ -66,6 +84,12 @@ class OnGoing extends Component {
                                 src="https://3.bp.blogspot.com/-ModI9D8GffM/W9iE1HA9evI/AAAAAAAAhP0/-0_0rgpvCgw3j-Xl8AiWffYDCib-Sw3VACLcBGAs/s1600/tuyet-chung-1.jpg"
                                 alt="ongoing"
                             />
+                            <div class="text-overlay">
+                                <h1>Campaign F</h1>
+                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
+                                </p>
+                            </div>
+                            <div className="filter">Read More...</div>
                         </div>                      
                     </Slider>
                 </div>

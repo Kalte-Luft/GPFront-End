@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import "./CampaignSelection.scss";
-import danang from "../../../assets/images/danang.jpg";
+import danang from "../../../assets/images/danang.webp";
 import Aoe from "aoejs"; // Import Aoejs
 import InteractiveMap from "./InteractiveMap";
 
@@ -46,23 +46,21 @@ const CampaignSelection = () => {
                                 <div className="active-campaigns-title">
                                     Ended Campaign
                                 </div>
-                                <div className="active-campaigns-number">8</div>
+                                <div className="active-campaigns-number">3</div>
                             </div>
                             <div className="completed-campaigns">
                                 <div className="dividing-line" />
                                 <div className="completed-campaigns-title">
                                     Ongoing Campaign
                                 </div>
-                                <div className="completed-campaigns-number">
-                                    7
-                                </div>
+                                <div className="completed-campaigns-number">8</div>
                             </div>
                             <div className="past-campaigns">
                                 <div className="dividing-line" />
                                 <div className="past-campaigns-title">
                                     Upcoming Campaign
                                 </div>
-                                <div className="past-campaigns-number">1</div>
+                                <div className="past-campaigns-number">5</div>
                             </div>
                         </div>
                     </div>

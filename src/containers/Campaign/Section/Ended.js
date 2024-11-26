@@ -29,38 +29,43 @@ class Ended extends Component {
                     <div className="ended-item" >
                             <img
                                 
-                                src="https://giaingo.info/wp-content/uploads/2021/07/4708875_Cover_Rung-768x476.jpg"
+                                src="https://th.bing.com/th/id/OIP.BMOTzYT4lQnbwXkeQUtMVAAAAA?rs=1&pid=ImgDetMain"
                                 alt="ended"
                             />
+                            <div class="text-overlay">
+                                <h1>Campaign 1</h1>
+                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
+                                </p>
+                            </div>
+                            <div className="filter">Read More...</div>
                         </div>
                         <div className="ended-item" >
                             <img
                                 
-                                src="https://th.bing.com/th/id/OIP.0sbaLUdVI3x6oL-880GktwHaE7?rs=1&pid=ImgDetMain"
+                                src="https://th.bing.com/th/id/R.4cd07a88113a030a22b06f7df5962fce?rik=V7dMINZrym6Phg&pid=ImgRaw&r=0"
                                 alt="ended"
                             />
+                            <div class="text-overlay">
+                                <h1>Campaign 2</h1>
+                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
+                                </p>
+                            </div>
+                            <div className="filter">Read More...</div>
                         </div>
                     <div className="ended-item" >
                             <img
                                 
-                                src="https://toquoc.mediacdn.vn/280518851207290880/2022/8/15/f48a290cecf52eab77e4-1-1660532019040535652705.jpg"
+                                src="https://file1.dangcongsan.vn/data/0/images/2023/06/27/upload_673/3.png?dpi=150&quality=100&w=780"
                                 alt="ended"
                             />
+                            <div class="text-overlay">
+                                <h1>Campaign 3</h1>
+                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
+                                </p>
+                            </div>
+                            <div className="filter">Read More...</div>
                         </div>
-                        <div className="ended-item" >
-                            <img
-                                
-                                src="https://th.bing.com/th/id/OIP.RwHZYBPb3VmPE74sUB_mhQHaEy?rs=1&pid=ImgDetMain"
-                                alt="ended"
-                            />
-                        </div>
-                        <div className="ended-item" >
-                            <img
-                                
-                                src="https://3.bp.blogspot.com/-ModI9D8GffM/W9iE1HA9evI/AAAAAAAAhP0/-0_0rgpvCgw3j-Xl8AiWffYDCib-Sw3VACLcBGAs/s1600/tuyet-chung-1.jpg"
-                                alt="ended"
-                            />
-                        </div>                      
+                                          
                     </Slider>
                 </div>
             </div>
