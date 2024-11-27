@@ -11,6 +11,7 @@ export const path = {
     DONATE:'/donate',
     SIGNUP: '/signup',
     PRODUCT:'/product',
+    DETAILCAMPAIGN:'/detail',
 };
 
 export const LANGUAGES = {

@@ -24,6 +24,8 @@ import Campaign from './Campaign/CampaignPage.js';
 import DonateUs from './Donate/DonateUs.js'
 import Signup from './Auth/Signup.js';
 import OurProduct from './ProductPage/OurProduct.js';
+import Overview from './Campaign/DetailCampaign/Section/Overview.js';
+import DetailCampaign from './Campaign/DetailCampaign/DetailCampaign.js';
 
 class App extends Component {
 
@@ -67,6 +69,7 @@ class App extends Component {
                                     <Route path={path.CAMPAIGN} component={Campaign} />
                                     <Route path={path.DONATE} component={DonateUs} />
                                     <Route path={path.PRODUCT} component={OurProduct}/>
+                                    <Route path={path.DETAILCAMPAIGN} component={DetailCampaign}/>
                                 </Switch>
                             </CustomScrollbars>
                         </div>
