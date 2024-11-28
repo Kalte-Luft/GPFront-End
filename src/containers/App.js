@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
@@ -27,6 +27,7 @@ import OurProduct from './ProductPage/OurProduct.js';
 import Overview from './Campaign/DetailCampaign/Section/Overview.js';
 import DetailCampaign from './Campaign/DetailCampaign/DetailCampaign.js';
 
+
 class App extends Component {
 
     handlePersistorState = () => {
@@ -51,7 +52,7 @@ class App extends Component {
         return (
             <Fragment>
                 {/* lưu lại data sau đăng nhập trên front-end*/}
-                <Router history={history}>
+                <BrowserRouter history={history}>
                     <div className="main-container" style={{fontFamily: "futura bt"}}>
                         {/* nếu logging r thì render tới header */}
 
@@ -70,6 +71,7 @@ class App extends Component {
                                     <Route path={path.DONATE} component={DonateUs} />
                                     <Route path={path.PRODUCT} component={OurProduct}/>
                                     <Route path={path.DETAILCAMPAIGN} component={DetailCampaign}/>
+                                  
                                 </Switch>
                             </CustomScrollbars>
                         </div>
@@ -81,7 +83,7 @@ class App extends Component {
                             closeButton={<CustomToastCloseButton />}
                         />
                     </div>
-                </Router>
+                </BrowserRouter>
             </Fragment>
         )
     }
