@@ -9,6 +9,8 @@ class ModalEditCampaign extends Component {
         this.state = {
             title: "",
             provinceList: [],
+            position: "",
+            position_map: "",
             description: "",
             status: "",
             target_amount: "",
@@ -63,6 +65,8 @@ class ModalEditCampaign extends Component {
         let arrInput = [
             "title",
             "description",
+            "position",
+            "position_map",
             "status",
             "target_amount",
             "current_amount",
@@ -90,7 +94,7 @@ class ModalEditCampaign extends Component {
                 isOpen={this.props.isOpen}
                 toggle={() => this.toggle()}
                 className={"modal-campaign-container"}
-                size="lg"
+                size="xl"
             >
                 <ModalHeader toggle={() => this.toggle()}>
                     Edit a campaign
@@ -146,6 +150,34 @@ class ModalEditCampaign extends Component {
                                 <option value="upcoming">Upcoming</option>
                                 <option value="ended">Ended</option>
                             </select>
+                        </div>
+                        <div className="input-container">
+                            <label>Position</label>
+                            <input
+                                type="text"
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "position"
+                                    )
+                                }
+                                value={this.state.position}
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="input-container">
+                            <label>Google Map</label>
+                            <input
+                                type="text"
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "position_map"
+                                    )
+                                }
+                                value={this.state.position_map}
+                                className="form-control"
+                            />
                         </div>
                         <div className="input-container">
                             <label>Target Amount</label>

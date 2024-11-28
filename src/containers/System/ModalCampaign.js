@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { emitter } from "../../utils/emitter";
 import { getAllProvinces } from "../../services/campaignService";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+
 class ModalCampaign extends Component {
     //hàm này dùng để khởi tạo state hoặc bind các function
     constructor(props) {
@@ -11,6 +12,8 @@ class ModalCampaign extends Component {
         this.state = {
             title: "",
             provinceList: [],
+            position: "",
+            position_map: "",
             description: "",
             status: "",
             target_amount: "",
@@ -26,6 +29,8 @@ class ModalCampaign extends Component {
             this.setState({
                 title: "",
                 provinceList: [],
+                position: "",
+                position_map: "",
                 description: "",
                 status: "",
                 target_amount: "",
@@ -80,6 +85,8 @@ class ModalCampaign extends Component {
         let arrInput = [
             "title",
             "province_id",
+            "position",
+            "position_map",
             "description",
             "status",
             "target_amount",
@@ -110,7 +117,7 @@ class ModalCampaign extends Component {
                 isOpen={this.props.isOpen}
                 toggle={() => this.toggle()}
                 className={"modal-campaign-container"}
-                size="lg"
+                size="xl"
             >
                 <ModalHeader toggle={() => this.toggle()}>
                     Create a new campaign
@@ -128,13 +135,16 @@ class ModalCampaign extends Component {
                                 className="form-control"
                             />
                         </div>
-                       
+
                         <div className="input-container">
                             <label>Province</label>
                             <select
                                 className="form-control"
                                 onChange={(event) =>
-                                    this.handleOnChangeInput(event, "province_id")
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "province_id"
+                                    )
                                 }
                                 value={this.state.province_id}
                             >
@@ -163,6 +173,34 @@ class ModalCampaign extends Component {
                                 <option value="upcoming">Upcoming</option>
                                 <option value="ended">Ended</option>
                             </select>
+                        </div>
+                        <div className="input-container">
+                            <label>Position</label>
+                            <input
+                                type="text"
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "position"
+                                    )
+                                }
+                                value={this.state.position}
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="input-container">
+                            <label>Google Map</label>
+                            <input
+                                type="text"
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "position_map"
+                                    )
+                                }
+                                value={this.state.position_map}
+                                className="form-control"
+                            />
                         </div>
                         <div className="input-container">
                             <label>Target Amount</label>

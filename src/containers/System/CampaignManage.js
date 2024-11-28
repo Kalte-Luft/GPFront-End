@@ -149,7 +149,7 @@ class CampaignManage extends Component {
                                 <th>ID</th>
                                 <th>Title</th>
                                 <th>Province</th>
-                                <th>Description</th>
+                                <th>Position</th>
                                 <th>Status</th>
                                 <th>Target Amount</th>
                                 <th>Current Amount</th>
@@ -169,7 +169,7 @@ class CampaignManage extends Component {
                                             <td>{item.id}</td>
                                             <td>{item.title}</td>
                                             <td>{item.province.name}</td>
-                                            <td>{item.description}</td>
+                                            <td>{item.position}</td>
                                             <td>{item.status}</td>
                                             <td>{item.target_amount}</td>
                                             <td>{item.current_amount}</td>
