@@ -132,7 +132,7 @@ class CampaignManage extends Component {
                 )}
 
                 <div className="title text-center">
-                    Manage campaigns with Nghia & Khanh
+                    Manage campaigns
                 </div>
                 <div className="mx-1">
                     <button
@@ -147,16 +147,17 @@ class CampaignManage extends Component {
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Image</th>
                                 <th>Title</th>
                                 <th>Province</th>
                                 <th>Position</th>
                                 <th>Status</th>
-                                <th>Target Amount</th>
-                                <th>Current Amount</th>
+                                <th>Target</th>
+                                <th>Current</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Partner</th>
-                                <th>Donor Number</th>
+                                <th>Donors</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -167,14 +168,34 @@ class CampaignManage extends Component {
                                     return (
                                         <tr key={index}>
                                             <td>{item.id}</td>
+                                            <td>
+                                                {item.image && (
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.title}
+                                                        style={{
+                                                            width: "100px",
+                                                        }}
+                                                    />
+                                                )}
+                                            </td>
                                             <td>{item.title}</td>
                                             <td>{item.province.name}</td>
                                             <td>{item.position}</td>
                                             <td>{item.status}</td>
                                             <td>{item.target_amount}</td>
                                             <td>{item.current_amount}</td>
-                                            <td>{item.start_date}</td>
-                                            <td>{item.end_date}</td>
+                                            <td>
+                                                {new Date(
+                                                    item.start_date
+                                                ).toLocaleDateString()}
+                                            </td>
+                                            <td>
+                                                {new Date(
+                                                    item.end_date
+                                                ).toLocaleDateString()}
+                                            </td>
+
                                             <td>
                                                 {item.partners.length > 0
                                                     ? item.partners.map(

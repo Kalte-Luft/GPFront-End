@@ -4,6 +4,12 @@ import { connect } from "react-redux";
 import { emitter } from "../../utils/emitter";
 import { getAllProvinces } from "../../services/campaignService";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import MarkdownIt from "markdown-it";
+import MdEditor from "react-markdown-editor-lite";
+import "react-markdown-editor-lite/lib/index.css";
+
+const mdParser = new MarkdownIt(/* Markdown-it options */);
+
 
 class ModalCampaign extends Component {
     //hàm này dùng để khởi tạo state hoặc bind các function
@@ -18,12 +24,15 @@ class ModalCampaign extends Component {
             status: "",
             target_amount: "",
             current_amount: "",
+            contentHTML: "",
+            contentMarkdown: "",
+            image: "",
             start_date: new Date(),
             end_date: new Date(),
         };
         this.listenToEmitter();
     }
-    //hàm này dùng để lắng nghe sự kiện từ emitter
+    //hàm này dùng để lắng nghe sự kiện từ emitter, ở đây là sự kiện clear data của modal
     listenToEmitter = () => {
         emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
             this.setState({
@@ -35,6 +44,9 @@ class ModalCampaign extends Component {
                 status: "",
                 target_amount: "",
                 current_amount: "",
+                contentHTML: "",
+                contentMarkdown: "",
+                image: "",
                 start_date: new Date(),
                 end_date: new Date(),
             });
@@ -43,6 +55,13 @@ class ModalCampaign extends Component {
     componentDidMount() {
         this.loadProvinces();
     }
+    handleEditorChange = ({ html, text }) => {
+        this.setState({
+            contentHTML: html,
+            contentMarkdown: text,
+        });
+    }
+    
     //hàm này dùng để đóng mở modal
     toggle = () => {
         this.props.toggleFromParent();
@@ -57,7 +76,7 @@ class ModalCampaign extends Component {
                 this.setState({
                     provinceList: response.Provinces || [], // Đảm bảo luôn gán giá trị mảng
                 });
-                console.log("Data: ", response.Provinces);
+                
             } else {
                 console.error(
                     "Failed to fetch provinces: ",
@@ -77,6 +96,7 @@ class ModalCampaign extends Component {
         this.setState({
             ...copyState,
         });
+            
     };
 
     //hàm này dùng để kiểm tra xem input có đúng không
@@ -91,10 +111,13 @@ class ModalCampaign extends Component {
             "status",
             "target_amount",
             "current_amount",
+            "contentMarkdown",
+            "contentHTML",
+            "image",
             "start_date",
             "end_date",
         ];
-        console.log("arrInput: ", arrInput);
+        
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -108,7 +131,13 @@ class ModalCampaign extends Component {
     handleAddNewCampaign = () => {
         let isValid = this.checkValidateInput();
         if (isValid === true) {
-            this.props.createNewCampaign(this.state); //gọi hàm createNewCampaign từ props, ở đây là từ mapDispatchToProps
+            // Thêm contentMarkdown và contentHTML vào payload
+            const campaignData = {
+                ...this.state, // Lấy toàn bộ state, bao gồm contentMarkdown và contentHTML
+                contentMarkdown: this.state.contentMarkdown,
+                contentHTML: this.state.contentHTML,
+            };
+            this.props.createNewCampaign(campaignData); // Gọi hàm để gửi dữ liệu
         }
     };
     render() {
@@ -179,10 +208,7 @@ class ModalCampaign extends Component {
                             <input
                                 type="text"
                                 onChange={(event) =>
-                                    this.handleOnChangeInput(
-                                        event,
-                                        "position"
-                                    )
+                                    this.handleOnChangeInput(event, "position")
                                 }
                                 value={this.state.position}
                                 className="form-control"
@@ -256,6 +282,20 @@ class ModalCampaign extends Component {
                             />
                         </div>
                         <div className="input-container">
+                            <label>Image Link</label>
+                            <input
+                                type="text"
+                                onChange={(event) =>
+                                    this.handleOnChangeInput(
+                                        event,
+                                        "image"
+                                    )
+                                }
+                                value={this.state.image}
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="input-container">
                             <label>Description</label>
                             <textarea
                                 onChange={(event) =>
@@ -269,6 +309,16 @@ class ModalCampaign extends Component {
                                 rows="4"
                             />
                         </div>
+                        
+                        <div className="input-container" style={{width:"100%"}}>
+                        <label>Detail Content</label>    
+                        <MdEditor
+                            style={{ height: "500px", width: "100%" }}
+                            renderHTML={(text) => mdParser.render(text)}
+                            onChange={this.handleEditorChange}
+                        />
+                        </div>
+
                     </div>
                 </ModalBody>
                 <ModalFooter>
