@@ -4,7 +4,6 @@ const getAllCampaigns = (inputId) => {
 };
 const createNewCampaignService = (data) => {
     return axios.post("/api/create-campaign", data);
-    console.log("data", data);
 };
 
 const deleteCampaignService = (campaignId) => {

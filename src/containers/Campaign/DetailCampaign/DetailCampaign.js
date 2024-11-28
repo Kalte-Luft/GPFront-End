@@ -4,7 +4,7 @@ import HomeHeader from "../../HomePage/HomeHeader";
 import HomeFooter from "../../HomePage/HomeFooter";
 import Overview from "./Section/Overview";
 import Detail from "./Section/Detail";
-
+import Value from "./Section/Value";
 
 class DetailCampaign extends Component {
     render() {
@@ -13,6 +13,7 @@ class DetailCampaign extends Component {
                 <HomeHeader />
                 <Overview />
                 <Detail />
+                <Value />
                 <HomeFooter />
             </div>
         );
