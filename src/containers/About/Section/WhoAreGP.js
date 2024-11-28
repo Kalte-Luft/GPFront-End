@@ -5,9 +5,9 @@ import "./WhoAreGP.scss";
 
 class WhoAreGP extends Component {
 
-	handleDonateClick =() => {
-		window.location.href = '/donate';
-	}
+	handleDonateClick = () => {
+        this.props.history.push('/donate');
+    }
 
 	render() {
 		return (
