@@ -71,7 +71,7 @@ class ModalCampaign extends Component {
     loadProvinces = async () => {
         try {
             let response = await getAllProvinces("ALL"); // Gọi API
-            console.log("Response: ", response);
+            
             if (response && response.errCode === 0) {
                 this.setState({
                     provinceList: response.Provinces || [], // Đảm bảo luôn gán giá trị mảng
