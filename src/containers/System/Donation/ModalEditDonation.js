@@ -1,54 +1,43 @@
-import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { emitter } from "../../utils/emitter";
-import { getAllProducts } from "../../services/donationService";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getAllProducts } from "../../../services/donationService";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import _, { add } from "lodash";
+import MarkdownIt from "markdown-it";
+import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 
-class ModalDonation extends Component {
-	//hàm này dùng để khởi tạo state hoặc bind các function
+const mdParser = new MarkdownIt(/* Markdown-it options */);
+class ModalEditDonation extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { //cài trạng thái
+		this.state = {
 			user_id: "",
 			user_name: "",
 			total_amount: "",
 			product_details: [],
 			date_created: new Date(),
 			qr_code: '',
-
 		};
-		this.listenToEmitter(); //lang nghe su kien tu emitter de nhan data tu component khac
 	}
-	//hàm này dùng để lắng nghe sự kiện từ emitter, ở đây là sự kiện clear data của modal
-	listenToEmitter = () => {
-		emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
-			//khi nhan duoc su kien nay thi clear data
-			this.setState({ //set state de clear data
-				user_id: "",
-				user_name: "",
-				total_amount: "",
-				product_details: [],
-				date_created: new Date(),
-				qr_code: '',
-			});
-		});
-	};
 
-
+	//hàm này dùng để lấy dữ liệu từ props truyền vào và set vào state
 	componentDidMount() {
-
+		let donation = this.props.currentDonation;
+		if (!_.isEmpty(donation)) {
+			this.setState({
+				...donation,
+				date_created: new Date(donation.date_created)
+					.toISOString()
+					.split("T")[0],
+			});
+		}
 	}
 
-
-	//hàm này dùng để đóng mở modal
 	toggle = () => {
 		this.props.toggleFromParent();
 	};
 
-
-	//hàm này dùng để lưu giá trị của input vào state
 	handleOnChangeInput = (event, id) => {  //id la key cua state can gan gia tri moi
 		let copyState = { ...this.state }; //copy state ra 1 object khac de gan gia tri moi cho no
 		copyState[id] = event.target.value; //gan gia tri vao copyState dua vao id cua input do
@@ -57,17 +46,16 @@ class ModalDonation extends Component {
 		})
 	}
 
-	//hàm này dùng để kiểm tra xem input có đúng không
-	checkValidateInput = () => { //check xem input co rong hay khong
-		let isValid = true; //khoi tao bien isValid = true 
-		let arrInput = [ //khoi tao mang arrInput chua cac key cua state
+	checkValidateInput = () => {
+		let isValid = true;  //khoi tao bien isValid = true 
+		let arrInput = [
 			"user_id",
 			"user_name",
 			"total_amount",
 			"product_details",
 			"date_created",
 			"qr_code",
-		];
+		]; //tao 1 mang chua cac key cua state
 		for (let i = 0; i < arrInput.length; i++) { //duyet mang arrInput 
 			if (!this.state[arrInput[i]]) { //neu state co gia tri rong 
 				isValid = false; //isValid = false
@@ -78,18 +66,12 @@ class ModalDonation extends Component {
 		return isValid; //tra ve isValid = true neu khong co gia tri rong
 	}
 
-
-	//hàm này dùng để thêm mới donation
-	handleAddNewDonation = () => {
-        let isValid = this.checkValidateInput();
-        if (isValid === true) {
-            // Thêm contentMarkdown và contentHTML vào payload
-            const donationData = {
-                ...this.state,
-            };
-            this.props.createNewDonation(donationData); // Gọi hàm để gửi dữ liệu
-        }
-    };
+	handleSaveDonation = () => {
+		let isValid = this.checkValidateInput();
+		if (isValid === true) {
+			this.props.editDonation(this.state);
+		}
+	};
 
 	addProductDetail = () => {
 		this.setState(prevState => ({
@@ -128,7 +110,7 @@ class ModalDonation extends Component {
 							<input
 								type="text"
 								onChange={(event) => { this.handleOnChangeInput(event, 'user_id') }}
-								value={this.state.user_id}
+								value={this.state.user_id} //gan gia tri cua state email cho input do
 							/>
 						</div>
 
@@ -136,7 +118,7 @@ class ModalDonation extends Component {
 							<label>User Name:</label>
 							<input
 								type="text"
-								onChange={(event) => { this.handleOnChangeInput(event, 'user_name') }}
+								onChange={(event) => { this.handleOnChangeInput(event, 'user_name') }} //goi ham handleOnChangeInput de gan gia tri moi cho state password
 								value={this.state.user_name}
 							/>
 						</div>
@@ -165,29 +147,12 @@ class ModalDonation extends Component {
 							</div>
 						</div>
 
-						{/* Hiển thị bảng thông tin sản phẩm */}
-						<table>
-							<thead>
-								<tr>
-									<th>Product ID</th>
-									<th>Quantity</th>
-								</tr>
-							</thead>
-							<tbody>
-								{this.state.product_details.map((product, index) => (
-									<tr key={index}>
-										<td>{product.product_id}</td>
-										<td>{product.quantity}</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
 
 						<div className="input-container">
 							<label>Total Amount:</label>
 							<input
 								type="text"
-								onChange={(event) => { this.handleOnChangeInput(event, 'total_amount') }}
+								onChange={(event) => { this.handleOnChangeInput(event, 'total_amount') }} //goi ham handleOnChangeInput de gan gia tri moi cho state firstName
 								value={this.state.total_amount}
 							/>
 						</div>
@@ -196,7 +161,7 @@ class ModalDonation extends Component {
 							<label>QR code:</label>
 							<input
 								type="text"
-								onChange={(event) => { this.handleOnChangeInput(event, 'qr_code') }}
+								onChange={(event) => { this.handleOnChangeInput(event, 'qr_code') }} //goi ham handleOnChangeInput de gan gia tri moi cho state firstName
 								value={this.state.qr_code}
 							/>
 						</div>
@@ -205,13 +170,13 @@ class ModalDonation extends Component {
 							<label>Date Created:</label>
 							<input
 								type="text"
-								onChange={(event) => { this.handleOnChangeInput(event, 'date_created') }}
+								onChange={(event) => { this.handleOnChangeInput(event, 'date_created') }} //goi ham handleOnChangeInput de gan gia tri moi cho state firstName
 								value={this.state.date_created}
 							/>
 						</div>
 					</div>
-				</ModalBody>
 
+				</ModalBody>
 				<ModalFooter>
 					<Button
 						color="primary"
@@ -235,4 +200,4 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalDonation);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEditDonation);

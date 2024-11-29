@@ -21,7 +21,6 @@ const editProductService = (inputData) => {
 
 
 
-
 export {
     getAllProducts,
     createNewProductService,

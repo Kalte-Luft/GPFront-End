@@ -7,12 +7,12 @@ import {
     createNewDonationService,
     deleteDonationService,
     editDonationService,
-	getAllProducts,
-	getAllUsers
-} from "../../services/donationService";
+    getAllProducts,
+    getAllUsers
+} from "../../../services/donationService";
 import ModalDonation from "./ModalDonation";
 import ModalEditDonation from "./ModalEditDonation";
-import { emitter } from "../../utils/emitter";
+import { emitter } from "../../../utils/emitter";
 class DonationManage extends Component {
     constructor(props) {
         super(props);
@@ -101,7 +101,7 @@ class DonationManage extends Component {
                     isOpenModalEditDonation: false,
                 });
                 await this.getAllDonationsFromReact();
-            }else {
+            } else {
                 alert(response.errCode);
             }
         } catch (error) {
@@ -129,7 +129,7 @@ class DonationManage extends Component {
                         isOpen={this.state.isOpenModalEditDonation}
                         toggleFromParent={this.toggleEditDonationModal}
                         currentDonation={this.state.donationEdit}
-                        editDonation = {this.doEditDonation}
+                        editDonation={this.doEditDonation}
                     />
                 )}
 
@@ -147,7 +147,7 @@ class DonationManage extends Component {
                         <thead>
                             <tr>
                                 <th>ID</th>
-								<th>User ID</th>
+                                <th>User ID</th>
                                 <th>User</th>
                                 <th>Product</th>
                             </tr>
@@ -159,7 +159,7 @@ class DonationManage extends Component {
                                     return (
                                         <tr key={index}>
                                             <td>{item.id}</td>
-                                            
+
                                             <td>
                                                 <button className="btn-edit">
                                                     <i

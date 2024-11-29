@@ -6,10 +6,10 @@ import {
     createNewProductService,
     deleteProductService,
     editProductService
-} from "../../services/productService";
+} from "../../../services/productService";
 import ModalProduct from "./ModalProduct";
 import ModalEditProduct from "./ModalEditProduct";
-import { emitter } from "../../utils/emitter";
+import { emitter } from "../../../utils/emitter";
 class ProductManage extends Component {
     constructor(props) {
         super(props);
@@ -98,7 +98,7 @@ class ProductManage extends Component {
                     isOpenModalEditProduct: false,
                 });
                 await this.getAllProductsFromReact();
-            }else {
+            } else {
                 alert(response.errCode);
             }
         } catch (error) {
@@ -115,7 +115,7 @@ class ProductManage extends Component {
         let arrProducts = this.state.arrProducts;
         return (
             <div className="product-container">
-                {/* <ModalProduct
+                <ModalProduct
                     isOpen={this.state.isOpenModalProduct}
                     toggleFromParent={this.toggleProductModal}
                     createNewProduct={this.createNewProduct}
@@ -125,9 +125,9 @@ class ProductManage extends Component {
                         isOpen={this.state.isOpenModalEditProduct}
                         toggleFromParent={this.toggleEditProductModal}
                         currentProduct={this.state.productEdit}
-                        editProduct = {this.doEditProduct}
+                        editProduct={this.doEditProduct}
                     />
-                )}  */}
+                )}
 
                 <div className="title text-center">Manage products</div>
                 <div className="mx-1">
@@ -167,7 +167,7 @@ class ProductManage extends Component {
                                                     style={{ width: "100px" }}
                                                 />
                                             }</td>
-                                            
+
                                             <td>
                                                 <button className="btn-edit">
                                                     <i
