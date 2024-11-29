@@ -6,9 +6,12 @@ import CampaignManage from "../containers/System/CampaignManage";
 import PartnerManage from "../containers/System/PartnerManage";
 import Header from "../containers/Header/Header";
 import { userIsAdmin } from "../hoc/authentication";
-import DonationManage from "../containers/System/DonationManage";
-import ProductManage from "../containers/System/ProductManage";
+
 import CampaignDonationManage from "../containers/System/CampaignDonationManage";
+
+import DonationManage from "../containers/System/Donation/DonationManage";
+import ProductManage from "../containers/System/Donation/ProductManage";
+
 class System extends Component {
     render() {
         const { systemMenuPath, isLoggedIn } = this.props;
