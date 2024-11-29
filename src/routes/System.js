@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import UserManage from "../containers/System/UserManage";
 import CampaignManage from "../containers/System/CampaignManage";
+import PartnerManage from "../containers/System/PartnerManage";
 import Header from "../containers/Header/Header";
 import { userIsAdmin } from "../hoc/authentication";
 
@@ -22,6 +23,10 @@ class System extends Component {
                             <Route
                                 path="/system/campaign-manage"
                                 component={userIsAdmin(CampaignManage)} // Sử dụng HOC
+                            />
+                            <Route
+                                path="/system/partner-manage"
+                                component={userIsAdmin(PartnerManage)} // Sử dụng HOC
                             />
                             <Route
                                 component={() => {

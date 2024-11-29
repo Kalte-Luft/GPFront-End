@@ -18,6 +18,7 @@
         "admin": {
             "manage-user": "Quản lý người dùng",
             "manage-campaign": "Quản lý chiến dịch",
+            "manage-partner": "Quản lý đối tác",
             "manage-donation": "Quản lý quyên góp",
             "back-to-home": "<◄ Trở về trang chủ"
         }
