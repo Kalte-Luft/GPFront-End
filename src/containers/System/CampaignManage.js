@@ -199,14 +199,14 @@ class CampaignManage extends Component {
                                             <td>
                                                 {item.partners.length > 0
                                                     ? item.partners.map(
-                                                          (partner, index) =>
-                                                              index ===
-                                                              item.partners
-                                                                  .length -
-                                                                  1
-                                                                  ? partner.name
-                                                                  : `${partner.name}, `
-                                                      )
+                                                        (partner, index) =>
+                                                            index ===
+                                                                item.partners
+                                                                    .length -
+                                                                1
+                                                                ? partner.name
+                                                                : `${partner.name}, `
+                                                    )
                                                     : "No Partner"}
                                             </td>
                                             <td>

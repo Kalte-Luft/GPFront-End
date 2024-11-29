@@ -68,7 +68,7 @@ class ModalUser extends Component {
                 isOpen={this.props.isOpen}
                 toggle={() => this.toggle()}
                 className={"modal-user-container"}
-                size = "lg"
+                size = "xl"
             >
                 <ModalHeader toggle={() => this.toggle()}>
                     Create a new user

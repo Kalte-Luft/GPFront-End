@@ -5,6 +5,7 @@ import UserManage from "../containers/System/UserManage";
 import CampaignManage from "../containers/System/CampaignManage";
 import Header from "../containers/Header/Header";
 import { userIsAdmin } from "../hoc/authentication";
+import DonationManage from "../containers/System/DonationManage";
 
 class System extends Component {
     render() {
@@ -22,6 +23,10 @@ class System extends Component {
                             <Route
                                 path="/system/campaign-manage"
                                 component={userIsAdmin(CampaignManage)} // Sử dụng HOC
+                            />
+                              <Route
+                                path="/system/donation-manage"
+                                component={userIsAdmin(DonationManage)}
                             />
                             <Route
                                 component={() => {
