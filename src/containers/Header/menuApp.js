@@ -19,6 +19,10 @@ export const adminMenu = [
                
             },
             {
+                name: 'menu.admin.manage-product',link : '/system/product-manage',
+               
+            },
+            {
                 name: 'menu.admin.back-to-home',link : '/home',
                
             },

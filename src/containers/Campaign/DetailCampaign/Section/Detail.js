@@ -53,7 +53,7 @@ const Detail = () => {
                     wise man therefore always holds in these matters to this
                     principle of selection: he rejects pleasures to secure other
                     greater pleasures, or else he endures pains to avoid worse
-                    pains. - On the other hand, we denounce with righteous
+                    pains. <br></br>- On the other hand, we denounce with righteous
                     indignation and dislike men who are so beguiled and
                     demoralized by the charms of pleasure of the moment, so
                     blinded by desire, that they cannot foresee the pain and

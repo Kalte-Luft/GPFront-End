@@ -7,6 +7,7 @@ import PartnerManage from "../containers/System/PartnerManage";
 import Header from "../containers/Header/Header";
 import { userIsAdmin } from "../hoc/authentication";
 import DonationManage from "../containers/System/DonationManage";
+import ProductManage from "../containers/System/ProductManage";
 
 class System extends Component {
     render() {
@@ -32,6 +33,10 @@ class System extends Component {
                             <Route
                                 path="/system/partner-manage"
                                 component={userIsAdmin(PartnerManage)} // Sử dụng HOC
+                            />
+                            <Route
+                                path="/system/product-manage"
+                                component={userIsAdmin(ProductManage)} // Sử dụng HOC
                             />
                             <Route
                                 component={() => {
