@@ -11,6 +11,10 @@ export const adminMenu = [
                
             },
             {
+                name: 'menu.admin.manage-campaign-donation',link : '/system/campaign-donation-manage',
+               
+            },
+            {
                 name: 'menu.admin.manage-partner',link : '/system/partner-manage',
                
             },

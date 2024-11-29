@@ -4,7 +4,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import _, { add } from "lodash";
 import { getAllCampaigns } from "../../services/campaignService";
 import Select from "react-select";
-import { data } from "jquery";
 class ModalEditPartner extends Component {
     constructor(props) {
         super(props);
@@ -66,7 +65,7 @@ class ModalEditPartner extends Component {
             campaign_id: selectedOption ? selectedOption.value : "",
         });
     };
-    
+    //hàm này dùng để lưu giá trị của input vào state
     handleOnChangeInput = (event, id) => {
         //good code
         let copyState = { ...this.state };
@@ -114,7 +113,7 @@ class ModalEditPartner extends Component {
                 <ModalBody>
                     <div className="modal-partner-body">
                         <div className="input-container">
-                            <label>logo</label>
+                            <label>Logo</label>
                             <input
                                 type="text"
                                 onChange={(event) =>

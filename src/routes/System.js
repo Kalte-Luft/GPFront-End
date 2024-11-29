@@ -8,7 +8,7 @@ import Header from "../containers/Header/Header";
 import { userIsAdmin } from "../hoc/authentication";
 import DonationManage from "../containers/System/DonationManage";
 import ProductManage from "../containers/System/ProductManage";
-
+import CampaignDonationManage from "../containers/System/CampaignDonationManage";
 class System extends Component {
     render() {
         const { systemMenuPath, isLoggedIn } = this.props;
@@ -35,9 +35,14 @@ class System extends Component {
                                 component={userIsAdmin(PartnerManage)} // Sử dụng HOC
                             />
                             <Route
+                                path="/system/campaign-donation-manage"
+                                component={userIsAdmin(CampaignDonationManage)} // Sử dụng HOC
+                            />
+                            <Route
                                 path="/system/product-manage"
                                 component={userIsAdmin(ProductManage)} // Sử dụng HOC
                             />
+                            
                             <Route
                                 component={() => {
                                     return <Redirect to={systemMenuPath} />;
