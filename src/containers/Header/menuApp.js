@@ -23,6 +23,10 @@ export const adminMenu = [
                
             },
             {
+                name: 'menu.admin.manage-cart',link : '/system/cart-manage',
+               
+            },
+            {
                 name: 'menu.admin.back-to-home',link : '/home',
                
             },

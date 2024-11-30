@@ -142,7 +142,7 @@ class ProductManage extends Component {
                     <table id="customers">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Product ID</th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Price</th>

@@ -1,112 +1,108 @@
 import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import "./DonationManage.scss";
+import "./CartManage.scss";
 import {
-    getAllDonations,
-    createNewDonationService,
-    deleteDonationService,
-    editDonationService,
-    getAllProducts,
-    getAllUsers,
-    getALLCart,
-} from "../../../services/donationService";
-import ModalDonation from "./ModalDonation";
-import ModalEditDonation from "./ModalEditDonation";
+    getAllCarts,
+    createNewCartService,
+    deleteCartService,
+    editCartService
+} from "../../../services/cartService";
+import ModalCart from "./ModalCart";
+import ModalEditCart from "./ModalEditCart";
 import { emitter } from "../../../utils/emitter";
-class DonationManage extends Component {
+class CartManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             //giống với hàm khởi tạo trong OOP
-            arrDonations: [],
-            isOpenModalDonation: false,
-            isOpenModalEditDonation: false,
-            donationEdit: {},
+            arrCarts: [],
+            isOpenModalCart: false,
+            isOpenModalEditCart: false,
+            cartEdit: {},
         };
     }
     //hàm này dùng để gọi API
     async componentDidMount() {
-        await this.getAllDonationsFromReact();
+        await this.getAllCartsFromReact();
     }
     //hàm này dùng để gọi API
-    getAllDonationsFromReact = async () => {
-        let response = await getAllDonations("ALL");
+    getAllCartsFromReact = async () => {
+        let response = await getAllCarts("ALL");
         if (response && response.errCode === 0) {
             this.setState({
                 //dùng để re-render lại component
-                arrDonations: response.donations,
+                arrCarts: response.carts,
             });
         }
     };
     //hàm này dùng để mở modal
-    handleAddNewDonation = () => {
+    handleAddNewCart = () => {
         this.setState({
-            isOpenModalDonation: true,
+            isOpenModalCart: true,
         });
     };
     //hàm này dùng để đóng mở modal
-    toggleDonationModal = () => {
+    toggleCartModal = () => {
         this.setState({
-            isOpenModalDonation: !this.state.isOpenModalDonation,
+            isOpenModalCart: !this.state.isOpenModalCart,
         });
     };
     //hàm này dùng để đóng mở modal
-    toggleEditDonationModal = () => {
+    toggleEditCartModal = () => {
         this.setState({
-            isOpenModalEditDonation: !this.state.isOpenModalEditDonation,
+            isOpenModalEditCart: !this.state.isOpenModalEditCart,
         });
     };
-    //hàm này dùng để tạo mới donation
-    createNewDonation = async (data) => {
+    //hàm này dùng để tạo mới Cart
+    createNewCart = async (data) => {
         try {
-            let response = await createNewDonationService(data);
+            let response = await createNewCartService(data);
             if (response && response.errCode !== 0) {
                 alert(response.errMessage);
             } else {
-                await this.getAllDonationsFromReact();
+                await this.getAllCartsFromReact();
                 this.setState({
-                    isOpenModalDonation: false,
+                    isOpenModalCart: false,
                 });
                 emitter.emit("EVENT_CLEAR_MODAL_DATA");
             }
         } catch (error) {
-            console.log("createNewDonation error: ", error);
+            console.log("createNewCart error: ", error);
         }
     };
-    //hàm này dùng để xóa donation
-    handleDeleteDonation = async (donation) => {
+    //hàm này dùng để xóa Cart
+    handleDeleteCart = async (cart) => {
         try {
-            let response = await deleteDonationService(donation.id);
+            let response = await deleteCartService(cart.id);
             if (response && response.errCode === 0) {
-                await this.getAllDonationsFromReact();
+                await this.getAllCartsFromReact();
             } else {
                 alert(response.errMessage);
             }
         } catch (error) {
-            console.log("handleDeleteDonation error: ", error);
+            console.log("handleDeleteCart error: ", error);
         }
     };
-    handleEditDonation = (donation) => {
+    handleEditCart = (cart) => {
         this.setState({
-            isOpenModalEditDonation: true,
-            donationEdit: donation,
+            isOpenModalEditCart: true,
+            cartEdit: cart,
         });
     };
-    //hàm này dùng để sửa donation
-    doEditDonation = async (data) => {
+    //hàm này dùng để sửa Cart
+    doEditCart = async (data) => {
         try {
-            let response = await editDonationService(data);
+            let response = await editCartService(data);
             if (response && response.errCode === 0) {
                 this.setState({
-                    isOpenModalEditDonation: false,
+                    isOpenModalEditCart: false,
                 });
-                await this.getAllDonationsFromReact();
+                await this.getAllCartsFromReact();
             } else {
                 alert(response.errCode);
             }
         } catch (error) {
-            console.log("doEditDonation error: ", error);
+            console.log("doEditCart error: ", error);
         }
     };
     //life cycle
@@ -116,61 +112,60 @@ class DonationManage extends Component {
     // 3. render (re-render)
 
     render() {
-        console.log("check state: ", this.state);
-        let arrDonations = this.state.arrDonations;
+        let arrCarts = this.state.arrCarts;
         return (
-            <div className="donation-container">
-                {/* <ModalDonation
-                    isOpen={this.state.isOpenModalDonation}
-                    toggleFromParent={this.toggleDonationModal}
-                    createNewDonation={this.createNewDonation}
+            <div className="cart-container">
+                <ModalCart
+                    isOpen={this.state.isOpenModalCart}
+                    toggleFromParent={this.toggleCartModal}
+                    createNewCart={this.createNewCart}
                 />
-                {this.state.isOpenModalEditDonation && (
-                    <ModalEditDonation
-                        isOpen={this.state.isOpenModalEditDonation}
-                        toggleFromParent={this.toggleEditDonationModal}
-                        currentDonation={this.state.donationEdit}
-                        editDonation={this.doEditDonation}a
+                {this.state.isOpenModalEditCart && (
+                    <ModalEditCart
+                        isOpen={this.state.isOpenModalEditCart}
+                        toggleFromParent={this.toggleEditCartModal}
+                        currentCart={this.state.cartEdit}
+                        editCart={this.doEditCart}
                     />
-                )} */}
+                )}
 
-                <div className="title text-center">Manage donations with Nghia & Khanh</div>
+                <div className="title text-center">Manage Carts</div>
                 <div className="mx-1">
                     <button
                         className="btn btn-primary px-3"
-                        onClick={() => this.handleAddNewDonation()}
+                        onClick={() => this.handleAddNewCart()}
                     >
-                        <i className="fa fa-plus"></i> Add new donation
+                        <i className="fa fa-plus"></i> Add new Cart
                     </button>
                 </div>
-                <div className="donations-table mt-3 mx-2">
+                <div className="carts-table mt-3 mx-2">
                     <table id="customers">
                         <thead>
                             <tr>
-                                <th>Donation ID</th>
                                 <th>Cart ID</th>
+                                <th>User ID</th>
                                 <th>User</th>
-                                <th>Product</th>
-                                <th>Total amount</th>
+                                <th>Product ID</th>
+                                <th>Quantity</th>
                                 <th>Status</th>
-                                <th>Purchased date</th>
-                                <th>Action</th>
+                                <th>Purchase At</th>
+                                <th>Action</th>                              
                             </tr>
                         </thead>
                         <tbody>
-                            {arrDonations &&
-                                arrDonations.map((item, index) => {
+                            {arrCarts &&
+                                arrCarts.map((item, index) => {
                                     return (
                                         <tr key={index}>
                                             <td>{item.id}</td>
-                                            <td>{item.cartItem_id}</td>
+                                            <td>{item.user_id}</td>
                                             <td>{item.user.name}</td>
                                             <td>{item.product_id}</td>
-                                            <td>{item.total_amount}</td>
-                                            <td>{item.cartItem.status}</td>
+                                            <td>{item.quantity}</td>
+                                            <td>{item.status}</td>
                                             <td>
                                                 {new Date(
-                                                    item.cartItem.purchased_at
+                                                    item.purchased_at
                                                 ).toLocaleDateString()}
                                             </td>
 
@@ -179,7 +174,7 @@ class DonationManage extends Component {
                                                     <i
                                                         className="fa fa-pencil-alt"
                                                         onClick={() =>
-                                                            this.handleEditDonation(
+                                                            this.handleEditCart(
                                                                 item
                                                             )
                                                         }
@@ -188,7 +183,7 @@ class DonationManage extends Component {
                                                 <button
                                                     className="btn-delete"
                                                     onClick={() =>
-                                                        this.handleDeleteDonation(
+                                                        this.handleDeleteCart(
                                                             item
                                                         )
                                                     }
@@ -215,4 +210,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DonationManage);
+export default connect(mapStateToProps, mapDispatchToProps)(CartManage);

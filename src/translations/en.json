@@ -20,7 +20,8 @@
             "manage-partner": "Manage Partner System",
             "manage-donation": "Manage Donation System",
             "manage-product": "Manage Product System",
-            "back-to-home": "◄ Back to Home"
+            "back-to-home": "◄ Back to Home",
+            "manage-cart":"Manage Cart System"
 
         }
     }
