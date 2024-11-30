@@ -6,7 +6,9 @@ import CampaignManage from "../containers/System/CampaignManage";
 import PartnerManage from "../containers/System/PartnerManage";
 import Header from "../containers/Header/Header";
 import { userIsAdmin } from "../hoc/authentication";
+import CampaignDonationManage from "../containers/System/CampaignDonationManage";
 import DonationManage from "../containers/System/Donation/DonationManage";
+
 import ProductManage from "../containers/System/Donation/ProductManage";
 import CartManage from "../containers/System/Donation/CartManage";
 class System extends Component {
@@ -31,9 +33,14 @@ class System extends Component {
                                 component={userIsAdmin(PartnerManage)} // Sử dụng HOC
                             />
                             <Route
+                                path="/system/campaign-donation-manage"
+                                component={userIsAdmin(CampaignDonationManage)} // Sử dụng HOC
+                            />
+                            <Route
                                 path="/system/product-manage"
                                 component={userIsAdmin(ProductManage)} // Sử dụng HOC
                             />
+                            
                             <Route
                                 path="/system/cart-manage"
                                 component={userIsAdmin(CartManage)}
