@@ -165,7 +165,7 @@ class DonationManage extends Component {
                                             <td>{item.id}</td>
                                             <td>{item.cartItem_id}</td>
                                             <td>{item.user.name}</td>
-                                            <td>{item.product_id}</td>
+                                            <td>{item.product.name}</td>
                                             <td>{item.total_amount}</td>
                                             <td>{item.cartItem.status}</td>
                                             <td>
