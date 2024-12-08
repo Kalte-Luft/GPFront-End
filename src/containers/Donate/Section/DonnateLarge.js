@@ -23,7 +23,7 @@ const DonateLarge = () => {
 					</div>
 				</div>
 				<div className="donateLarge-content-right">
-<div className ="parrot-image"></div>
+					<div className="parrot-image"></div>
 				</div>
 			</div>
 		</div>

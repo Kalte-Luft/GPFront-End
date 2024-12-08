@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../../utils/emitter';
-import { getAllProducts } from '../../../services/productService';
 import "react-markdown-editor-lite/lib/index.css";
 
 class ModalDonation extends Component {

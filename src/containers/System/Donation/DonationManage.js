@@ -135,15 +135,15 @@ class DonationManage extends Component {
                 )} */}
 
                 <div className="title text-center">Manage donations with Nghia & Khanh</div>
-                <div className="mx-1">
+                {/* <div className="mx-1">
                     <button
                         className="btn btn-primary px-3"
                         onClick={() => this.handleAddNewDonation()}
                     >
                         <i className="fa fa-plus"></i> Add new donation
                     </button>
-                </div>
-                <div className="donations-table mt-3 mx-2">
+                </div> */}
+                <div className="donations-table mt-5 mx-3">
                     <table id="customers">
                         <thead>
                             <tr>
