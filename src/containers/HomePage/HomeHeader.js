@@ -26,15 +26,17 @@ class HomeHeader extends Component {
                     </div>
                     <div className="center-content">
                         <button
-                            className="btn"
+                            className={`btn ${  this.props.location.pathname === "/home" ? "active" : ""}`}
                             onClick={() => this.handleNavigate("/home")}
+                            //nếu đang ở trang home thì thêm class active
+
                         >
                             <span>
                                 <FormattedMessage id="home-header.home" />
                             </span>
                         </button>
                         <button
-                            className="btn"
+                            className={`btn ${  this.props.location.pathname === "/about" ? "active" : ""}`}
                             onClick={() => this.handleNavigate("/about")}
                         >
                             <span>
@@ -42,7 +44,7 @@ class HomeHeader extends Component {
                             </span>
                         </button>
                         <button
-                            className="btn"
+                            className={`btn ${  this.props.location.pathname === "/status" ? "active" : ""}`}
                             onClick={() => this.handleNavigate("/status")}
                         >
                             <span>
@@ -50,7 +52,7 @@ class HomeHeader extends Component {
                             </span>
                         </button>
                         <button
-                            className="btn"
+                            className={`btn ${  this.props.location.pathname === "/campaign" ? "active" : ""}`}
                             onClick={() => this.handleNavigate("/campaign")}
                         >
                             <span>
@@ -58,7 +60,7 @@ class HomeHeader extends Component {
                             </span>
                         </button>
                         <button
-                            className="btn"
+                            className={`btn ${  this.props.location.pathname === "/contact" ? "active" : ""}`}
                             onClick={() => this.handleNavigate("/contact")}
                         >
                             <span>
@@ -131,6 +133,7 @@ class HomeHeader extends Component {
                         {this.props.isLoggedIn === true && (
                             <div className="drop-info">
                                 <button className="dropbtn">
+                                    <i class="fa fa-user" style={{marginRight:"10px"}}></i>
                                     <p>{userInfo && userInfo.name
                                         ? userInfo.name
                                         : ""}</p>

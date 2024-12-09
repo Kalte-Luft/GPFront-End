@@ -34,6 +34,12 @@
                     cursor: pointer;
                 }
             }
+            .active {
+                fill: #002868;
+                stroke: #002868 !important;
+                stroke-width: 2px;
+                stroke-linejoin: round;
+            }
         }
 
         a {

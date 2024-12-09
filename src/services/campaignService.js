@@ -2,6 +2,7 @@ import axios from "../axios";
 const getAllCampaigns = (inputId) => {
     return axios.get(`/api/get-all-campaigns?id=${inputId}`);
 };
+
 const createNewCampaignService = (data) => {
     return axios.post("/api/create-campaign", data);
 };
@@ -23,10 +24,15 @@ const getAllProvinces = (inputId) => {
     return axios.get(`/api/get-all-provinces?id=${inputId}`);
 };
 
+const getProvinceOverview = (inputId) => {
+    return axios.get(`/api/get-province-overview?id=${inputId}`);
+}
+
 export {
     getAllCampaigns,
     createNewCampaignService,
     deleteCampaignService,
     editCampaignService,
     getAllProvinces,
+    getProvinceOverview,
 };

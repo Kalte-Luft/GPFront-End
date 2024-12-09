@@ -50,10 +50,15 @@
                     background-color: #359381;
                     color: #ffffff;
                 }
+                
                 i {
                     margin-right: 4px;
                     font-size: 18px;
                 }
+            }
+            .active {
+                background-color: #359381;
+                color: #ffffff;
             }
             .dropdown {
                 width: 10%;
@@ -159,7 +164,7 @@
                     width: 170px;
                     color: #ffffff;
                     font-size: medium;
-                    padding: 0 16px;
+                    padding: 0 12px;
                     border: none;
                     cursor: pointer;
                     display: flex;
