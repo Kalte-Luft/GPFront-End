@@ -4,14 +4,15 @@ export const path = {
     LOGIN: '/login',
     LOG_OUT: '/logout',
     SYSTEM: '/system',
-    ABOUTUS: '/about',
-    CONTACTUS: '/contact',
+    ABOUT_US: '/about',
+    CONTACT_US: '/contact',
     STATUS: '/status',
     CAMPAIGN: '/campaign',
     DONATE:'/donate',
     SIGNUP: '/signup',
     PRODUCT:'/product',
-    DETAILCAMPAIGN:'/detail',
+    DETAIL_CAMPAIGN:'/detail/:id',
+    ERROR: '*',
 };
 
 export const LANGUAGES = {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getAllProvinces } from "../../services/campaignService";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import _, { add } from "lodash";
+import _ from "lodash";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
@@ -19,7 +19,6 @@ class ModalEditCampaign extends Component {
             description: "",
             status: "",
             target_amount: "",
-            current_amount: "",
             image: "",
             contentHTML: "",
             contentMarkdown: "",
@@ -91,7 +90,6 @@ class ModalEditCampaign extends Component {
             "position_map",
             "status",
             "target_amount",
-            "current_amount",
             "image",
             "contentMarkdown",
             "contentHTML",
@@ -215,20 +213,7 @@ class ModalEditCampaign extends Component {
                                 className="form-control"
                             />
                         </div>
-                        <div className="input-container">
-                            <label>Current Amount</label>
-                            <input
-                                type="text"
-                                onChange={(event) =>
-                                    this.handleOnChangeInput(
-                                        event,
-                                        "current_amount"
-                                    )
-                                }
-                                value={this.state.current_amount}
-                                className="form-control"
-                            />
-                        </div>
+                        
                         <div className="input-container">
                             <label>Start Date</label>
                             <input

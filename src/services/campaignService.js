@@ -27,7 +27,9 @@ const getAllProvinces = (inputId) => {
 const getProvinceOverview = (inputId) => {
     return axios.get(`/api/get-province-overview?id=${inputId}`);
 }
-
+const getCampaignByProvinceId = (inputId) => {
+    return axios.get(`/api/get-campaigns-by-province?id=${inputId}`);
+}
 export {
     getAllCampaigns,
     createNewCampaignService,
@@ -35,4 +37,5 @@ export {
     editCampaignService,
     getAllProvinces,
     getProvinceOverview,
+    getCampaignByProvinceId,
 };

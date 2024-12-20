@@ -1,117 +1,143 @@
-import React, { useEffect, useRef } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Detail.scss";
+import { getAllCampaigns } from "../../../../services/campaignService";
+import { withRouter } from "react-router-dom";
 
-const Detail = () => {
-    return (
-        <div className="detail-container">
-            <div className="left-content">
-                <div className="status">
-                    <h1>Status</h1>
-                    <p>
-                        <i class="fa fa-tasks" aria-hidden="true"></i>Ongoing
-                    </p>
+class Detail extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            detailCampaigns: [],
+        };
+    }
+    handleNavigate = (path) => {
+        this.props.history.push(path);
+    };
+    async componentDidMount() {
+        if (
+            this.props.match &&
+            this.props.match.params &&
+            this.props.match.params.id
+        ) {
+            let inputId = this.props.match.params.id;
+            try {
+                let response = await getAllCampaigns(inputId);
+                if (response && response.errCode === 0) {
+                    this.setState({ detailCampaigns: response.campaigns });
+                }
+            } catch (error) {
+                console.error("Error fetching campaigns:", error);
+            }
+        } else {
+            console.log("No id found");
+        }
+    }
+    async componentDidUpdate(prevProps, prevState, snapshot) {}
+    render() {
+        const { isLoggedIn } = this.props;
+        let { detailCampaigns } = this.state;
+        return (
+            <div className="detail-container">
+                <div className="left-content">
+                    <div className="status">
+                        <h1>Status</h1>
+                        <p>
+                            <i class="fa fa-tasks" aria-hidden="true"></i>
+                            {detailCampaigns &&
+                                detailCampaigns.status &&
+                                detailCampaigns.status}
+                        </p>
+                    </div>
+                    <div className="start-date">
+                        <h1>Start date</h1>
+                        <p>
+                            <i
+                                class="fa fa-calendar-alt"
+                                aria-hidden="true"
+                            ></i>
+                            {detailCampaigns &&
+                                detailCampaigns.start_date &&
+                                new Date(
+                                    detailCampaigns.start_date
+                                ).toLocaleDateString()}
+                        </p>
+                    </div>
+                    <div className="end-date">
+                        <h1>End date</h1>
+                        <p>
+                            <i
+                                class="fa fa-calendar-alt"
+                                aria-hidden="true"
+                            ></i>
+                            {detailCampaigns &&
+                                detailCampaigns.end_date &&
+                                new Date(
+                                    detailCampaigns.end_date
+                                ).toLocaleDateString()}
+                        </p>
+                    </div>
+                    <div className="donor-num">
+                        <h1>Donors</h1>
+                        <p>
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            {detailCampaigns &&
+                            detailCampaigns.donations &&
+                            detailCampaigns.donations.length > 0
+                                ? detailCampaigns.donations.length
+                                : "No Donor"}
+                        </p>
+                    </div>
                 </div>
-                <div className="start-date">
-                    <h1>Start date</h1>
-                    <p>
-                        <i class="fa fa-calendar-alt" aria-hidden="true"></i>
-                        2021-07-07
-                    </p>
+                <div className="center-content">
+                    {detailCampaigns &&
+                        detailCampaigns.contentHTML &&
+                        detailCampaigns.contentHTML.length > 0 && (
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: detailCampaigns.contentHTML,
+                                }}
+                            />
+                        )}
                 </div>
-                <div className="end-date">
-                    <h1>End date</h1>
-                    <p>
-                        <i class="fa fa-calendar-alt" aria-hidden="true"></i>
-                        2021-08-07
-                    </p>
-                </div>
-                <div className="donor-num">
-                    <h1>Donors</h1>
-                    <p>
-                        <i class="fa fa-users" aria-hidden="true"></i>
-                        107
-                    </p>
+                <div className="right-content">
+                    {isLoggedIn === false && (
+                        <div className="login-info">
+                            <button
+                                onClick={() => {
+                                    this.handleNavigate(
+                                        `/login/${this.props.match.params.id}`
+                                    );
+                                }}
+                            >
+                                Login to join our campaign
+                            </button>
+                        </div>
+                    )}
+                    <div className="location">
+                        <h1>Location</h1>
+                        <p>
+                            <i class="fas fa-map-marker-alt"></i>
+                            {detailCampaigns &&
+                                detailCampaigns.province &&
+                                detailCampaigns.province.name &&
+                                detailCampaigns.position}
+                        </p>
+                        {detailCampaigns &&
+                            detailCampaigns.position_map &&
+                            detailCampaigns.position_map.length > 0 && (
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: detailCampaigns.position_map,
+                                    }}
+                                />
+                            )}
+                    </div>
                 </div>
             </div>
-            <div className="center-content">
-                <p>
-                    - On the other hand, we denounce with righteous indignation
-                    and dislike men who are so beguiled and demoralized by the
-                    charms of pleasure of the moment, so blinded by desire, that
-                    they cannot foresee the pain and trouble that are bound to
-                    ensue; and equal blame belongs to those who fail in their
-                    duty through weakness of will, which is the same as saying
-                    through shrinking from toil and pain. These cases are
-                    perfectly simple and easy to distinguish. In a free hour,
-                    when our power of choice is untrammelled and when nothing
-                    prevents our being able to do what we like best, every
-                    pleasure is to be welcomed and every pain avoided. But in
-                    certain circumstances and owing to the claims of duty or the
-                    obligations of business it will frequently occur that
-                    pleasures have to be repudiated and annoyances accepted. The
-                    wise man therefore always holds in these matters to this
-                    principle of selection: he rejects pleasures to secure other
-                    greater pleasures, or else he endures pains to avoid worse
-                    pains. <br></br>- On the other hand, we denounce with righteous
-                    indignation and dislike men who are so beguiled and
-                    demoralized by the charms of pleasure of the moment, so
-                    blinded by desire, that they cannot foresee the pain and
-                    trouble that are bound to ensue; and equal blame belongs to
-                    those who fail in their duty through weakness of will, which
-                    is the same as saying through shrinking from toil and pain.
-                    These cases are perfectly simple and easy to distinguish. In
-                    a free hour, when our power of choice is untrammelled and
-                    when nothing prevents our being able to do what we like
-                    best, every pleasure is to be welcomed and every pain
-                    avoided. But in certain circumstances and owing to the
-                    claims of duty or the obligations of business it will
-                    frequently occur that pleasures have to be repudiated and
-                    annoyances accepted. The wise man therefore always holds in
-                    these matters to this principle of selection: he rejects
-                    pleasures to secure other greater pleasures, or else he
-                    endures pains to avoid worse pains - On the other hand, we
-                    denounce with righteous indignation and dislike men who are
-                    so beguiled and demoralized by the charms of pleasure of the
-                    moment, so blinded by desire, that they cannot foresee the
-                    pain and trouble that are bound to ensue; and equal blame
-                    belongs to those who fail in their duty through weakness of
-                    will, which is the same as saying through shrinking from
-                    toil and pain. These cases are perfectly simple and easy to
-                    distinguish. In a free hour, when our power of choice is
-                    untrammelled and when nothing prevents our being able to do
-                    what we like best, every pleasure is to be welcomed and
-                    every pain avoided. But in certain circumstances and owing
-                    to the claims of duty or the obligations of business it will
-                    frequently occur that pleasures have to be repudiated and
-                    annoyances accepted. The wise man therefore always holds in
-                    these matters to this principle of selection: he rejects
-                    pleasures to secure other greater pleasures, or else he
-                    endures pains to avoid worse pains
-                </p>
-            </div>
-            <div className="right-content">
-                <div className="login-info">
-                    <h1>Login notification</h1>
-                    <button>Login to join our campaign</button>
-                </div>
-                <div className="location">
-                    <h1>Location</h1>
-                    <p>
-                        <i class="fas fa-map-marker-alt"></i>
-                        Dragon Bridge, Da Nang City
-                    </p>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.0844029613672!2d108.22511767496832!3d16.06110933965551!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219d2f38ce45d%3A0xbfa47dd116d4db88!2zQ-G6p3UgUuG7k25nLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1732723812769!5m2!1svi!2s"
-                        allowfullscreen="true"
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                </div>
-            </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -124,4 +150,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Detail);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Detail));

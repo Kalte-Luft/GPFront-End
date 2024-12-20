@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { emitter } from "../../utils/emitter";
 import { getAllProvinces } from "../../services/campaignService";
@@ -23,7 +22,6 @@ class ModalCampaign extends Component {
             description: "",
             status: "",
             target_amount: "",
-            current_amount: "",
             contentHTML: "",
             contentMarkdown: "",
             image: "",
@@ -43,7 +41,6 @@ class ModalCampaign extends Component {
                 description: "",
                 status: "",
                 target_amount: "",
-                current_amount: "",
                 contentHTML: "",
                 contentMarkdown: "",
                 image: "",
@@ -92,6 +89,7 @@ class ModalCampaign extends Component {
     handleOnChangeInput = (event, id) => {
         //good code
         let copyState = { ...this.state };
+        console.log("Updated state:", copyState);
         copyState[id] = event.target.value;
         this.setState({
             ...copyState,
@@ -110,7 +108,6 @@ class ModalCampaign extends Component {
             "description",
             "status",
             "target_amount",
-            "current_amount",
             "contentMarkdown",
             "contentHTML",
             "image",
@@ -242,20 +239,7 @@ class ModalCampaign extends Component {
                                 className="form-control"
                             />
                         </div>
-                        <div className="input-container">
-                            <label>Current Amount</label>
-                            <input
-                                type="text"
-                                onChange={(event) =>
-                                    this.handleOnChangeInput(
-                                        event,
-                                        "current_amount"
-                                    )
-                                }
-                                value={this.state.current_amount}
-                                className="form-control"
-                            />
-                        </div>
+                        
                         <div className="input-container">
                             <label>Start Date</label>
                             <input

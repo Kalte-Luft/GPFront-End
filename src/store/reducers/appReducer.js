@@ -13,7 +13,8 @@ const initialState = {
     systemMenuPath: '/system/user-manage',
     contentOfConfirmModal: {
         ...initContentOfConfirmModal
-    }
+    },
+    selectedProvinceId: null, //thêm state mới cho việc chọn tỉnh thành
 }
 
 const appReducer = (state = initialState, action) => {
@@ -35,6 +36,12 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 language: action.language,
+            }
+            //thêm reducer mới cho việc chọn tỉnh thành
+        case actionTypes.SET_SELECTED_PROVINCE:
+            return {
+                ...state,
+                selectedProvinceId: action.provinceId,
             }
         default:
             return state;

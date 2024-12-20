@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl'; //đa ngôn ngữ
 import "./WhoAreGP.scss";
+import { withRouter } from 'react-router-dom'; // Import withRouter
 
 class WhoAreGP extends Component {
 
@@ -50,4 +51,4 @@ const mapDispatchToProps = dispatch => { //fire action event của redux
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WhoAreGP); //bộc 2 lớp dữ liệu từ store ra ngoài, kết nối redux với react
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(WhoAreGP)); //bộc 2 lớp dữ liệu từ store ra ngoài, kết nối redux với react

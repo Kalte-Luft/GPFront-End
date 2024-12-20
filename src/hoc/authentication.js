@@ -13,7 +13,14 @@ export const userIsNotAuthenticated = connectedRouterRedirect({
     // Want to redirect the user when they are authenticated
     authenticatedSelector: state => !state.user.isLoggedIn,
     wrapperDisplayName: 'UserIsNotAuthenticated',
-    redirectPath: (state, ownProps) => locationHelper.getRedirectQueryParam(ownProps) || '/',
+    redirectPath: (state, ownProps) => 
+        {
+        if(ownProps.location.pathname === '/login') { 
+             return locationHelper.getRedirectQueryParam(ownProps) || '/home';//nếu chưa pathname là /login thì chuyển về trang home
+        }else{
+            return '/detail/' + ownProps.location.pathname.replace("/login/", "");// nếu pathname khác thì chuyển về trang detail
+        }
+    },
     allowRedirectBack: false
 });
 export const userIsAdmin = connectedRouterRedirect({

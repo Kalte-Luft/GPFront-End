@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./CampaignManage.scss";
 import {
@@ -215,7 +214,7 @@ class CampaignManage extends Component {
                                                     : "No Donor"}
                                             </td>
 
-                                            <td>
+                                            <td style={{width : "111px"}}>
                                                 <button className="btn-edit">
                                                     <i
                                                         className="fa fa-pencil-alt"

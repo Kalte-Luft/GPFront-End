@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import _, { add } from "lodash";
+import _ from "lodash";
 import { getAllCampaigns } from "../../services/campaignService";
 import Select from "react-select";
 class ModalEditPartner extends Component {

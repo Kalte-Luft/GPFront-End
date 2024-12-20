@@ -1,17 +1,52 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Ended.scss";
-import { FormattedMessage } from "react-intl";
+import { withRouter } from "react-router";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { getCampaignByProvinceId } from "../../../services/campaignService";
 class Ended extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            campaigns: [],
+        };
+    }
+    handleViewDetailCampaign = (campaign) => {
+        console.log("View detail campaign", campaign);
+        if (this.props.history) {
+            this.props.history.push(`/detail/${campaign.id}`);
+        }
+    };
+    componentDidUpdate(prevProps) {
+        if (prevProps.provinceId !== this.props.provinceId) {
+            console.log("provinceId changed", this.props.provinceId);
+            this.fetchCampaigns(this.props.provinceId);
+        }
+    }
+    fetchCampaigns = async (provinceId) => {
+        if (provinceId) {
+            try {
+                let response = await getCampaignByProvinceId(provinceId);
+                if (response && response.campaigns) {
+                    const endedCampaigns = response.campaigns.filter(
+                        (campaign) => campaign.status === "ended"
+                    );
+                    this.setState({ campaigns: endedCampaigns });
+                }
+            } catch (error) {
+                console.error("Error fetching campaigns:", error);
+            }
+        }
+    };
     render() {
+        let { campaigns } = this.state;
         let settings = {
             centerMode: true,
             infinite: true,
             centerPadding: "10px",
-            slidesToShow: 3,
+            slidesToShow: Math.min(campaigns.length, 3),
             slidesToScroll: 1,
             autoplay: true,
             speed: 1000,
@@ -21,51 +56,28 @@ class Ended extends Component {
         return (
             <div className="ended-container">
                 <div className="ended-title">
-                <i class="fa fa-play"></i>
+                    <i class="fa fa-play"></i>
                     Ended Campaigns
                 </div>
                 <div className="ended-content">
                     <Slider {...settings}>
-                    <div className="ended-item" >
-                            <img
-                                
-                                src="https://th.bing.com/th/id/OIP.BMOTzYT4lQnbwXkeQUtMVAAAAA?rs=1&pid=ImgDetMain"
-                                alt="ended"
-                            />
-                            <div class="text-overlay">
-                                <h1>Campaign 1</h1>
-                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
-                                </p>
-                            </div>
-                            <div className="filter">Read More...</div>
-                        </div>
-                        <div className="ended-item" >
-                            <img
-                                
-                                src="https://th.bing.com/th/id/R.4cd07a88113a030a22b06f7df5962fce?rik=V7dMINZrym6Phg&pid=ImgRaw&r=0"
-                                alt="ended"
-                            />
-                            <div class="text-overlay">
-                                <h1>Campaign 2</h1>
-                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
-                                </p>
-                            </div>
-                            <div className="filter">Read More...</div>
-                        </div>
-                    <div className="ended-item" >
-                            <img
-                                
-                                src="https://file1.dangcongsan.vn/data/0/images/2023/06/27/upload_673/3.png?dpi=150&quality=100&w=780"
-                                alt="ended"
-                            />
-                            <div class="text-overlay">
-                                <h1>Campaign 3</h1>
-                                <p>lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viv
-                                </p>
-                            </div>
-                            <div className="filter">Read More...</div>
-                        </div>
-                                          
+                        {campaigns.length > 0 &&
+                            campaigns.map((item, index) => (
+                                <div
+                                    className="ended-item"
+                                    key={index}
+                                    onClick={() =>
+                                        this.handleViewDetailCampaign(item)
+                                    }
+                                >
+                                    <img src={item.image} alt={item.title} />
+                                    <div className="text-overlay">
+                                        <h1>{item.title}</h1>
+                                        <p>{item.description}</p>
+                                    </div>
+                                    <div className="filter">Read more...</div>
+                                </div>
+                            ))}
                     </Slider>
                 </div>
             </div>
@@ -77,6 +89,7 @@ const mapStateToProps = (state) => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        provinceId: state.app.selectedProvinceId,
     };
 };
 
@@ -84,4 +97,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Ended);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Ended));

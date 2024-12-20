@@ -12,10 +12,8 @@ const InteractiveMap = ({ onProvinceSelect }) => {
         }
     }, [selectedProvince]);   
     const fetchProvinceOverview = async (provinceId) => {
-        console.log("Fetching province overview: ", provinceId);
         try {
             const response = await getProvinceOverview(provinceId);
-            console.log("Response: ", response);
             if (response && response.province) {
                 onProvinceSelect(response.province); // Pass the data to parent component
             }

@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import "./CampaignSelection.scss";
 import non from "../../../assets/images/non.png";
 import CountUp from "react-countup";
 import InteractiveMap from "./InteractiveMap";
+import { setSelectedProvince } from "../../../store/actions/appActions";
 
-const CampaignSelection = () => {
+const CampaignSelection = ({ setSelectedProvince }) => {
     const [provinceOverview, setProvinceOverview] = useState(null); // Store selected province data
+    // Reset data khi component được mount
+    useEffect(() => {
+        setProvinceOverview(null); // Reset dữ liệu tỉnh đã chọn
+        setSelectedProvince(null); // Reset ID tỉnh trong Redux
+    }, [setSelectedProvince]); // Chỉ chạy khi component mount hoặc `setSelectedProvince` thay đổi
+
     const handleProvinceSelect = (overviewData) => {
-        console.log(overviewData);
         setProvinceOverview(overviewData);
+        setSelectedProvince(overviewData.province.id); // Store selected province id using mapDispatchToProps
     };
+
     return (
         <div className="campaign-selection-container">
             <div className="space" />
@@ -129,15 +137,11 @@ const CampaignSelection = () => {
     );
 };
 
-const mapStateToProps = (state) => {
+// Map dispatch to props để dispatch hành động setSelectedProvince
+const mapDispatchToProps = (dispatch) => {
     return {
-        isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language,
+        setSelectedProvince: (provinceId) => dispatch(setSelectedProvince(provinceId))
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CampaignSelection);
+export default connect(null, mapDispatchToProps)(CampaignSelection);

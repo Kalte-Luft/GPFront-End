@@ -1,28 +1,72 @@
-import React, { useEffect, useRef } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Overview.scss";
+import { getAllCampaigns } from "../../../../services/campaignService";
+import { withRouter } from "react-router-dom";
 
-
-const Overview = () => {
-    return (
-        <div className="overview-container">
-            <div className='transparent'></div>
-                <div className="overview-content"
+class Overview extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            detailCampaigns: [],
+        };
+    }
+    async componentDidMount() {
+        if (
+            this.props.match &&
+            this.props.match.params &&
+            this.props.match.params.id
+        ) {
+            let inputId = this.props.match.params.id;
+            try {
+                let response = await getAllCampaigns(inputId);
+                if (response && response.errCode === 0) {
+                    this.setState({ detailCampaigns: response.campaigns });
+                }
+            } catch (error) {
+                console.error("Error fetching campaigns:", error);
+            }
+        } else {
+            console.log("No id found");
+        }
+    }
+    async componentDidUpdate(prevProps, prevState, snapshot) {}
+    render() {
+        let { detailCampaigns } = this.state;
+        return (
+            <div className="overview-container">
+                <div className="transparent"></div>
+                <div
+                    className="overview-content"
                     style={{
-                        backgroundImage: `url(https://giaingo.info/wp-content/uploads/2021/07/4708875_Cover_Rung-768x476.jpg)`,
+                        backgroundImage: `url(${
+                            detailCampaigns &&
+                            detailCampaigns.image &&
+                            detailCampaigns.image.length > 0 &&
+                            detailCampaigns.image
+                        })`,
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
-                    }}         
+                    }}
                 >
-                <div className="gradient">
-                    <p>Projects & campaigns</p>
-                    <h1>Forest planting campaign, greening bare hills</h1>
+                    <div className="gradient">
+                        <h1 style={{ fontFamily: "Helvetica" }}>
+                            {detailCampaigns &&
+                                detailCampaigns.title &&
+                                detailCampaigns.title}
+                        </h1>
+                        <p style={{ fontFamily: "Helvetica" }}>
+                            {detailCampaigns &&
+                                detailCampaigns.description &&
+                                detailCampaigns.description}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -35,4 +79,6 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Overview);
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(Overview)
+);
