@@ -4,9 +4,9 @@ import "./JoinCampaign.scss";
 import { emitter } from "../../../../utils/emitter";
 import { withRouter } from "react-router-dom";
 import { createNewCampaignDonationService } from "../../../../services/campaignDonationService";
-import Alert from "../../../../components/CustomAlert";
+import { getAllCampaigns } from "../../../../services/campaignService";
 import AlertContainer from '../../../../components/AlertContainer';
-const COUNTDOWN_TIME = 5;//10 giây -- 300 giây = 5 phút
+const COUNTDOWN_TIME = 300;//10 giây -- 300 giây = 5 phút
 class JoinCampaign extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +16,7 @@ class JoinCampaign extends Component {
                 this.props.match &&
                 this.props.match.params &&
                 this.props.match.params.id,
+            detailCampaigns: [],
             amount: "",
             transfer_content: "",
             showQRCode: false,
@@ -135,11 +136,28 @@ class JoinCampaign extends Component {
             this.checkTransactionValidity(); // Kiểm tra giao dịch
         }
     };
-    handleGetCampaignDetail = (campaignId) => {
-        
+    async handleGetCampaignDetail () {
+        if (
+            this.props.match &&
+            this.props.match.params &&
+            this.props.match.params.id
+        ) {
+            let inputId = this.props.match.params.id;
+            try {
+                let response = await getAllCampaigns(inputId);
+                if (response && response.errCode === 0) {
+                    this.setState({ detailCampaigns: response.campaigns });
+                }
+            } catch (error) {
+                console.error("Error fetching campaigns:", error);
+            }
+        } else {
+            console.log("No id found");
+        }
     }
     //hàm này dùng để lưu user_id vào localStorage để khi reload trang vẫn giữ được user_id
     componentDidMount() {
+        this.handleGetCampaignDetail();
         const savedUserId = localStorage.getItem("user_id");
         if (savedUserId) {
             this.setState({
@@ -194,7 +212,8 @@ class JoinCampaign extends Component {
     render() {
         console.log("su thay doi cua state ", this.state);
         const url = `https://img.vietqr.io/image/MB-00170920050-compact2.png?amount=${this.state.amount}&addInfo=${this.state.transfer_content}&accountName=GreenPaws%20Organization`;
-        const { showQRCode, countdown, transactionStatus } = this.state;
+        const { showQRCode, countdown, transactionStatus, detailCampaigns } = this.state;
+        
         return (
             <div className="join-campaign-container">
                 <div className="join-campaign-content">
@@ -207,7 +226,7 @@ class JoinCampaign extends Component {
                                     <div className="step">
                                         <div>
                                             <span>CAMPAIGN</span>
-                                            <p>23, Campaign H</p>
+                                            <p>{detailCampaigns.id}, {detailCampaigns.title}</p>
                                         </div>
                                         <hr />
                                         <div>

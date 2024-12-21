@@ -16,13 +16,15 @@
     },
     "menu": {
         "admin": {
+            "system": "Hệ thống",
             "manage-user": "Quản lý người dùng",
             "manage-campaign": "Quản lý chiến dịch",
             "manage-partner": "Quản lý đối tác",
             "manage-donation": "Quản lý quyên góp",
             "manage-product": "Quản lý sản phẩm",
             "manage-campaign-donation": "Quản lý quyên góp cho chiến dịch",
-            "back-to-home": "<◄ Trở về trang chủ"
+            "manage-cart":"Quản lý giỏ hàng",
+            "back-to-home": "◄ Trở về trang chủ"
         }
     }
 }

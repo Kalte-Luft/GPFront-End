@@ -7,32 +7,27 @@ import DonnateLarge from "./Section/DonnateLarge";
 import DonateSmall from "./Section/DonateSmall";
 
 class DonateUs extends Component {
-	render() {
-		return (
-			<div>
-				<HomeHeader
-				/>
+    render() {
+        return (
+            <div>
+                <HomeHeader />
 
-				<Donate
-				/>
+                <Donate />
 
-				<DonnateLarge
-				/>
-				
-				<DonateSmall
-				/>
+                <DonnateLarge />
 
-				<HomeFooter
-				/>
-			</div>
-		);
-	}
+                <DonateSmall />
+
+                <HomeFooter />
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
-	return {
-		isLoggedIn: state.user.isLoggedIn,
-	};
+    return {
+        isLoggedIn: state.user.isLoggedIn,
+    };
 };
 
 export default connect(mapStateToProps)(DonateUs);

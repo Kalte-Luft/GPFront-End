@@ -21,7 +21,7 @@ import OurProduct from './ProductPage/OurProduct.js';
 import DetailCampaign from './Campaign/DetailCampaign/DetailCampaign.js';
 import BadRequest from './ErrorDocs/404.js';
 import CheckOut from './Donate/CheckOut/CheckOut.js';
-
+import Profile from './Profile/Profile.js';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -65,7 +65,8 @@ class App extends Component {
                                     <Route path={path.DONATE} component={DonateUs} />
                                     <Route path={path.PRODUCT} component={OurProduct}/>
                                     <Route path={path.DETAIL_CAMPAIGN} component={DetailCampaign}/>
-                                    <Route path={path.CHECKOUT} component={CheckOut} />  
+                                    <Route path={path.CHECKOUT} component={CheckOut} />
+                                    <Route path={path.PROFILE} component={Profile} />  
                                     <Route path={path.ERROR} component={BadRequest} />  
                                   
                                 </Switch>

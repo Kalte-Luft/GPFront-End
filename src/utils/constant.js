@@ -13,6 +13,7 @@ export const path = {
     PRODUCT:'/product',
     DETAIL_CAMPAIGN:'/detail/:id',
     CHECKOUT:'/checkout',
+    PROFILE:'/profile',
     ERROR: '*',
 };
 

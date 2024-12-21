@@ -159,7 +159,13 @@ class HomeHeader extends Component {
                                                 <FormattedMessage id="home-header.system-manager" />
                                             </a>
                                         )}
-                                    <a className="account-manager" href="#">
+                                    <a className="account-manager" href="#"
+                                    onClick={() => {
+                                        this.handleNavigate(
+                                            "/profile"
+                                        );
+                                    }}
+                                    >
                                         <i
                                             class="fa fa-user"
                                             aria-hidden="true"

@@ -30,7 +30,6 @@ class Overview extends Component {
             console.log("No id found");
         }
     }
-    async componentDidUpdate(prevProps, prevState, snapshot) {}
     render() {
         let { detailCampaigns } = this.state;
         return (
