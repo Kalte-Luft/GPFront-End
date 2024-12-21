@@ -21,6 +21,41 @@ const DonateSmall = (props) => {
     }
   }, [props.location]);
 
+  const handleNavigate2 = (path, targetScrollTop2) => {
+    if (props.history) {
+      props.history.push(path, { targetScrollTop2 });
+    } else {
+      console.error("Navigation failed: History object is not available.");
+    }
+  };
+
+  useEffect(() => {
+    const state = props.location.state || {};
+    const targetScrollTop2 = state.targetScrollTop2 || 0;
+
+    if (targetScrollTop2 && document.documentElement) {
+      window.scrollTo({ top: targetScrollTop2, behavior: "smooth" });
+    }
+  }, [props.location]);
+
+  const handleNavigate3 = (path, targetScrollTop3) => {
+    if (props.history) {
+      props.history.push(path, { targetScrollTop3 });
+    } else {
+      console.error("Navigation failed: History object is not available.");
+    }
+  };
+
+  useEffect(() => {
+    const state = props.location.state || {};
+    const targetScrollTop3 = state.targetScrollTop3 || 0;
+
+    if (targetScrollTop3 && document.documentElement) {
+      window.scrollTo({ top: targetScrollTop3, behavior: "smooth" });
+    }
+  }, [props.location]);
+
+
   return (
     <div className="donateSmall-container">
       <div className="title-donateSmall">
@@ -55,7 +90,7 @@ const DonateSmall = (props) => {
             <span>350.000 VND<br /></span>
             <span>Per month<br /></span>
           </div>
-          <button className="btn-donateSmall">
+          <button className="btn-donateSmall" onClick={() => handleNavigate2("/product", 100)}>
             Donate now
           </button>
         </div>
@@ -71,7 +106,7 @@ const DonateSmall = (props) => {
             <span>178.000 VND<br /></span>
             <span>Per month<br /></span>
           </div>
-          <button className="btn-donateSmall">
+          <button className="btn-donateSmall" onClick={() => handleNavigate3("/product", 100)}>
             Donate now
           </button>
         </div>

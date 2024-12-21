@@ -2,12 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import "./OrangePlan.scss";
 import Aoe from "aoejs"; // Import Aoejs
+import { withRouter } from "react-router-dom";
 
+const OrangePlan = (props) => {
+  const orangePlanRef = useRef(null); // Ref to target section
 
-const OrangePlan = () => {
+  useEffect(() => {
+	console.log(props);
+    const targetScrollTop2 = props.location?.state.targetScrollTop2 || 0;
+    if (orangePlanRef.current && targetScrollTop2) {
+		orangePlanRef.current.scrollIntoView({ behavior: "auto" });
+    }
+  }, [props.location]);
 
 	return (
-		<div className="OrangePlan-container">
+		<div className="OrangePlan-container" ref={orangePlanRef}>
 			<div className="OrangePlan-content">
 				<div className="OrangePlan-content-left">
 					<div className="OrangePlan-image">
@@ -78,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrangePlan);
+export default withRouter(connect(mapStateToProps)(OrangePlan));

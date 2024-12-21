@@ -2,12 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import "./GreenPlan.scss";
 import Aoe from "aoejs"; // Import Aoejs
+import { withRouter } from "react-router-dom";
 
+const GreenPlan = (props) => {
+  const greenPlanRef = useRef(null); // Ref to target section
 
-const GreenPlan = () => {
+  useEffect(() => {
+	console.log(props);
+    const targetScrollTop3 = props.location?.state.targetScrollTop3 || 0;
+    if (greenPlanRef.current && targetScrollTop3) {
+		greenPlanRef.current.scrollIntoView({ behavior: "auto" });
+    }
+  }, [props.location]);
 
 	return (
-		<div className="GreenPlan-container">
+		<div className="GreenPlan-container" ref={greenPlanRef}>
 			<div className="GreenPlan-content">
 				<div className="GreenPlan-content-left">
 					<div className="GreenPlan-image">
@@ -78,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GreenPlan);
+export default withRouter(connect(mapStateToProps)(GreenPlan));

@@ -2,12 +2,23 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import "./CucPhuong.scss";
 import Aoe from "aoejs"; // Import Aoejs
+import { withRouter } from "react-router-dom";
 
+const CucPhuong = (props) => {
+  const CucPhuongRef = useRef(null); // Ref to target section
 
-const CucPhuong = () => {
+  //dùng để scroll đến vị trí cần thiết khi chuyển trang
+  useEffect(() => {
+	console.log(props);
+	const targetScrollTop1 = props.location?.state.targetScrollTop1 || 0;
+	if (CucPhuongRef.current && targetScrollTop1) {
+		CucPhuongRef.current.scrollIntoView({ behavior: "auto" });
+	}
+	
+  }, [props.location]);
 
 	return (
-		<div className="cucPhuong-container">
+		<div className="cucPhuong-container" ref={CucPhuongRef}>
 			<div className="cucPhuong-content">
 				<div className="cucPhuong-content-left">
 					<div className="cucPhuong-image">
@@ -78,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CucPhuong);
+export default withRouter(connect(mapStateToProps)(CucPhuong));
