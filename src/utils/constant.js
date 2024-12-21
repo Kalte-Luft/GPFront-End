@@ -12,6 +12,7 @@ export const path = {
     SIGNUP: '/signup',
     PRODUCT:'/product',
     DETAIL_CAMPAIGN:'/detail/:id',
+    CHECKOUT:'/checkout',
     ERROR: '*',
 };
 
