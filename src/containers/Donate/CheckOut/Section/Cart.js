@@ -64,7 +64,7 @@ class Cart extends Component {
 													<span className="item-name">
 														<button
 															className="remove_button">
-															x
+															<i class="fa fa-times" aria-hidden="true"></i>
 														</button>
 													</span>
 												</div>

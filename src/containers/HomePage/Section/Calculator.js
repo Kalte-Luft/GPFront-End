@@ -5,7 +5,7 @@ import "./Calculator.scss";
 import Aoe from "aoejs"; // Import Aoejs
 const Calculator = (props) => {
     const handleNavigate = (path) => {
-        props.history.push(path);
+        this.props.history.push(path);
     }
     useEffect(() => {
         const aoe = new Aoe();
