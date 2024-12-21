@@ -12,8 +12,19 @@ class Profile extends Component {
             isEditEmail: false,
             isEditAddress: false,
             isEditPhone: false,
-        };
+        };    
+            this.yourAccountRef = React.createRef();
+            this.securityRef = React.createRef();
+            this.donationRef = React.createRef();
+            this.campaignRef = React.createRef();
+
     }
+    scrollToSection = (ref) => {
+        console.log(ref);
+        if (ref.current) {
+            ref.current.scrollIntoView({ behavior: "smooth" });
+        }
+    };
     onChangeEditName = () => {
         this.setState({ isEditName: !this.state.isEditName });
     };
@@ -127,7 +138,7 @@ class Profile extends Component {
                                             aria-hidden="true"
                                         ></i>
                                     </div>
-                                    <div className="selection-item">
+                                    <div className="selection-item" onClick={() => this.scrollToSection(this.yourAccountRef)}>
                                         <p>Your account</p>
                                     </div>
                                 </div>
@@ -138,7 +149,7 @@ class Profile extends Component {
                                             aria-hidden="true"
                                         ></i>
                                     </div>
-                                    <div className="selection-item">
+                                    <div className="selection-item" onClick={() => this.scrollToSection(this.securityRef)}>
                                         <p>Account and security</p>
                                     </div>
                                 </div>
@@ -149,7 +160,7 @@ class Profile extends Component {
                                             aria-hidden="true"
                                         ></i>
                                     </div>
-                                    <div className="selection-item">
+                                    <div className="selection-item" onClick={() => this.scrollToSection(this.donationRef)}>
                                         <p>Donation history</p>
                                     </div>
                                 </div>
@@ -160,7 +171,7 @@ class Profile extends Component {
                                             aria-hidden="true"
                                         ></i>
                                     </div>
-                                    <div className="selection-item">
+                                    <div className="selection-item" onClick={() => this.scrollToSection(this.campaignRef)}>
                                         <p>Campaign donation history</p>
                                     </div>
                                 </div>
@@ -168,7 +179,7 @@ class Profile extends Component {
                         </div>
                         <div className="right-content">
                             <div className="right-container">
-                                <div className="your-account">
+                                <div className="your-account" ref={this.yourAccountRef}>
                                     <div className="your-account-header">
                                         <h1>Your account</h1>
                                     </div>
@@ -370,7 +381,7 @@ class Profile extends Component {
                                         <hr class="_PhRSQ" />
                                     </div>
                                 </div>
-                                <div className="security">
+                                <div className="security" ref={this.securityRef}>
                                     <h1>Account and Security</h1>
                                     <div className="change-password">
                                         <div className="change-password-content">
@@ -414,7 +425,7 @@ class Profile extends Component {
                                     </div>
                                 </div>
                                 <hr class="_PhRSQ" />
-                                <div className="donation">
+                                <div className="donation" ref={this.donationRef}>
                                     <div className="donation-title">
                                         <h1>Donation History</h1>
                                     </div>
@@ -456,7 +467,7 @@ class Profile extends Component {
                                     </div>
                                 </div>
                                 <hr class="_PhRSQ" />
-                                <div className="campaign">
+                                <div className="campaign" ref={this.campaignRef}>
                                     <div className="campaign-title">
                                         <h1>Campaign Donation History</h1>
                                     </div>
