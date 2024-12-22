@@ -22,6 +22,7 @@ import DetailCampaign from './Campaign/DetailCampaign/DetailCampaign.js';
 import BadRequest from './ErrorDocs/404.js';
 import CheckOut from './Donate/CheckOut/CheckOut.js';
 import Profile from './Profile/Profile.js';
+import withCustomScrollbar from '../hoc/withNoCustomScrollbar.js';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -51,22 +52,22 @@ class App extends Component {
                         {/* nếu logging r thì render tới header */}
 
                         <div className="content-container">
-                            <CustomScrollbars style ={{height: '100vh', width: '100%'}}>
+                            <CustomScrollbars style ={{height: '751.2px', width: '1487.8px'}}>
                                 <Switch>
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} /> {/*hàm bọc để check xem người dùng đã đăng nhập hay ch*/}
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                    <Route path={path.SIGNUP} component={Signup} />
-                                    <Route path={path.HOMEPAGE} component={HomePage} />
-                                    <Route path={path.ABOUT_US} component={AboutUs} />
-                                    <Route path={path.CONTACT_US} component={ContactUs} />
-                                    <Route path={path.STATUS} component={Status} />
-                                    <Route path={path.CAMPAIGN} component={Campaign} />
-                                    <Route path={path.DONATE} component={DonateUs} />
-                                    <Route path={path.PRODUCT} component={OurProduct}/>
-                                    <Route path={path.DETAIL_CAMPAIGN} component={DetailCampaign}/>
-                                    <Route path={path.CHECKOUT} component={CheckOut} />
-                                    <Route path={path.PROFILE} component={Profile} />  
+                                    <Route path={path.SIGNUP} component={withCustomScrollbar(Signup)} />
+                                    <Route path={path.HOMEPAGE} component={withCustomScrollbar(HomePage)} />
+                                    <Route path={path.ABOUT_US} component={withCustomScrollbar(AboutUs)} />
+                                    <Route path={path.CONTACT_US} component={withCustomScrollbar(ContactUs)} />
+                                    <Route path={path.STATUS} component={withCustomScrollbar(Status)} />
+                                    <Route path={path.CAMPAIGN} component={withCustomScrollbar(Campaign)} />
+                                    <Route path={path.DONATE} component={withCustomScrollbar(DonateUs)} />
+                                    <Route path={path.PRODUCT} component={withCustomScrollbar(OurProduct)}/>
+                                    <Route path={path.DETAIL_CAMPAIGN} component={withCustomScrollbar(DetailCampaign)}/>
+                                    <Route path={path.CHECKOUT} component={withCustomScrollbar(CheckOut)} />
+                                    <Route path={path.PROFILE} component={withCustomScrollbar(Profile)} />  
                                     <Route path={path.ERROR} component={BadRequest} />  
                                   
                                 </Switch>

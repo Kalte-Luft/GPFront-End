@@ -27,8 +27,12 @@ const getAllUsers = (inputId) => {
     return axios.get(`/api/get-all-users?id=${inputId}`);
 };
 
+const getCampaignDonationsByUser = (inputId) => {
+    return axios.get(`/api/get-campaign-donations-by-user?id=${inputId}`);
+}
 export {
     getAllCampaignDonations,
+    getCampaignDonationsByUser,
     getAllUsers,
     getAllCampaigns,
     createNewCampaignDonationService,

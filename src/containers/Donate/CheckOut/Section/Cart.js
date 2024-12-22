@@ -14,31 +14,7 @@ class Cart extends Component {
 	handleNavigate = (path) => {
 		this.props.history.push(path);
 	};
-	async componentDidMount() {
-		// if (
-		//     this.props.match &&
-		//     this.props.match.params &&
-		//     this.props.match.params.id
-		// ) {
-		//     let inputId = this.props.match.params.id;
-		//     try {
-		//         let response = await getAllCart(inputId);
-		//         if (response && response.errCode === 0) {
-		//             this.setState({ CheckOut: response.campaigns });
-		//         }
-		//     } catch (error) {
-		//         console.error("Error fetching campaigns:", error);
-		//     }
-		// } else {
-		//     console.log("No id found");
-		// }
-	}
-	async componentDidUpdate(prevProps, prevState, snapshot) {
-
-	}
 	render() {
-		// const { isLoggedIn } = this.props;
-		// let { CheckOut } = this.state;
 		return (
 			<div className="Cart-container">
 				<div className="banner"></div>
@@ -50,10 +26,8 @@ class Cart extends Component {
 							</div>
 							<div className="cart_item">
 								<div className="cart_item_inner">
-
 									<div className="cart_item_content">
 										<div className="cart_item_img">
-
 										</div>
 										<div className="cart_item_wrap">
 											<div className="cart_item_wrap_top">
@@ -69,10 +43,7 @@ class Cart extends Component {
 													</span>
 												</div>
 											</div>
-
-
 											<div className="cart_item_wrap_bottom">
-
 												<div className="cart_item_quantity">
 													<div className="cart_item_quantity_inner">
 														<span className="seclect_quantity">
@@ -84,7 +55,6 @@ class Cart extends Component {
 														</div>
 													</div>
 												</div>
-
 												<div className="cart_item_price">
 													<div className="cart_item_price_inner">
 														180,000 VND
@@ -93,7 +63,6 @@ class Cart extends Component {
 											</div>
 										</div>
 									</div>
-
 								</div>
 							</div>
 							<hr></hr>
@@ -115,76 +84,15 @@ class Cart extends Component {
 									</tr>
 								</tbody>
 							</table>
-
 							<div className="shopping_continue">
 								<div className="shopping_continue_inner">
 									Looking for more trees to plant?
 									<p> Continue choosing</p>
 								</div>
 							</div>
-
-
-
-						</div>
-						{/* <div className="status">
-						<h1>Status</h1>
-						<p>
-							<i class="fa fa-tasks" aria-hidden="true"></i>
-							{CartCampaigns &&
-								CartCampaigns.status &&
-								CartCampaigns.status}
-						</p>
-					</div> */}
-						{/* <div className="start-date">
-						<h1>Start date</h1>
-						<p>
-							<i
-								class="fa fa-calendar-alt"
-								aria-hidden="true"
-							></i>
-							{CartCampaigns &&
-								CartCampaigns.start_date &&
-								new Date(
-									CartCampaigns.start_date
-								).toLocaleDateString()}
-						</p>
-					</div>
-					<div className="end-date">
-						<h1>End date</h1>
-						<p>
-							<i
-								class="fa fa-calendar-alt"
-								aria-hidden="true"
-							></i>
-							{CartCampaigns &&
-								CartCampaigns.end_date &&
-								new Date(
-									CartCampaigns.end_date
-								).toLocaleDateString()}
-						</p>
-					</div>
-					<div className="donor-num">
-						<h1>Donors</h1>
-						<p>
-							<i class="fa fa-users" aria-hidden="true"></i>
-							{CartCampaigns &&
-								CartCampaigns.donations &&
-								CartCampaigns.donations.length > 0
-								? CartCampaigns.donations.length
-								: "No Donor"}
-						</p>
-					</div> */}
+						</div>			
 					</div>
 					<div className="center-content">
-						{/* {CartCampaigns &&
-						CartCampaigns.contentHTML &&
-						CartCampaigns.contentHTML.length > 0 && (
-							<div
-								dangerouslySetInnerHTML={{
-									__html: CartCampaigns.contentHTML,
-								}}
-							/>
-						)} */}
 					</div>
 					<div className="right_content">
 						<div className="right_content_inner">
@@ -202,7 +110,6 @@ class Cart extends Component {
 									/>
 								</div>
 							</div>
-
 							<div className="right_checkout_needAgreement">
 								<div className="right_checkout_button">
 									<button className="checkout_button">Checkout</button>
@@ -225,38 +132,6 @@ class Cart extends Component {
 								</div>
 							</div>
 						</div>
-						{/* {isLoggedIn === false && (
-						<div className="login-info">
-							<button
-								onClick={() => {
-									this.handleNavigate(
-										`/login/${this.props.match.params.id}`
-									);
-								}}
-							>
-								Login to join our campaign
-							</button>
-						</div>
-					)}
-					<div className="location">
-						<h1>Location</h1>
-						<p>
-							<i class="fas fa-map-marker-alt"></i>
-							{CartCampaigns &&
-								CartCampaigns.province &&
-								CartCampaigns.province.name &&
-								CartCampaigns.position}
-						</p>
-						{CartCampaigns &&
-							CartCampaigns.position_map &&
-							CartCampaigns.position_map.length > 0 && (
-								<div
-									dangerouslySetInnerHTML={{
-										__html: CartCampaigns.position_map,
-									}}
-								/>
-							)}
-					</div> */}
 					</div>
 				</div>
 			</div>
