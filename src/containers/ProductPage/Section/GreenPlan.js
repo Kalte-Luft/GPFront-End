@@ -9,12 +9,22 @@ const GreenPlan = (props) => {
 
   useEffect(() => {
 	console.log(props);
-    const targetScrollTop3 = props.location?.state.targetScrollTop3 || 0;
-    if (greenPlanRef.current && targetScrollTop3) {
+	 const targetScrollTop3 = props.location?.state.targetScrollTop3 || 0;
+	 if (greenPlanRef.current && targetScrollTop3) {
 		greenPlanRef.current.scrollIntoView({ behavior: "auto" });
-    }
-  }, [props.location]);
-
+	 }
+	if (props.location?.state?.targetScrollTop3) {
+		props.history.replace({
+		  ...props.location,
+		  state: {
+			...props.location.state,
+			targetScrollTop3: 0,
+		  },
+		});
+	  }
+   }, [props.location,props.history]);
+ 
+  
 	return (
 		<div className="GreenPlan-container" ref={greenPlanRef}>
 			<div className="GreenPlan-content">

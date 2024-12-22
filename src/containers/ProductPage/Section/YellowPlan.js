@@ -6,14 +6,26 @@ import { withRouter } from "react-router-dom";
 const YellowPlan = (props) => {
   const yellowPlanRef = useRef(null); // Ref to target section
 
-  useEffect(() => {
-	console.log(props);
-    const targetScrollTop = props.location?.state.targetScrollTop || 0;
-    if (yellowPlanRef.current && targetScrollTop) {
+  //dùng để scroll đến vị trí cần thiết khi chuyển trang
+    useEffect(() => {
+    console.log(props);
+     const targetScrollTop = props.location?.state.targetScrollTop || 0;
+     if (yellowPlanRef.current && targetScrollTop) {
       yellowPlanRef.current.scrollIntoView({ behavior: "auto" });
-    }
-  }, [props.location]);
-
+     }
+    if (props.location?.state?.targetScrollTop) {
+      props.history.replace({
+        ...props.location,
+        state: {
+        ...props.location.state,
+        targetScrollTop: 0,
+        },
+      });
+      }
+    }, [props.location,props.history]);
+    
+     
+    
   return (
     <div className="YellowPlan-container" ref={yellowPlanRef}>
       <div className="YellowPlan-content">

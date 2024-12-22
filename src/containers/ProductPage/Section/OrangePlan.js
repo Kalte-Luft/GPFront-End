@@ -7,14 +7,25 @@ import { withRouter } from "react-router-dom";
 const OrangePlan = (props) => {
   const orangePlanRef = useRef(null); // Ref to target section
 
-  useEffect(() => {
+  //hàm chuyển trang
+   useEffect(() => {
 	console.log(props);
-    const targetScrollTop2 = props.location?.state.targetScrollTop2 || 0;
-    if (orangePlanRef.current && targetScrollTop2) {
+	 const targetScrollTop2 = props.location?.state.targetScrollTop2 || 0;
+	 if (orangePlanRef.current && targetScrollTop2) {
 		orangePlanRef.current.scrollIntoView({ behavior: "auto" });
-    }
-  }, [props.location]);
-
+	 }
+	if (props.location?.state?.targetScrollTop2) {
+		props.history.replace({
+		  ...props.location,
+		  state: {
+			...props.location.state,
+			targetScrollTop2: 0,
+		  },
+		});
+	  }
+	}, [props.location,props.history]);
+	
+	 
 	return (
 		<div className="OrangePlan-container" ref={orangePlanRef}>
 			<div className="OrangePlan-content">

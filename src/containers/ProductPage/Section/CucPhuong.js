@@ -10,12 +10,23 @@ const CucPhuong = (props) => {
   //dùng để scroll đến vị trí cần thiết khi chuyển trang
   useEffect(() => {
 	console.log(props);
-	const targetScrollTop1 = props.location?.state.targetScrollTop1 || 0;
-	if (CucPhuongRef.current && targetScrollTop1) {
+	 const targetScrollTop1 = props.location?.state.targetScrollTop1 || 0;
+	 if (CucPhuongRef.current && targetScrollTop1) {
 		CucPhuongRef.current.scrollIntoView({ behavior: "auto" });
-	}
-	
-  }, [props.location]);
+	 }
+	if (props.location?.state?.targetScrollTop1) {
+		props.history.replace({
+		  ...props.location,
+		  state: {
+			...props.location.state,
+			targetScrollTop1: 0,
+		  },
+		});
+	  }
+	}, [props.location,props.history]);
+  
+   
+
 
 	return (
 		<div className="cucPhuong-container" ref={CucPhuongRef}>

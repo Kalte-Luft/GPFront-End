@@ -1,40 +1,48 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'; // Import withRouter HOC
 import "./Product.scss";
 import Aoe from "aoejs"; // Import Aoejs
 
+const Product = (props) => {
+  // Hàm chuyển trang
+  const handleNavigate = (path) => {
+    if (props.history) {
+      props.history.push(path); // Dùng props.history.push để chuyển trang
+    } else {
+      console.error("Navigation failed: History object is not available.");
+    }
+  };
 
-const Product = () => {
-
-	return (
-			<div className="Product-container">
-				<div className="navi"></div>
-				<div className="find-cart">
-					<div className="find">
-						<div className="search">
-							<i className="fas fa-search"></i>
-							<input
-								type="text"
-								placeholder='Finding product'></input>
-						</div>
-					</div>
-					<div className="cart">
-						<i class="fas fa-shopping-cart"></i>
-					</div>
-				</div>
-			</div>
-	);
+  return (
+    <div className="Product-container">
+      <div className="navi"></div>
+      <div className="find-cart">
+        <div className="find">
+          <div className="search">
+            <i className="fas fa-search"></i>
+            <input type="text" placeholder="Finding product"></input>
+          </div>
+        </div>
+        <div className="cart" onClick={() => handleNavigate('/checkout')}>
+          <i className="fas fa-shopping-cart"></i>
+        </div>
+      </div>
+    </div>
+  );
 };
 
+// Map state to props nếu cần
 const mapStateToProps = (state) => {
-	return {
-		isLoggedIn: state.user.isLoggedIn,
-		language: state.app.language,
-	};
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    language: state.app.language,
+  };
 };
 
+// Map dispatch to props nếu cần
 const mapDispatchToProps = (dispatch) => {
-	return {};
+  return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Product));
