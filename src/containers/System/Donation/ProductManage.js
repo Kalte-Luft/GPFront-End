@@ -105,6 +105,14 @@ class ProductManage extends Component {
             console.log("doEditProduct error: ", error);
         }
     };
+
+    formatPrice = (price) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'decimal',
+            maximumFractionDigits: 0,
+        }).format(price);
+    };
+    
     //life cycle
     // Run component
     // 1. constructor -> init state
@@ -147,7 +155,7 @@ class ProductManage extends Component {
                                 <th>Description</th>
                                 <th>Price</th>
                                 <th>Image</th>
-                                <th>Action</th>
+                                <th style={{ width: "120px" }}>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -158,7 +166,8 @@ class ProductManage extends Component {
                                             <td>{item.id}</td>
                                             <td>{item.name}</td>
                                             <td>{item.description}</td>
-                                            <td>{item.price}</td>
+                                            <td>{this.formatPrice(item.price)}</td>
+
                                             <td>{
                                                 <img
                                                     src={item.image}

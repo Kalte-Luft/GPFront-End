@@ -58,7 +58,7 @@ class Cart extends Component {
 										<div className="cart_item_wrap">
 											<div className="cart_item_wrap_top">
 												<div className="name_item">
-													<p>Yellow Plan: 18 Trees Planted Every Month</p>
+													<p>Yellow Plan: 18 Trees Planted One Time</p>
 												</div>
 												<div className="remove_item">
 													<span className="item-name">

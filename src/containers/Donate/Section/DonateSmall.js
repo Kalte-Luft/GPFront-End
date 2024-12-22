@@ -72,7 +72,7 @@ const DonateSmall = (props) => {
             <span>Carbon balanced<br /></span>
             <span>every month <br /></span>
             <span>700.000 VND <br /></span>
-            <span>Per month</span>
+            <span>One time</span>
           </div>
           <button className="btn-donateSmall" onClick={() => handleNavigate("/product", 100)}>
             Donate now
@@ -88,7 +88,7 @@ const DonateSmall = (props) => {
             <span>Carbon balanced <br /></span>
             <span>every month<br /></span>
             <span>350.000 VND<br /></span>
-            <span>Per month<br /></span>
+            <span>One time<br /></span>
           </div>
           <button className="btn-donateSmall" onClick={() => handleNavigate2("/product", 100)}>
             Donate now
@@ -103,8 +103,8 @@ const DonateSmall = (props) => {
             <span>100kgs CO2<br /></span>
             <span>Carbon balanced <br /></span>
             <span>every month<br /></span>
-            <span>178.000 VND<br /></span>
-            <span>Per month<br /></span>
+            <span>180.000 VND<br /></span>
+            <span>One time<br /></span>
           </div>
           <button className="btn-donateSmall" onClick={() => handleNavigate3("/product", 100)}>
             Donate now

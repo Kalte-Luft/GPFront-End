@@ -52,11 +52,11 @@ const GreenPlan = (props) => {
 							</div>
 						</div>
 						<div className="description">
-							<p> Join the Yellow Plan membership and plant 18 trees each month, 
+							<p> Join the Green Plan membership and plant 18 trees each month, 
 								amplifying your positive environmental impact. 
 								Each tree sequesters 20 kg of CO2, allowing you to balance <strong>120 kg of CO2 </strong>monthly. 
 								Your ongoing contribution helps restore vital ecosystems, protect biodiversity, and actively combat climate change. 
-								By becoming a Yellow Plan member, you're supporting sustainable growth and ensuring a greener planet for future generations. 
+								By becoming a Green Plan member, you're supporting sustainable growth and ensuring a greener planet for future generations. 
 								Make a lasting difference today—one tree at a time!</p>
 							<p><strong>Plant 5 trees every month</strong></p>
 							<p><strong>7kgs of CO2 balanced every month</strong></p>

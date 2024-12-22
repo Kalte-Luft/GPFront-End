@@ -105,6 +105,14 @@ class CampaignManage extends Component {
             console.log("doEditCampaign error: ", error);
         }
     };
+
+    formatPrice = (amount) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'decimal',
+            maximumFractionDigits: 0,
+        }).format(amount);
+    };
+
     //life cycle
     // Run component
     // 1. constructor -> init state
@@ -182,8 +190,9 @@ class CampaignManage extends Component {
                                             <td>{item.province.name}</td>
                                             <td>{item.position}</td>
                                             <td>{item.status}</td>
-                                            <td>{item.target_amount}</td>
-                                            <td>{item.current_amount}</td>
+                                            <td>{this.formatPrice(item.target_amount)}</td>
+                                            <td>{this.formatPrice(item.current_amount)}</td>
+
                                             <td>
                                                 {new Date(
                                                     item.start_date
@@ -214,7 +223,7 @@ class CampaignManage extends Component {
                                                     : "No Donor"}
                                             </td>
 
-                                            <td style={{width : "111px"}}>
+                                            <td style={{ width: "111px" }}>
                                                 <button className="btn-edit">
                                                     <i
                                                         className="fa fa-pencil-alt"

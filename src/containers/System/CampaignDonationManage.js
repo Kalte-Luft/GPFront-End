@@ -105,6 +105,13 @@ class CampaignDonationManage extends Component {
             console.log("doEditCampaignDonation error: ", error);
         }
     };
+
+    formatPrice = (amount) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'decimal',
+            maximumFractionDigits: 0,
+        }).format(amount);
+    };
     //life cycle
     // Run component
     // 1. constructor -> init state
@@ -159,7 +166,7 @@ class CampaignDonationManage extends Component {
                                             <td>{item.id}</td>
                                             <td>{item.user.email}</td>
                                             <td>{item.campaign.title}</td>
-                                            <td>{item.amount}</td>
+                                            <td>{this.formatPrice(item.amount)}</td>
                                             <td>
                                                 <button className="btn-edit">
                                                     <i

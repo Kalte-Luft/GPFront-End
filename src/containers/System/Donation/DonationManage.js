@@ -109,6 +109,13 @@ class DonationManage extends Component {
             console.log("doEditDonation error: ", error);
         }
     };
+
+    formatPrice = (amount) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'decimal',
+            maximumFractionDigits: 0,
+        }).format(amount);
+    };
     //life cycle
     // Run component
     // 1. constructor -> init state
@@ -120,29 +127,7 @@ class DonationManage extends Component {
         let arrDonations = this.state.arrDonations;
         return (
             <div className="donation-container">
-                {/* <ModalDonation
-                    isOpen={this.state.isOpenModalDonation}
-                    toggleFromParent={this.toggleDonationModal}
-                    createNewDonation={this.createNewDonation}
-                />
-                {this.state.isOpenModalEditDonation && (
-                    <ModalEditDonation
-                        isOpen={this.state.isOpenModalEditDonation}
-                        toggleFromParent={this.toggleEditDonationModal}
-                        currentDonation={this.state.donationEdit}
-                        editDonation={this.doEditDonation}a
-                    />
-                )} */}
-
                 <div className="title text-center">Manage donations with Nghia & Khanh</div>
-                {/* <div className="mx-1">
-                    <button
-                        className="btn btn-primary px-3"
-                        onClick={() => this.handleAddNewDonation()}
-                    >
-                        <i className="fa fa-plus"></i> Add new donation
-                    </button>
-                </div> */}
                 <div className="donations-table mt-5 mx-3">
                     <table id="customers">
                         <thead>
@@ -166,7 +151,7 @@ class DonationManage extends Component {
                                             <td>{item.cartItem_id}</td>
                                             <td>{item.user.name}</td>
                                             <td>{item.product.name}</td>
-                                            <td>{item.total_amount}</td>
+                                            <td>{this.formatPrice(item.total_amount)}</td>
                                             <td>{item.cartItem.status}</td>
                                             <td>
                                                 {new Date(
