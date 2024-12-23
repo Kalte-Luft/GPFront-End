@@ -13,7 +13,7 @@ class ModalCart extends Component {
 			productList: [],
 			quantity: "",
 			status: "",
-			purchase_at: new Date(),
+			total: "",
 		};
 		this.listenToEmitter();//gọi hàm này để lắng nghe sự kiện từ emitter
 	}
@@ -25,7 +25,7 @@ class ModalCart extends Component {
 				productList: [],
 				quantity: "",
 				status: "",
-				purchase_at: new Date(),
+				total: "",
 			});
 		});
 	}
@@ -69,7 +69,7 @@ class ModalCart extends Component {
 	//hàm này dùng để kiểm tra xem input có đúng không
 	checkValidateInput = () => {
 		let isValid = true;
-		let arrInput = ["user_id", "product_id", "quantity", "status", "purchase_at"];
+		let arrInput = ["user_id", "product_id", "quantity", "total", "status"];
 		for (let i = 0; i < arrInput.length; i++) {
 			if (!this.state[arrInput[i]]) {
 				isValid = false;
@@ -151,6 +151,13 @@ class ModalCart extends Component {
 								<option value="pending">Pending </option>
 								<option value="purchased">Purchased</option>
 							</select>
+						</div>
+						<div className="input-container">
+							<label>Total</label>
+							<input type="text"
+								onChange={(event) => this.handleOnChangeInput(event, "total")}
+								value={this.state.total}
+								className="form-control" />
 						</div>
 					</div>
 				</ModalBody>

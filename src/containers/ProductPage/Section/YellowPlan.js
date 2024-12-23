@@ -2,38 +2,84 @@ import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import "./YellowPlan.scss";
 import { withRouter } from "react-router-dom";
+import { getAllProducts } from "../../../services/productService";
+import { createNewCartService } from "../../../services/cartService";
+import AlertContainer from "../../../components/AlertContainer";
 
 const YellowPlan = (props) => {
-  const yellowPlanRef = useRef(null); // Ref to target section
+  const yellowPlanRef = useRef(null); // Ref to target
+  const alertRef = useRef(null);
+  const [arrCheckout, setArrCheckout] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [userId, setUserId] = useState(props.userInfo ? props.userInfo.id : null);
+  const [productId, setProductId] = useState(1);
 
   //dùng để scroll đến vị trí cần thiết khi chuyển trang
-    useEffect(() => {
+  useEffect(() => {
     console.log(props);
-     const targetScrollTop = props.location?.state.targetScrollTop || 0;
-     if (yellowPlanRef.current && targetScrollTop) {
+    const targetScrollTop = props.location?.state.targetScrollTop || 0;
+    if (yellowPlanRef.current && targetScrollTop) {
       yellowPlanRef.current.scrollIntoView({ behavior: "auto" });
-     }
+    }
     if (props.location?.state?.targetScrollTop) {
       props.history.replace({
         ...props.location,
         state: {
-        ...props.location.state,
-        targetScrollTop: 0,
+          ...props.location.state,
+          targetScrollTop: 0,
         },
       });
+    }
+  }, [props.location, props.history]);
+
+  const handleNavigate = (path) => {
+    props.history.push(path);
+  };
+
+  useEffect(() => {
+    handleGetAllProducts();
+  }, []);
+
+  const handleGetAllProducts = async () => {
+    let response = await getAllProducts("1");
+    if (response && response.errCode === 0) {
+      setArrCheckout(response.products);
+    }
+  };
+
+  const handleAddNewCart = async () => {
+    let data = {
+      user_id: userId,
+      product_id: productId,
+      quantity: quantity,
+    };
+    try {
+      let response = await createNewCartService(data);
+      if (response && response.errCode !== 0) {
+        alert(response.errMessage);
+      } else {
+        showAlert("Add new cart success", "success");
       }
-    }, [props.location,props.history]);
-    
-    const handleNavigate = (path) => {
-      props.history.push(path);
-    }; 
-    
+    } catch (error) {
+      console.log("handleAddNewCart error", error);
+    }
+  };
+
+  const handleOnChange = (e) => {
+    setQuantity(e.target.value);
+  };
+
+  const showAlert = (message, type) => {
+    if (alertRef.current) {
+        alertRef.current.showAlert(message, type);
+    }
+  };
+
   return (
     <div className="YellowPlan-container" ref={yellowPlanRef}>
       <div className="YellowPlan-content">
         <div className="YellowPlan-content-left">
-          <div className="YellowPlan-image">
-          </div>
+          <div className="YellowPlan-image"></div>
         </div>
         <div className="YellowPlan-content-right">
           <div className="title-YellowPlan">
@@ -43,10 +89,11 @@ const YellowPlan = (props) => {
           <div className="buy-product-YellowPlan">
             <div className="bg">
               <h3>Would you like to buy this product?</h3>
-              <p>Once you subscribe, we will place a new order with this product.
+              <p>
+                Once you subscribe, we will place a new order with this product.
                 You will be automatically charged 450.000VND or each order.
-                You can easily manage your subscription or cancel it anytime with no additional charges.</p>
-
+                You can easily manage your subscription or cancel it anytime with no additional charges.
+              </p>
               <span>1 item in the bag</span>
             </div>
             <div className="product-content">
@@ -54,23 +101,37 @@ const YellowPlan = (props) => {
                 <label><span>Quantity:</span></label>
               </div>
               <div className="qty">
-                <input type="number" id="quantity" className="quantity" min="1" max="100" placeholder="1" />
+                <input
+                  type="number"
+                  id="quantity"
+                  className="quantity"
+                  min="1" max="100"
+                  placeholder="1"
+                  value={quantity || ""}
+                  onChange={handleOnChange}
+                />
               </div>
             </div>
             <div className="product-purchase-controll">
               <div className="btn-action">
-                <button className="add-btn">Add to bag</button>
-
-                <button className="go-to-check-btn" onClick={() => handleNavigate("/checkout")}>Go to Checkout</button>
+                <button
+                  className="add-btn"
+                  onClick={handleAddNewCart}
+                >
+                  Add to bag
+                </button>
+                <button
+                  className="go-to-check-btn"
+                  onClick={() => handleNavigate("/checkout")}
+                >
+                  Go to Checkout
+                </button>
               </div>
             </div>
             <div className="description">
-              <p> Join the Yellow Plan membership and plant 18 trees each month, 
-                amplifying your positive environmental impact. 
-                Each tree sequesters 20 kg of CO2, allowing you to balance <strong>360 kg of CO2 </strong>monthly. 
-                Your ongoing contribution helps restore vital ecosystems, protect biodiversity, and actively combat climate change. 
-                By becoming a Yellow Plan member, you're supporting sustainable growth and ensuring a greener planet for future generations. 
-                Make a lasting difference today—one tree at a time!</p>
+              <p>
+                {arrCheckout?.description}
+              </p>
               <p><strong>Plant 20 trees every month</strong></p>
               <p><strong>400kgs of CO2 balanced every month</strong></p>
             </div>
@@ -85,6 +146,7 @@ const YellowPlan = (props) => {
           </div>
         </div>
       </div>
+      <AlertContainer ref={alertRef} />
     </div>
   );
 };
@@ -93,6 +155,7 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
     language: state.app.language,
+    userInfo: state.user.userInfo,
   };
 };
 

@@ -105,6 +105,15 @@ class CartManage extends Component {
             console.log("doEditCart error: ", error);
         }
     };
+
+    formatPrice = (price) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'decimal',
+            maximumFractionDigits: 0,
+        }).format(price);
+    };
+
+
     //life cycle
     // Run component
     // 1. constructor -> init state
@@ -147,8 +156,8 @@ class CartManage extends Component {
                                 <th>User</th>
                                 <th>Product ID</th>
                                 <th>Quantity</th>
+                                <th>Total</th>
                                 <th>Status</th>
-                                <th>Purchase At</th>
                                 <th>Action</th>                              
                             </tr>
                         </thead>
@@ -162,12 +171,8 @@ class CartManage extends Component {
                                             <td>{item.user.name}</td>
                                             <td>{item.product_id}</td>
                                             <td>{item.quantity}</td>
+                                            <td>{this.formatPrice(item.total)}</td>
                                             <td>{item.status}</td>
-                                            <td>
-                                                {new Date(
-                                                    item.purchased_at
-                                                ).toLocaleDateString()}
-                                            </td>
 
                                             <td>
                                                 <button className="btn-edit">

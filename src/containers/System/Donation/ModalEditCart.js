@@ -15,8 +15,8 @@ class ModalEditCart extends Component {
 			user_id: "",
 			productList: [],
 			quantity: "",
+			total:"",
 			status: "",
-			purchased_at: new Date(),
 		};
 	}
 	//hàm này dùng để lấy dữ liệu từ props truyền vào và set vào state
@@ -25,11 +25,8 @@ class ModalEditCart extends Component {
 		if (!_.isEmpty(cart)) {
 			this.setState({
 				...cart,
-				purchased_at: new Date(cart.purchased_at)
-					.toISOString()
-					.split("T")[0],
 				status: cart.status,
-				
+				total: cart.total,
 			});
 		}
 		this.loadProducts();
@@ -73,7 +70,7 @@ class ModalEditCart extends Component {
 			"user_id",
 			"product_id",
 			"quantity",
-			"purchased_at",
+			"total",
 			"status",			
 		];
 		for (let i = 0; i < arrInput.length; i++) {
@@ -142,19 +139,13 @@ class ModalEditCart extends Component {
 								className="form-control" />
 						</div>
 						<div className="input-container">
-                            <label>Purchased At</label>
-                            <input
-                                type="date"
-                                className="form-control"
-								value={this.state.purchased_at}
-                                onChange={(event) =>
-                                    this.handleOnChangeInput(
-                                        event,
-                                        "purchased_at"
-                                    )
-                                }
-                            />
-                        </div>
+							<label>Total</label>
+							<input type="text"
+								onChange={(event) => this.handleOnChangeInput(event, "total")}
+								value={this.state.total}
+								className="form-control" 
+								disabled/>
+						</div>
 						<div className="input-container">
 							<label>Status</label>
 							<select

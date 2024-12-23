@@ -3,30 +3,83 @@ import { connect } from "react-redux";
 import "./GreenPlan.scss";
 import Aoe from "aoejs"; // Import Aoejs
 import { withRouter } from "react-router-dom";
+import { getAllProducts } from "../../../services/productService";
+import { createNewCartService } from "../../../services/cartService";
+import AlertContainer from "../../../components/AlertContainer";
 
 const GreenPlan = (props) => {
-  const greenPlanRef = useRef(null); // Ref to target section
+	const greenPlanRef = useRef(null); // Ref to target section
+	const alertRef = useRef(null);
+	const [arrCheckout, setArrCheckout] = useState(null); //setArrCheckout is a function to update the state of arrCheckout, //arrCheckout is a state to store the data of the product
+	const [quantity, setQuantity] = useState(1); //setQuantity is a function to update the state of quantity, //quantity is a state to store the quantity of the product
+	const [userId, setUserId] = useState(props.userInfo ? props.userInfo.id : null);//setUserId is a function to update the state of userId, //userId is a state to store the id of the user //useState is a hook to declare a state variable
+	const [productId, setProductId] = useState(3);
 
-  useEffect(() => {
-	console.log(props);
-	 const targetScrollTop3 = props.location?.state.targetScrollTop3 || 0;
-	 if (greenPlanRef.current && targetScrollTop3) {
-		greenPlanRef.current.scrollIntoView({ behavior: "auto" });
-	 }
-	if (props.location?.state?.targetScrollTop3) {
-		props.history.replace({
-		  ...props.location,
-		  state: {
-			...props.location.state,
-			targetScrollTop3: 0,
-		  },
-		});
-	  }
-   }, [props.location,props.history]);
-   const handleNavigate = (path) => {
-	props.history.push(path);
-};
-  
+	useEffect(() => {
+		console.log(props);
+		const targetScrollTop3 = props.location?.state.targetScrollTop3 || 0;
+		if (greenPlanRef.current && targetScrollTop3) {
+			greenPlanRef.current.scrollIntoView({ behavior: "auto" });
+		}
+		if (props.location?.state?.targetScrollTop3) {
+			props.history.replace({
+				...props.location,
+				state: {
+					...props.location.state,
+					targetScrollTop3: 0,
+				},
+			});
+		}
+	}, [props.location, props.history]);
+
+
+	const handleNavigate = (path) => {
+		props.history.push(path);
+	};
+
+
+	useEffect(() => {
+		handleGetAllProducts();
+	}, []);
+
+	const handleGetAllProducts = async () => {
+		let response = await getAllProducts("3");
+		if (response && response.errCode === 0) { //errCode is a key to check the status of the response === 0 means success
+			setArrCheckout(response.products);
+		}
+	}
+
+
+	const handleAddNewCart = async () => {
+		let data = {
+			user_id: userId,
+			product_id: productId,
+			quantity: quantity,
+		}
+		try {
+			let response = await createNewCartService(data);
+			if (response && response.errCode !== 0) {
+				alert(response.errMessage);
+			} else {
+				showAlert("Add new cart success", "success");
+			}
+		} catch (error) {
+			console.log("handleAddNewCart error", error);
+		}
+	}
+
+
+	const handleOnChange = (e) => {
+		setQuantity(e.target.value);
+	}
+
+	const showAlert = (message, type) => {
+		if (alertRef.current) {
+			alertRef.current.showAlert(message, type);
+		}
+	};
+
+
 	return (
 		<div className="GreenPlan-container" ref={greenPlanRef}>
 			<div className="GreenPlan-content">
@@ -53,24 +106,31 @@ const GreenPlan = (props) => {
 								<label><span>Quantity:</span></label>
 							</div>
 							<div className="qty">
-								<input type="number" id="quantity" className="quantity" min="1" max="100" placeholder="1" />
+								<input
+									type="number"
+									id="quantity"
+									className="quantity"
+									min="1" max="100"
+									placeholder="1"
+									value={quantity || ""}
+									onChange={handleOnChange}
+								/>
 							</div>
 						</div>
 						<div className="product-purchase-controll">
 							<div className="btn-action">
-								<button className="add-btn">Add to bag</button>
+								<button
+									className="add-btn"
+									onClick={handleAddNewCart}
+								>Add to bag</button>
 
 								<button className="go-to-check-btn" onClick={() => handleNavigate("/checkout")}>Go to Checkout</button>
 							</div>
 						</div>
 						<div className="description">
-							<p> Join the Green Plan membership and plant 18 trees each month, 
-								amplifying your positive environmental impact. 
-								Each tree sequesters 20 kg of CO2, allowing you to balance <strong>120 kg of CO2 </strong>monthly. 
-								Your ongoing contribution helps restore vital ecosystems, protect biodiversity, and actively combat climate change. 
-								By becoming a Green Plan member, you're supporting sustainable growth and ensuring a greener planet for future generations. 
-								Make a lasting difference today—one tree at a time!</p>
-							<p><strong>Plant 5 trees every month</strong></p>
+							<p>
+								{arrCheckout?.description}
+							</p>
 							<p><strong>7kgs of CO2 balanced every month</strong></p>
 						</div>
 						<div className="product-share">
@@ -84,6 +144,7 @@ const GreenPlan = (props) => {
 					</div>
 				</div>
 			</div>
+			<AlertContainer ref={alertRef} />
 		</div>
 	);
 };
@@ -92,6 +153,7 @@ const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
 		language: state.app.language,
+		userInfo: state.user.userInfo, //userInfo is a key to get the user information
 	};
 };
 
