@@ -24,7 +24,9 @@ const YellowPlan = (props) => {
       }
     }, [props.location,props.history]);
     
-     
+    const handleNavigate = (path) => {
+      props.history.push(path);
+    }; 
     
   return (
     <div className="YellowPlan-container" ref={yellowPlanRef}>
@@ -59,7 +61,7 @@ const YellowPlan = (props) => {
               <div className="btn-action">
                 <button className="add-btn">Add to bag</button>
 
-                <button className="go-to-check-btn">Go to Checkout</button>
+                <button className="go-to-check-btn" onClick={() => handleNavigate("/checkout")}>Go to Checkout</button>
               </div>
             </div>
             <div className="description">

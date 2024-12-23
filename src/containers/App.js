@@ -52,7 +52,7 @@ class App extends Component {
                         {/* nếu logging r thì render tới header */}
 
                         <div className="content-container">
-                            <CustomScrollbars style ={{height: '751.2px', width: '1487.8px'}}>
+                            <CustomScrollbars style ={{height: '100vh', width: '100%'}}>
                                 <Switch>
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} /> {/*hàm bọc để check xem người dùng đã đăng nhập hay ch*/}

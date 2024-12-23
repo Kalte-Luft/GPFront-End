@@ -25,7 +25,9 @@ const OrangePlan = (props) => {
 	  }
 	}, [props.location,props.history]);
 	
-	 
+	const handleNavigate = (path) => {
+        props.history.push(path);
+    };
 	return (
 		<div className="OrangePlan-container" ref={orangePlanRef}>
 			<div className="OrangePlan-content">
@@ -59,7 +61,7 @@ const OrangePlan = (props) => {
 							<div className="btn-action">
 								<button className="add-btn">Add to bag</button>
 
-								<button className="go-to-check-btn">Go to Checkout</button>
+								<button className="go-to-check-btn" onClick={() => handleNavigate("/checkout")}>Go to Checkout</button>
 							</div>
 						</div>
 						<div className="description">

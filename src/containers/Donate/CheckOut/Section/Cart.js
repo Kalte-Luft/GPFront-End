@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Cart.scss";
-import { getAllCart } from "../../../../services/cartService";
 import { withRouter } from "react-router-dom";
 
 class Cart extends Component {

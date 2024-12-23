@@ -33,7 +33,6 @@ class Detail extends Component {
             console.log("No id found");
         }
     }
-    async componentDidUpdate(prevProps, prevState, snapshot) {}
     render() {
         const { isLoggedIn } = this.props;
         let { detailCampaigns } = this.state;

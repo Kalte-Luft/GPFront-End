@@ -5,17 +5,22 @@ import HomeFooter from "../../HomePage/HomeFooter";
 import Overview from "./Section/Overview";
 import Detail from "./Section/Detail";
 import Value from "./Section/Value";
-import JoinCampain from "./Section/JoinCampain";
+import JoinCampaign from "./Section/JoinCampaign";
 
 class DetailCampaign extends Component {
     render() {
+        const {isLoggedIn} = this.props
         return (
             <div>
                 <HomeHeader />
                 <Overview />
                 <Value />
                 <Detail />
-                <JoinCampain />
+                {
+                    isLoggedIn === true &&
+                    (<JoinCampaign />)
+                }
+                
                 <HomeFooter />
                 
             </div>

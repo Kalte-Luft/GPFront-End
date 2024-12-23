@@ -15,9 +15,9 @@ class ModalCart extends Component {
 			status: "",
 			purchase_at: new Date(),
 		};
-		this.listenToEmitter();
+		this.listenToEmitter();//gọi hàm này để lắng nghe sự kiện từ emitter
 	}
-	//hàm này dùng để lắng nghe sự kiện từ emitter
+	//hàm này dùng để lắng nghe sự kiện từ emitter, dùng để clear data khi có sự kiện
 	listenToEmitter = () => {
 		emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
 			this.setState({
