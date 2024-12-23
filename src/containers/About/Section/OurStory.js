@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl'; //đa ngôn ngữ
 import "./OurStory.scss";
-
+import { withRouter } from 'react-router-dom';
 class OurStory extends Component {
-haha=() => {
-	alert ("hehe");
-}
+
+	handleNavigate = (path) => {
+        if (this.props.history) {
+            this.props.history.push(path);
+        } else {
+            console.error("Navigation failed: History object is not available.");
+        }
+    }; 
 	render() {
 		return (
 			<div className="OurStory-container">
@@ -17,7 +22,7 @@ haha=() => {
 				<div className="our-projects">
 					<div className="our-projects-content">
 					</div>
-					<button className="btn btn-our-projects" onClick={() => this.haha()}>Our Projects</button>
+					<button className="btn btn-our-projects" onClick={() => this.handleNavigate('/campaign')}>Our Projects</button>
 				</div>
 				<div className="OurStory-content">
 				</div>
@@ -39,4 +44,4 @@ const mapDispatchToProps = dispatch => { //fire action event của redux
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OurStory); //bộc 2 lớp dữ liệu từ store ra ngoài, kết nối redux với react
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OurStory)); //bộc 2 lớp dữ liệu từ store ra ngoài, kết nối redux với react

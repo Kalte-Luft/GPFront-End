@@ -68,7 +68,7 @@ const YellowPlan = (props) => {
 					id: existingCart.id,
 					product_id: productId,
 					quantity: updatedQuantity,
-				};
+				};console.log("Updated quantity:", updatedQuantity);
 				const updateResponse = await editCartService(updateData);
 				if (updateResponse.errCode !== 0) {
 					alert(updateResponse.errMessage);
@@ -113,14 +113,14 @@ const YellowPlan = (props) => {
         <div className="YellowPlan-content-right">
           <div className="title-YellowPlan">
             <h1>Yellow Plan</h1>
-            <p>450.000VND</p>
+            <p>700.000VND</p>
           </div>
           <div className="buy-product-YellowPlan">
             <div className="bg">
               <h3>Would you like to buy this product?</h3>
               <p>
                 Once you subscribe, we will place a new order with this product.
-                You will be automatically charged 450.000VND or each order.
+                You will be automatically charged 700.000VND or each order.
                 You can easily manage your subscription or cancel it anytime with no additional charges.
               </p>
               <span>1 item in the bag</span>

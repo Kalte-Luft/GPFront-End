@@ -2,18 +2,70 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Cart.scss";
 import { withRouter } from "react-router-dom";
+import {
+	getAllCarts,
+	getCartByUser,
+	deleteCartService,
+} from "../../../../services/cartService";
 
 class Cart extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			CheckOut: [],
+			user_id: this.props.userInfo ? this.props.userInfo.id : "",
+			arrCarts: [],
+
+
 		};
 	}
 	handleNavigate = (path) => {
 		this.props.history.push(path);
 	};
+
+	formatPrice = (amount) => {
+		if (!amount) return "0";
+		// Tính tổng số tiền (cộng thêm 10%)
+		const finalAmount = amount;
+		return new Intl.NumberFormat('vi-VN', {
+			style: 'currency',
+			currency: 'VND',
+			maximumFractionDigits: 0,
+		}).format(finalAmount);  // Định dạng dưới dạng tiền tệ
+	};
+
+	async componentDidMount() {
+		await this.getAllCartsFromReact();
+	}
+
+	//hàm này dùng để gọi API
+	getAllCartsFromReact = async () => {
+		let response = await getCartByUser(this.state.user_id);
+		if (response && response.errCode === 0) {
+			this.setState({
+				//dùng để re-render lại component
+				arrCarts: response.carts,
+			});
+		}
+	};
+
+	handleDeleteCart = async (cart) => {
+		try {
+			let response = await deleteCartService(cart.id);
+			if (response && response.errCode === 0) {
+				await this.getAllCartsFromReact();
+			} else {
+				alert(response.errMessage);
+			}
+		} catch (error) {
+			console.log("handleDeleteCart error: ", error);
+		}
+	};
+
 	render() {
+		const { userInfo } = this.props; // Lấy thông tin người dùng từ props
+		const userEmail = userInfo ? userInfo.email : ''; // Nếu có userInfo thì lấy email, nếu không thì để trống
+		let arrCarts = this.state.arrCarts;
+		console.log("Cart items:", arrCarts); // Ghi lại thông tin về giỏ hàng
 		return (
 			<div className="Cart-container">
 				<div className="banner"></div>
@@ -24,56 +76,84 @@ class Cart extends Component {
 								<h1>Shopping Cart</h1>
 							</div>
 							<div className="cart_item">
-								<div className="cart_item_inner">
-									<div className="cart_item_content">
-										<div className="cart_item_img">
-										</div>
-										<div className="cart_item_wrap">
-											<div className="cart_item_wrap_top">
-												<div className="name_item">
-													<p>Yellow Plan: 18 Trees Planted One Time</p>
+								{arrCarts.length > 0 ? (
+									arrCarts &&
+									arrCarts.map((item) => (
+										<div className="cart_item_inner">
+											<div className="cart_item_content">
+												<div className="cart_item_img" >
+													{item.product.image && (
+														<img
+															src={item.product.image}
+															alt={item.product.name}
+															style={{
+																width: "60px", height: "80px",
+															}}
+														/>
+
+													)}
+													{console.log("Image URL:", item.product.image)}
 												</div>
-												<div className="remove_item">
-													<span className="item-name">
-														<button
-															className="remove_button">
-															<i class="fa fa-times" aria-hidden="true"></i>
-														</button>
-													</span>
-												</div>
-											</div>
-											<div className="cart_item_wrap_bottom">
-												<div className="cart_item_quantity">
-													<div className="cart_item_quantity_inner">
-														<span className="seclect_quantity">
-															Quantity: 1
-														</span>
-														<div className="arrow_column">
-															<div className="arrow">▲</div>
-															<div className="arrow">▼</div>
+												<div className="cart_item_wrap">
+													<div className="cart_item_wrap_top">
+														<div className="name_item">
+															<p>{item.product.name}</p>
+														</div>
+														<div className="remove_item">
+															<span className="item-name">
+																<button
+																	className="remove_button"
+																	onClick={() =>
+																		this.handleDeleteCart(
+																			item
+																		)
+																	}
+																>
+																	<i class="fa fa-times" aria-hidden="true"></i>
+																</button>
+															</span>
+														</div>
+													</div>
+													<div className="cart_item_wrap_bottom">
+														<div className="cart_item_quantity">
+															<div className="cart_item_quantity_inner">
+																<span className="seclect_quantity">
+																	Quantity: {item.quantity}
+																</span>
+																<div className="arrow_column">
+																	<div
+																		className="arrow"
+
+																	>▲</div>
+																	<div
+																		className="arrow"
+
+																	>▼</div>
+																</div>
+															</div>
+														</div>
+														<div className="cart_item_price">
+															<div className="cart_item_price_inner">
+																{this.formatPrice(item.total)}
+															</div>
 														</div>
 													</div>
 												</div>
-												<div className="cart_item_price">
-													<div className="cart_item_price_inner">
-														180,000 VND
-													</div>
-												</div>
 											</div>
 										</div>
-									</div>
-								</div>
+									))) : (<p>Your cart is empty.</p>)
+								}
 							</div>
 							<hr></hr>
 							<table className="summary">
 								<tbody className="summary_body">
 									<tr className="summary_row_item">
 										<td className="summary_row_item_title">Subtotal</td>
-										<td className="summary_row_item_price">250.000</td>
+										{/* <td className="summary_row_item_price">{this.formatPrice(item.total)} VND</td> */}
 									</tr>
 									<tr className="summary_row_tip">
 										<td className="summary_row_tip_title">Tip</td>
-										<td className="summary_row_tip_price">0</td>
+										<td className="summary_row_tip_price">10%</td>
 									</tr>
 								</tbody>
 								<tbody className="summary_body">
@@ -89,7 +169,7 @@ class Cart extends Component {
 									<p> Continue choosing</p>
 								</div>
 							</div>
-						</div>			
+						</div>
 					</div>
 					<div className="center-content">
 					</div>
@@ -99,13 +179,15 @@ class Cart extends Component {
 								<h1>Checkout</h1>
 							</div>
 							<div className="right_email">
-								<div className="right_email_text"><p>Enter your email address. This address will be used to send you order status updates.</p> </div>
+								<div className="right_email_text"><p>This address will be used to send you order status updates.</p> </div>
 								<div className="email_container">
 									<input
 										type="email"
 										className="email_input"
 										placeholder="Enter your email"
 										required
+										value={userEmail} // Gán giá trị email của người dùng
+										readOnly // Giúp ngừng chỉnh sửa nếu không muốn người dùng sửa email
 									/>
 								</div>
 							</div>
@@ -143,6 +225,7 @@ const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
 		language: state.app.language,
+		userInfo: state.user.userInfo,
 	};
 };
 

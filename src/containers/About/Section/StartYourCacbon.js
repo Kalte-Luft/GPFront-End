@@ -9,8 +9,9 @@ class StartYourCacbon extends Component {
         super(props);
     }
 
-    handleCalculateNowClick = () => {
-        alert('Success!');
+    handleCalculateNowClick = (path) => {
+        this.props.history.push(path);
+        console.log("path: ", path);
     };
 
     handleNavigate = (path) => {
@@ -42,7 +43,7 @@ class StartYourCacbon extends Component {
                                 </div>
                                 <button
                                     className="calculate-now"
-                                    onClick={this.handleCalculateNowClick}
+                                    onClick={() => this.handleCalculateNowClick('/status')}
                                 >
                                     Calculate Now
                                 </button>
@@ -69,7 +70,7 @@ class StartYourCacbon extends Component {
                                 </div>
                                 <button
                                     className="contact-us"
-                                    onClick={() => this.handleNavigate('/contact')}
+                                    onClick={() => this.handleNavigate('/contact' )}
                                 >
                                     Contact Us
                                 </button>
