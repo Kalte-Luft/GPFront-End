@@ -4,7 +4,7 @@ import "./GreenPlan.scss";
 import Aoe from "aoejs"; // Import Aoejs
 import { withRouter } from "react-router-dom";
 import { getAllProducts } from "../../../services/productService";
-import { createNewCartService } from "../../../services/cartService";
+import { createNewCartService,getCartByUser,editCartService } from "../../../services/cartService";
 import AlertContainer from "../../../components/AlertContainer";
 
 const GreenPlan = (props) => {
@@ -51,22 +51,51 @@ const GreenPlan = (props) => {
 
 
 	const handleAddNewCart = async () => {
-		let data = {
-			user_id: userId,
-			product_id: productId,
-			quantity: quantity,
-		}
 		try {
-			let response = await createNewCartService(data);
-			if (response && response.errCode !== 0) {
-				alert(response.errMessage);
+			// Lấy danh sách giỏ hàng của người dùng
+			const cartResponse = await getCartByUser(userId);
+			if (cartResponse.errCode !== 0) {
+				alert("Failed to retrieve cart data");
+				return;
+			}
+	
+			const carts = cartResponse.carts || [];
+			const existingCart = carts.find(
+				(cart) => cart.user_id === userId && cart.product_id === productId
+			);
+	
+			if (existingCart) {
+				// Nếu sản phẩm đã tồn tại, gọi API update (editCartService)
+				const updatedQuantity = parseInt(existingCart.quantity, 10) + parseInt(quantity, 10);
+				const updateData = {
+					id: existingCart.id,
+					product_id: productId,
+					quantity: updatedQuantity,
+				};
+				const updateResponse = await editCartService(updateData);
+				if (updateResponse.errCode !== 0) {
+					alert(updateResponse.errMessage);
+				} else {
+					showAlert("Quantity updated successfully", "success");
+				}
 			} else {
-				showAlert("Add new cart success", "success");
+				// Nếu sản phẩm chưa tồn tại, thêm mới
+				const newCartData = {
+					user_id: userId,
+					product_id: productId,
+					quantity: quantity,
+				};
+				const addResponse = await createNewCartService(newCartData);
+				if (addResponse.errCode !== 0) {
+					alert(addResponse.errMessage);
+				} else {
+					showAlert("Added new product to cart successfully", "success");
+				}
 			}
 		} catch (error) {
-			console.log("handleAddNewCart error", error);
+			console.error("handleAddNewCart error:", error);
 		}
-	}
+	};
 
 
 	const handleOnChange = (e) => {

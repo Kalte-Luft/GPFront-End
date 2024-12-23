@@ -25,7 +25,6 @@ class Profile extends Component {
     }
     handleNavigate = (path) => {
         this.props.history.push(path);
-        console.log("path: ", path);
     }
     async componentDidMount() {
         await this.getAllCampaignDonationsFromReact();
@@ -35,15 +34,9 @@ class Profile extends Component {
                 this.handleScroll
             );
         }
-        // const savedUserId = localStorage.getItem("user_id");
-        // if (savedUserId) {
-        //     this.setState({
-        //         user_id: savedUserId,
-        //     });
-        // }
+        
     }
     getAllCampaignDonationsFromReact = async () => {
-        console.log("thằng user_id:", this.state.user_id);
         let response = await getCampaignDonationsByUser(this.state.user_id);
         if (response && response.errCode === 0) {
             this.setState({
@@ -52,14 +45,7 @@ class Profile extends Component {
             });
         }
     };
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.userInfo !== this.props.userInfo && this.props.userInfo) {
-    //         this.setState({
-    //             user_id: this.props.userInfo ? this.props.userInfo.id : "",
-    //         });
-    //         localStorage.setItem("user_id", this.props.userInfo.id);
-    //     }
-    // }
+
     componentWillUnmount() {
         if (this.scrollbarsRef.current) {
             this.scrollbarsRef.current.removeEventListener(
@@ -674,11 +660,7 @@ class Profile extends Component {
                                                 {arrCampaignDonations &&
                                                     arrCampaignDonations.map(
                                                         (item, index) => {
-                                                            console.log(
-                                                                "check map: ",
-                                                                item,
-                                                                index
-                                                            );
+                                                            
                                                             return (
                                                                 <tr key={index}>
                                                                     <th scope="row">
