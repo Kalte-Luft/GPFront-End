@@ -111,10 +111,14 @@ class DonationManage extends Component {
     };
 
     formatPrice = (amount) => {
+        if (!amount) return "0";
+        // Tính tổng số tiền (cộng thêm 10%)
+        const finalAmount = amount ; 
         return new Intl.NumberFormat('vi-VN', {
-            style: 'decimal',
+            style: 'currency',
+            currency: 'VND',
             maximumFractionDigits: 0,
-        }).format(amount);
+        }).format(finalAmount);  // Định dạng dưới dạng tiền tệ
     };
     //life cycle
     // Run component
@@ -137,8 +141,6 @@ class DonationManage extends Component {
                                 <th>User</th>
                                 <th>Product</th>
                                 <th>Total amount</th>
-                                <th>Status</th>
-                                <th>Purchased date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -149,15 +151,9 @@ class DonationManage extends Component {
                                         <tr key={index}>
                                             <td>{item.id}</td>
                                             <td>{item.cartItem_id}</td>
-                                            <td>{item.user.name}</td>
-                                            <td>{item.product.name}</td>
+                                            <td>{item.user ? item.user.name : "N/A"}</td> 
+                                            <td>{item.product ? item.product.name : "N/A"}</td>
                                             <td>{this.formatPrice(item.total_amount)}</td>
-                                            <td>{item.cartItem.status}</td>
-                                            <td>
-                                                {new Date(
-                                                    item.cartItem.purchased_at
-                                                ).toLocaleDateString()}
-                                            </td>
 
                                             <td>
                                                 <button className="btn-edit">

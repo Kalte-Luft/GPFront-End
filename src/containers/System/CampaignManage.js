@@ -107,10 +107,14 @@ class CampaignManage extends Component {
     };
 
     formatPrice = (amount) => {
+        if (!amount) return "0";
+        // Tính tổng số tiền (cộng thêm 10%)
+        const finalAmount = amount ; 
         return new Intl.NumberFormat('vi-VN', {
-            style: 'decimal',
+            style: 'currency',
+            currency: 'VND',
             maximumFractionDigits: 0,
-        }).format(amount);
+        }).format(finalAmount);  // Định dạng dưới dạng tiền tệ
     };
 
     //life cycle
