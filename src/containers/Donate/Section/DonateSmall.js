@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import "./DonateSmall.scss";
 import { withRouter } from "react-router-dom";
+import Aoe from "aoejs";
 
 const DonateSmall = (props) => {
   const handleNavigate = (path, targetScrollTop) => {
@@ -11,6 +12,32 @@ const DonateSmall = (props) => {
       console.error("Navigation failed: History object is not available.");
     }
   };
+
+  useEffect(() => {
+    // Khởi tạo Aoe
+    const aoe = new Aoe();
+    aoe.init({
+      attributes: {
+        dataset: "data-aoe", // Chỉ định thuộc tính `data-aoe` để áp dụng hiệu ứng
+        delay: "data-aoe-delay",
+        speed: "data-aoe-speed",
+      },
+      observerRoot: null,
+      observeRootMargin: "0px",
+      observeRootThreshold: [0, 0.5, 0.75, 1],
+      intersectionRatio: 0.5,
+      once: false,
+      speed: 800,
+      delay: 0,
+      timingFunction: "linear",
+    });
+
+    // Clean-up để ngắt kết nối observers khi component unmount
+    return () => {
+      aoe.disconnectObservers();
+    };
+  }, []); // Chạy sau khi component render lần đầu tiên
+
 
   useEffect(() => {
     const state = props.location.state || {};
@@ -57,7 +84,7 @@ const DonateSmall = (props) => {
 
 
   return (
-    <div className="donateSmall-container">
+    <div className="donateSmall-container" data-aoe="driveInBottom">
       <div className="title-donateSmall">
         <h1>Join our community of monthly supporters of Land Regeneration Plans</h1>
       </div>

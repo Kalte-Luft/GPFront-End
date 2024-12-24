@@ -117,6 +117,14 @@
 							background-color: #43935f;
 							height          : 46px;
 							cursor          : pointer;
+							transition      : background-color 0.3s ease, transform 0.3s ease;
+						}
+
+						.add-btn:hover {
+							background-color: #367a4d;
+							/* Thay đổi màu nền khi hover */
+							transform       : scale(1.05);
+							/* Phóng to nút khi hover */
 						}
 
 						.go-to-check-btn {
@@ -130,7 +138,16 @@
 							background-color: #43935f;
 							height          : 46px;
 							cursor          : pointer;
+							transition      : background-color 0.3s ease, transform 0.3s ease;
 						}
+
+						.go-to-check-btn:hover {
+							background-color: #367a4d;
+							/* Thay đổi màu nền khi hover */
+							transform       : scale(1.05);
+							/* Phóng to nút khi hover */
+						}
+
 					}
 				}
 

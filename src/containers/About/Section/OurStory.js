@@ -1,47 +1,77 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl'; //đa ngôn ngữ
+import React, { useEffect, useRef } from "react";
+import { connect } from "react-redux"; // Kết nối Redux
+import { withRouter } from "react-router-dom"; // Điều hướng
+import { FormattedMessage } from "react-intl"; // Đa ngôn ngữ
+import Aoe from "aoejs"; // Import Aoejs
 import "./OurStory.scss";
-import { withRouter } from 'react-router-dom';
-class OurStory extends Component {
 
-	handleNavigate = (path) => {
-        if (this.props.history) {
-            this.props.history.push(path);
-        } else {
-            console.error("Navigation failed: History object is not available.");
-        }
-    }; 
-	render() {
-		return (
-			<div className="OurStory-container">
-				<div className="core-value">
-					<div className="core-value-content">
-					</div>
-				</div>
-				<div className="our-projects">
-					<div className="our-projects-content">
-					</div>
-					<button className="btn btn-our-projects" onClick={() => this.handleNavigate('/campaign')}>Our Projects</button>
-				</div>
-				<div className="OurStory-content">
+const OurStory = (props) => {
+
+	useEffect(() => {
+		// Khởi tạo Aoe
+		const aoe = new Aoe();
+		aoe.init({
+			attributes: {
+				dataset: "data-aoe", // Chỉ định thuộc tính `data-aoe` để áp dụng hiệu ứng
+				delay: "data-aoe-delay",
+				speed: "data-aoe-speed",
+			},
+			observerRoot: null,
+			observeRootMargin: "0px",
+			observeRootThreshold: [0, 0.5, 0.75, 1],
+			intersectionRatio: 0.5,
+			once: false,
+			speed: 800,
+			delay: 0,
+			timingFunction: "linear",
+		});
+
+		// Clean-up để ngắt kết nối observers khi component unmount
+		return () => {
+			aoe.disconnectObservers();
+		};
+	}, []); // Chạy sau khi component render lần đầu tiên
+
+
+	const handleNavigate = (path) => {
+		if (props.history) {
+			props.history.push(path);
+		} else {
+			console.error("Navigation failed: History object is not available.");
+		}
+	};
+
+
+	return (
+		<div className="OurStory-container">
+			<div className="core-value">
+				<div className="core-value-content" data-aoe="ball">
 				</div>
 			</div>
-		);
-	}
+			<div className="our-projects">
+				<div className="our-projects-content" data-aoe="ball">
+				</div>
+				<button className="btn btn-our-projects " data-aoe="pull" onClick={() => handleNavigate("/campaign")}>
+					<FormattedMessage id="our.projects" defaultMessage="Our Projects" />
+				</button>
+			</div>
+			<div className="OurStory-content" >
+			</div>
+		</div>
+	);
+};
 
-}
-
-const mapStateToProps = state => { //lấy biến thông qua state
+// Kết nối với Redux
+const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
 		language: state.app.language,
 	};
 };
 
-const mapDispatchToProps = dispatch => { //fire action event của redux
-	return {
-	};
+const mapDispatchToProps = (dispatch) => {
+	return {};
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OurStory)); //bộc 2 lớp dữ liệu từ store ra ngoài, kết nối redux với react
+// Sử dụng connect và withRouter
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OurStory));

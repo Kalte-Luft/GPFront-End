@@ -50,12 +50,11 @@
 			i {
 				color     : white;
 				font-size : 28px;
-				/* Tăng kích thước icon */
+				cursor    : pointer;
 				transition: color 0.3s ease-in-out;
-				/* Hiệu ứng chuyển đổi màu icon */
 
 				&:hover {
-					background-color:#45625D;
+					background-color: #45625D;
 					/* Đổi màu nền khi hover */
 					transform       : scale(1.2);
 					/* Phóng to nhẹ khi hover */
@@ -65,7 +64,7 @@
 
 
 			&:hover i {
-				color: #359381;
+				color: #aaa;
 				/* Đổi màu icon sang vàng khi hover */
 			}
 		}
