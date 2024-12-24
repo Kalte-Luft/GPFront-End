@@ -192,9 +192,11 @@ class Cart extends Component {
 									<tr className="summary_row_total">
 										<td className="summary_row_total_title">Total</td>
 										<td className="summary_row_total_price">
+											<span className="summary_total">
 											{
 												this.formatPrice(this.calculateTotalAmount())
 											}
+											</span>
 										</td>
 									</tr>
 								</tbody>

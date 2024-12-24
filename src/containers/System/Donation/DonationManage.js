@@ -1,18 +1,10 @@
 import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./DonationManage.scss";
 import {
     getAllDonations,
-    createNewDonationService,
     deleteDonationService,
-    editDonationService,
-    getAllProducts,
-    getAllUsers,
-    getALLCart,
 } from "../../../services/donationService";
-import ModalDonation from "./ModalDonation";
-import ModalEditDonation from "./ModalEditDonation";
 import { emitter } from "../../../utils/emitter";
 class DonationManage extends Component {
     constructor(props) {
@@ -32,6 +24,7 @@ class DonationManage extends Component {
     //hàm này dùng để gọi API
     getAllDonationsFromReact = async () => {
         let response = await getAllDonations("ALL");
+        console.log("check response: ", response);
         if (response && response.errCode === 0) {
             this.setState({
                 //dùng để re-render lại component
@@ -39,41 +32,8 @@ class DonationManage extends Component {
             });
         }
     };
-    //hàm này dùng để mở modal
-    handleAddNewDonation = () => {
-        this.setState({
-            isOpenModalDonation: true,
-        });
-    };
-    //hàm này dùng để đóng mở modal
-    toggleDonationModal = () => {
-        this.setState({
-            isOpenModalDonation: !this.state.isOpenModalDonation,
-        });
-    };
-    //hàm này dùng để đóng mở modal
-    toggleEditDonationModal = () => {
-        this.setState({
-            isOpenModalEditDonation: !this.state.isOpenModalEditDonation,
-        });
-    };
-    //hàm này dùng để tạo mới donation
-    createNewDonation = async (data) => {
-        try {
-            let response = await createNewDonationService(data);
-            if (response && response.errCode !== 0) {
-                alert(response.errMessage);
-            } else {
-                await this.getAllDonationsFromReact();
-                this.setState({
-                    isOpenModalDonation: false,
-                });
-                emitter.emit("EVENT_CLEAR_MODAL_DATA");
-            }
-        } catch (error) {
-            console.log("createNewDonation error: ", error);
-        }
-    };
+    
+
     //hàm này dùng để xóa donation
     handleDeleteDonation = async (donation) => {
         try {
@@ -87,28 +47,8 @@ class DonationManage extends Component {
             console.log("handleDeleteDonation error: ", error);
         }
     };
-    handleEditDonation = (donation) => {
-        this.setState({
-            isOpenModalEditDonation: true,
-            donationEdit: donation,
-        });
-    };
-    //hàm này dùng để sửa donation
-    doEditDonation = async (data) => {
-        try {
-            let response = await editDonationService(data);
-            if (response && response.errCode === 0) {
-                this.setState({
-                    isOpenModalEditDonation: false,
-                });
-                await this.getAllDonationsFromReact();
-            } else {
-                alert(response.errCode);
-            }
-        } catch (error) {
-            console.log("doEditDonation error: ", error);
-        }
-    };
+   
+    
 
     formatPrice = (amount) => {
         if (!amount) return "0";
@@ -137,9 +77,8 @@ class DonationManage extends Component {
                         <thead>
                             <tr>
                                 <th>Donation ID</th>
-                                <th>Cart ID</th>
+                                <th>User ID</th>
                                 <th>User</th>
-                                <th>Product</th>
                                 <th>Total amount</th>
                                 <th>Action</th>
                             </tr>
@@ -150,9 +89,8 @@ class DonationManage extends Component {
                                     return (
                                         <tr key={index}>
                                             <td>{item.id}</td>
-                                            <td>{item.cartItem_id}</td>
-                                            <td>{item.user ? item.user.name : "N/A"}</td> 
-                                            <td>{item.product ? item.product.name : "N/A"}</td>
+                                            <td>{item.user_id}</td>
+                                            <td>{item.user.name}</td> 
                                             <td>{this.formatPrice(item.total_amount)}</td>
 
                                             <td>
