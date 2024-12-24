@@ -20,6 +20,10 @@ const editDonationService = (inputData) => {
     return axios.put("/api/update-donation", inputData);
 };
 
+const getDonationByUser = (userId) => {
+    return axios.get(`/api/get-donation-by-user?id=${userId}`);
+}
+
 const getAllProducts = (inputId) => {
     return axios.get(`/api/get-all-products?id=${inputId}`);
 }
@@ -34,6 +38,7 @@ export {
     createNewDonationService,
     deleteDonationService,
     editDonationService,
+    getDonationByUser,
     getAllProducts,
     getAllUsers,
     getAllCarts,

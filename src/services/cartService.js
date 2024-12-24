@@ -21,8 +21,8 @@ const editCartService = (inputData) => {
 const getAllProducts = (id) => {
 	return axios.get(`/api/get-all-products?id=${id}`);
 };
-const getCartByUser = (userId) => {
-    return axios.get(`/api/get-cart-by-user?id=${userId}`);
+const getCartByUser = (userId, status) => {
+    return axios.get(`/api/get-cart-by-user?id=${userId}&status=${status}`);
 }
 
 

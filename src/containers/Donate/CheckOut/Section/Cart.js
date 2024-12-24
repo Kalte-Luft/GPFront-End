@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import "./Cart.scss";
 import { withRouter } from "react-router-dom";
 import {
-	getAllCarts,
 	getCartByUser,
 	deleteCartService,
 } from "../../../../services/cartService";
@@ -13,9 +12,8 @@ class Cart extends Component {
 		super(props);
 		this.state = {
 			user_id: this.props.userInfo ? this.props.userInfo.id : "",
-			arrCarts: [],
-
-
+			arrCarts: [],//gồm image, name, quantity, total
+			total_amount: "",
 		};
 	}
 	handleNavigate = (path) => {
@@ -35,11 +33,15 @@ class Cart extends Component {
 
 	async componentDidMount() {
 		await this.getAllCartsFromReact();
+		this.setState({
+			total_amount: this.calculateTotalAmount(),
+		});
+		console.log("state", this.state);
 	}
 
 	//hàm này dùng để gọi API
 	getAllCartsFromReact = async () => {
-		let response = await getCartByUser(this.state.user_id);
+		let response = await getCartByUser(this.state.user_id, "pending");
 		if (response && response.errCode === 0) {
 			this.setState({
 				//dùng để re-render lại component
@@ -56,15 +58,44 @@ class Cart extends Component {
 			} else {
 				alert(response.errMessage);
 			}
-		} catch (error) {
-			console.log("handleDeleteCart error: ", error);
+		} catch (e) {
+			console.log("handleDeleteDonation error: ", e);
 		}
 	};
+
+	calculateSubtotal = () => {
+		const { arrCarts } = this.state;
+		let subtotal = 0;
+		if (arrCarts && arrCarts.length > 0) {
+			subtotal = arrCarts.reduce((acc, item) => { //acc là giá trị tích lũy, item là phần tử hiện tại
+				const itemTotal = parseFloat(item.total) || 0; // Chuyển đổi thành số, dùng 0 nếu không hợp lệ
+				return acc + itemTotal;
+			}, 0);
+		}
+		return subtotal;
+	};
+
+	// Tính tổng số tiền (cộng thêm 10%)
+	calculateTotalAmount = () => {
+		const { arrCarts } = this.state;
+		let total_amount = 0;
+		if (arrCarts && arrCarts.length > 0) {
+			total_amount = arrCarts.reduce((acc, item) => {
+				const itemTotal = parseFloat(item.total) || 0;
+				return acc + itemTotal;
+			}, 0);
+		}
+		
+		const result = total_amount * 1.1;
+		return result;
+	};
+
 
 	render() {
 		const { userInfo } = this.props; // Lấy thông tin người dùng từ props
 		const userEmail = userInfo ? userInfo.email : ''; // Nếu có userInfo thì lấy email, nếu không thì để trống
 		let arrCarts = this.state.arrCarts;
+		let arrDonations = this.state.arrDonations;
 		console.log("Cart items:", arrCarts); // Ghi lại thông tin về giỏ hàng
 		return (
 			<div className="Cart-container">
@@ -87,7 +118,8 @@ class Cart extends Component {
 															src={item.product.image}
 															alt={item.product.name}
 															style={{
-																width: "60px", height: "80px",
+																width: "70px", height: "70px",
+																marginRight: "11px", borderRadius: "5px"
 															}}
 														/>
 
@@ -149,7 +181,7 @@ class Cart extends Component {
 								<tbody className="summary_body">
 									<tr className="summary_row_item">
 										<td className="summary_row_item_title">Subtotal</td>
-										{/* <td className="summary_row_item_price">{this.formatPrice(item.total)} VND</td> */}
+										<td className="summary_row_item_price">{this.formatPrice(this.calculateSubtotal())}</td>
 									</tr>
 									<tr className="summary_row_tip">
 										<td className="summary_row_tip_title">Tip</td>
@@ -159,7 +191,11 @@ class Cart extends Component {
 								<tbody className="summary_body">
 									<tr className="summary_row_total">
 										<td className="summary_row_total_title">Total</td>
-										<td className="summary_row_total_price"><span className="summary_total">250,000</span></td>
+										<td className="summary_row_total_price">
+											{
+												this.formatPrice(this.calculateTotalAmount())
+											}
+										</td>
 									</tr>
 								</tbody>
 							</table>
