@@ -110,7 +110,8 @@ class UserManage extends Component {
     // 1. constructor -> init state
     // 2. did mount -> set state
     // 3. render (re-render)
-
+    // 4. setState -> re-render
+    // 5. componentWillUnmount -> remove component
     render() {
         console.log("check state: ", this.state);
         let arrUsers = this.state.arrUsers;

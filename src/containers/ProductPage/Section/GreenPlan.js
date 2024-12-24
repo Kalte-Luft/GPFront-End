@@ -16,7 +16,6 @@ const GreenPlan = (props) => {
 	const [productId, setProductId] = useState(3);
 
 	useEffect(() => {
-		console.log(props);
 		const targetScrollTop3 = props.location?.state.targetScrollTop3 || 0;
 		if (greenPlanRef.current && targetScrollTop3) {
 			greenPlanRef.current.scrollIntoView({ behavior: "auto" });
@@ -39,15 +38,28 @@ const GreenPlan = (props) => {
 
 
 	useEffect(() => {
-		handleGetAllProducts();
-	}, []);
+        let isMounted = true; // Biến cờ để kiểm tra xem component đã unmount hay chưa
 
-	const handleGetAllProducts = async () => {
-		let response = await getAllProducts("3");
-		if (response && response.errCode === 0) { //errCode is a key to check the status of the response === 0 means success
-			setArrCheckout(response.products);
-		}
-	}
+        const fetchData = async () => {
+            let response = await getAllProducts("3");
+            if (isMounted && response && response.errCode === 0) {
+                setArrCheckout(response.products);
+            }
+        };
+
+        fetchData();
+
+        return () => {
+            isMounted = false; // Đặt cờ thành false khi component unmount
+        };
+    }, []);
+
+	// const handleGetAllProducts = async () => {
+	// 	let response = await getAllProducts("3");
+	// 	if (response && response.errCode === 0) { //errCode is a key to check the status of the response === 0 means success
+	// 		setArrCheckout(response.products);
+	// 	}
+	// }
 
 
 	const handleAddNewCart = async () => {
@@ -165,9 +177,9 @@ const GreenPlan = (props) => {
 						<div className="product-share">
 							<h3>Share this product with your friends</h3>
 							<div className="share-content">
-								<i class="fab fa-facebook"></i>
-								<i class="fab fa-telegram"></i>
-								<i class="fab fa-instagram"></i>
+								<i className="fab fa-facebook"></i>
+								<i className="fab fa-telegram"></i>
+								<i className="fab fa-instagram"></i>
 							</div>
 						</div>
 					</div>

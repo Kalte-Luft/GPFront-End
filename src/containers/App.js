@@ -67,7 +67,7 @@ class App extends Component {
                                     <Route path={path.PRODUCT} component={withCustomScrollbar(OurProduct)}/>
                                     <Route path={path.DETAIL_CAMPAIGN} component={withCustomScrollbar(DetailCampaign)}/>
                                     <Route path={path.CHECKOUT} component={withCustomScrollbar(CheckOut)} />
-                                    <Route path={path.PROFILE} component={withCustomScrollbar(Profile)} />  
+                                    <Route path={path.PROFILE} component={userIsAuthenticated(withCustomScrollbar(Profile))} />  
                                     <Route path={path.ERROR} component={BadRequest} />  
                                   
                                 </Switch>

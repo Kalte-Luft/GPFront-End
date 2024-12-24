@@ -1,21 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import axios from "../../axios";
+import * as actions from "../../store/actions";
 import { withRouter } from "react-router-dom";
 import HomeHeader from "../HomePage/HomeHeader";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "./Profile.scss";
+import {editUserService, getAllUsers, deleteUserService} from "../../services/userService";
 import { getCampaignDonationsByUser } from "../../services/campaignDonationService";
 class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
             arrCampaignDonations: [],
+            arrUsers: [],
             user_id: this.props.userInfo ? this.props.userInfo.id : "",
             isEditName: false,
             isOpenModalEditEmail: false,
             isEditEmail: false,
             isEditAddress: false,
             isEditPhone: false,
+            phone: "",
+            email: "",
+            name: "",
+            address: "",
         };
         this.yourAccountRef = React.createRef();
         this.securityRef = React.createRef();
@@ -23,18 +31,16 @@ class Profile extends Component {
         this.campaignRef = React.createRef();
         this.scrollbarsRef = React.createRef();
     }
-    handleNavigate = (path) => {
-        this.props.history.push(path);
-    }
+    
     async componentDidMount() {
         await this.getAllCampaignDonationsFromReact();
+        await this.getAllUsersFromReact();
         if (this.scrollbarsRef.current) {
             this.scrollbarsRef.current.addEventListener(
                 "scroll",
                 this.handleScroll
             );
         }
-        
     }
     getAllCampaignDonationsFromReact = async () => {
         let response = await getCampaignDonationsByUser(this.state.user_id);
@@ -45,6 +51,15 @@ class Profile extends Component {
             });
         }
     };
+    getAllUsersFromReact = async () => {
+        let response = await getAllUsers(this.state.user_id);
+        if (response && response.errCode === 0) {
+            this.setState({
+                //dùng để re-render lại component
+                arrUsers: response.users,
+            });
+        }
+    }
 
     componentWillUnmount() {
         if (this.scrollbarsRef.current) {
@@ -86,7 +101,6 @@ class Profile extends Component {
             campaign.style.backgroundColor = "transparent";
         }
     };
-    //nhấp nút cuộn đến section
     scrollToSection = (ref) => {
         if (ref.current) {
             ref.current.scrollIntoView({ behavior: "smooth" });
@@ -104,25 +118,150 @@ class Profile extends Component {
     onChangeEditPhone = () => {
         this.setState({ isEditPhone: !this.state.isEditPhone });
     };
-
     toggle = () => {
         this.setState({
             isOpenModalEditEmail: !this.state.isOpenModalEditEmail,
         });
     };
+    handleNavigate = (path) => {
+        this.props.history.push(path);
+    }
+
     handleEditEmail = () => {
         this.setState({ isOpenModalEditEmail: true });
     };
+    handleOnChangeInput = (event, id) => {
+        //good code
+        let copyState = { ...this.state };
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState,
+        });
+    };
+    checkValidateName = () => {
+        if (!this.state.name) {
+            alert("Name is required");
+            return false;
+        }
+        return true;
+    };
 
+    checkValidateEmail = () => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!this.state.email || !emailPattern.test(this.state.email)) {
+            alert("Invalid email format");
+            return false;
+        }
+        return true;
+    };
+
+    checkValidatePhone = () => {
+        const phonePattern = /^[0-9]{10}$/;
+        if (!this.state.phone || !phonePattern.test(this.state.phone)) {
+            alert("Invalid phone number");
+            return false;
+        }
+        return true;
+    };
+
+    checkValidateAddress = () => {
+        if (!this.state.address) {
+            alert("Address is required");
+            return false;
+        }
+        return true;
+    };
+    handleSaveName = async() => {
+        if (this.checkValidateName()) {
+            try {
+                let response = await editUserService({
+                    id: this.state.user_id,
+                    name: this.state.name,
+                });
+                if (response && response.errCode === 0) {
+                    this.setState({
+                        isEditName: false,
+                    });
+                    await this.getAllUsersFromReact();
+                }
+            } catch (error) {
+                console.log("handleSaveName error: ", error);          
+            }
+        }
+    };
+
+    handleSaveEmail = () => {
+        if (this.checkValidateEmail()) {
+            // Call API to save email
+            console.log("Email saved:", this.state.email);
+        }
+    };
+
+    handleSavePhone = async() => {
+        if (this.checkValidatePhone()) {
+            try {
+                let response = await editUserService({
+                    id: this.state.user_id,
+                    phone: this.state.phone,
+                });
+                if (response && response.errCode === 0) {
+                    this.setState({
+                        isEditPhone: false,
+                    });
+                    await this.getAllUsersFromReact();
+                }
+            } catch (error) {
+                console.log("handleSavePhone error: ", error);
+            }
+        }
+    };
+
+    handleSaveAddress = async() => {
+        if (this.checkValidateAddress()) {
+            try {
+                let response = await editUserService({
+                    id: this.state.user_id,
+                    address: this.state.address,
+                });
+                if (response && response.errCode === 0) {
+                    this.setState({
+                        isEditAddress: false,
+                    });
+                    await this.getAllUsersFromReact();
+                }
+            } catch (error) {
+                console.log("handleSaveAddress error: ", error);
+            }
+        }
+    };
+
+    handleDeleteUser = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete your account? All data that belongs to this account will be deleted as well.");
+        if (confirmDelete) {
+            try {
+                let response = await deleteUserService(this.state.user_id);
+                if (response && response.errCode === 0) {
+                    await this.getAllUsersFromReact();
+                    this.props.processLogout();
+                } else {
+                    alert(response.errMessage);
+                }
+                
+            } catch (error) {
+                console.log("handleDeleteUser error: ", error);
+            }
+        }
+    };
+    
     render() {
         const isEditName = this.state.isEditName;
         const isEditEmail = this.state.isEditEmail;
         const isEditAddress = this.state.isEditAddress;
         const isEditPhone = this.state.isEditPhone;
         const isOpenModalEditEmail = this.state.isOpenModalEditEmail;
-        const { userInfo } = this.props;
+        const arrUsers = this.state.arrUsers;
         const createdAt =
-            userInfo && userInfo.createdAt ? userInfo.createdAt : "";
+        arrUsers && arrUsers.createdAt ? arrUsers.createdAt : "";
         const date = new Date(createdAt);
         const formattedDateTime = `${date.toLocaleDateString("vi-VN", {
             day: "2-digit",
@@ -153,8 +292,8 @@ class Profile extends Component {
                                     <label>
                                         Before changing your account, you will
                                         need to enter the code we sent to{" "}
-                                        {userInfo && userInfo.email
-                                            ? userInfo.email
+                                        {arrUsers && arrUsers.email
+                                            ? arrUsers.email
                                             : ""}
                                     </label>
                                     <label
@@ -211,13 +350,13 @@ class Profile extends Component {
                                 </div>
                                 <div className="overview-info">
                                     <h1>
-                                        {userInfo && userInfo.name
-                                            ? userInfo.name
+                                        {arrUsers && arrUsers.name
+                                            ? arrUsers.name
                                             : ""}
                                     </h1>
                                     <p>
-                                        {userInfo && userInfo.email
-                                            ? userInfo.email
+                                        {arrUsers && arrUsers.email
+                                            ? arrUsers.email
                                             : ""}
                                     </p>
                                 </div>
@@ -326,9 +465,9 @@ class Profile extends Component {
                                             <div className="profile-image-content">
                                                 <div className="profile-img">
                                                     <h6>
-                                                        {userInfo &&
-                                                        userInfo.email
-                                                            ? userInfo.email
+                                                        {arrUsers &&
+                                                        arrUsers.email
+                                                            ? arrUsers.email
                                                             : ""}
                                                     </h6>
                                                 </div>
@@ -349,11 +488,13 @@ class Profile extends Component {
                                                     type="email"
                                                     className="form-control"
                                                     placeholder={
-                                                        userInfo &&
-                                                        userInfo.email
-                                                            ? userInfo.email
+                                                        arrUsers &&
+                                                        arrUsers.email
+                                                            ? arrUsers.email
                                                             : ""
                                                     }
+                                                    value={this.state.email}
+                                                    onChange={(event) => this.handleOnChangeInput(event, "email")}
                                                 />
                                                 <button
                                                     className="btn btn-light"
@@ -363,7 +504,7 @@ class Profile extends Component {
                                                 >
                                                     Cancel
                                                 </button>
-                                                <button className="btn btn-success">
+                                                <button className="btn btn-success" onClick={this.handleSaveEmail}>
                                                     Save
                                                 </button>
                                             </div>
@@ -379,9 +520,9 @@ class Profile extends Component {
                                             <div className="profile-image-content">
                                                 <div className="profile-img">
                                                     <h6>
-                                                        {userInfo &&
-                                                        userInfo.name
-                                                            ? userInfo.name
+                                                        {arrUsers &&
+                                                        arrUsers.name
+                                                            ? arrUsers.name
                                                             : ""}
                                                     </h6>
                                                 </div>
@@ -403,11 +544,13 @@ class Profile extends Component {
                                                     type="text"
                                                     className="form-control"
                                                     placeholder={
-                                                        userInfo &&
-                                                        userInfo.name
-                                                            ? userInfo.name
+                                                        arrUsers &&
+                                                        arrUsers.name
+                                                            ? arrUsers.name
                                                             : ""
                                                     }
+                                                    value={this.state.name}
+                                                    onChange={(event) => this.handleOnChangeInput(event, "name")}
                                                 />
                                                 <button
                                                     className="btn btn-light"
@@ -417,7 +560,7 @@ class Profile extends Component {
                                                 >
                                                     Cancel
                                                 </button>
-                                                <button className="btn btn-success">
+                                                <button className="btn btn-success" onClick={this.handleSaveName}>
                                                     Save
                                                 </button>
                                             </div>
@@ -433,9 +576,9 @@ class Profile extends Component {
                                             <div className="profile-image-content">
                                                 <div className="profile-img">
                                                     <h6>
-                                                        {userInfo &&
-                                                        userInfo.address
-                                                            ? userInfo.address
+                                                        {arrUsers &&
+                                                        arrUsers.address
+                                                            ? arrUsers.address
                                                             : ""}
                                                     </h6>
                                                 </div>
@@ -457,11 +600,13 @@ class Profile extends Component {
                                                     type="text"
                                                     className="form-control"
                                                     placeholder={
-                                                        userInfo &&
-                                                        userInfo.address
-                                                            ? userInfo.address
+                                                        arrUsers &&
+                                                        arrUsers.address
+                                                            ? arrUsers.address
                                                             : ""
                                                     }
+                                                    value={this.state.address}
+                                                    onChange={(event) => this.handleOnChangeInput(event, "address")}
                                                 />
                                                 <button
                                                     className="btn btn-light"
@@ -471,7 +616,7 @@ class Profile extends Component {
                                                 >
                                                     Cancel
                                                 </button>
-                                                <button className="btn btn-success">
+                                                <button className="btn btn-success" onClick={this.handleSaveAddress}>
                                                     Save
                                                 </button>
                                             </div>
@@ -487,9 +632,9 @@ class Profile extends Component {
                                             <div className="profile-image-content">
                                                 <div className="profile-img">
                                                     <h6>
-                                                        {userInfo &&
-                                                        userInfo.phone
-                                                            ? userInfo.phone
+                                                        {arrUsers &&
+                                                        arrUsers.phone
+                                                            ? arrUsers.phone
                                                             : ""}
                                                     </h6>
                                                 </div>
@@ -511,11 +656,13 @@ class Profile extends Component {
                                                     type="phone"
                                                     className="form-control"
                                                     placeholder={
-                                                        userInfo &&
-                                                        userInfo.phone
-                                                            ? userInfo.phone
+                                                        arrUsers &&
+                                                        arrUsers.phone
+                                                            ? arrUsers.phone
                                                             : ""
                                                     }
+                                                    value={this.state.phone}
+                                                    onChange={(event) => this.handleOnChangeInput(event, "phone")}
                                                 />
                                                 <button
                                                     className="btn btn-light"
@@ -525,7 +672,7 @@ class Profile extends Component {
                                                 >
                                                     Cancel
                                                 </button>
-                                                <button className="btn btn-success">
+                                                <button className="btn btn-success" onClick={this.handleSavePhone}>
                                                     Save
                                                 </button>
                                             </div>
@@ -576,7 +723,7 @@ class Profile extends Component {
                                             GreenPaws account was created at{" "}
                                             {formattedDateTime}.
                                         </p>
-                                        <button>Delete Account</button>
+                                        <button onClick={this.handleDeleteUser}>Delete Account</button>
                                     </div>
                                 </div>
                                 <hr class="_PhRSQ" />
@@ -704,5 +851,9 @@ const mapStateToProps = (state) => {
         userInfo: state.user.userInfo,
     };
 };
-
-export default withRouter(connect(mapStateToProps)(Profile));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        processLogout: () => dispatch(actions.processLogout()),
+    };
+};
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));

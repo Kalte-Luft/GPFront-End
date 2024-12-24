@@ -8,16 +8,38 @@ import UK from "../../assets/images/UK.svg";
 import { FormattedMessage } from "react-intl";
 import { LANGUAGES } from "../../utils/constant";
 import { changeLanguageApp } from "../../store/actions/appActions";
+import { getAllUsers } from "../../services/userService";
 class HomeHeader extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            arrUsers: [],
+            user_id: this.props.userInfo ? this.props.userInfo.id : "",
+        };
+    }
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language);
     };
     handleNavigate = (path) => {
         this.props.history.push(path);
     };
+    getAllUsersFromReact = async () => {
+        let response = await getAllUsers(this.state.user_id);
+        if (response && response.errCode === 0) {
+            this.setState({
+                arrUsers: response.users,
+            });
+        }
+    }
+    async componentDidMount() {
+        if (this.props.isLoggedIn) {
+            await this.getAllUsersFromReact();
+        }
+    }
 
     render() {
-        const { processLogout, userInfo } = this.props;
+        const { processLogout  } = this.props;
+        let arrUsers = this.state.arrUsers;
         return (
             <div className="home-header-container">
                 <div className="home-header-content">
@@ -133,9 +155,9 @@ class HomeHeader extends Component {
                         {this.props.isLoggedIn === true && (
                             <div className="drop-info">
                                 <button className="dropbtn">
-                                    <i class="fa fa-user" style={{marginRight:"10px"}}></i>
-                                    <p>{userInfo && userInfo.name
-                                        ? userInfo.name
+                                    <i className="fa fa-user" style={{marginRight:"10px"}}></i>
+                                    <p>{arrUsers && arrUsers.name
+                                        ? arrUsers.name
                                         : ""}</p>
                                     <i className="fas fa-caret-down"></i>
                                 </button>
@@ -153,7 +175,7 @@ class HomeHeader extends Component {
                                                 }}
                                             >
                                                 <i
-                                                    class="fa fa-cog"
+                                                    className="fa fa-cog"
                                                     aria-hidden="true"
                                                 ></i>
                                                 <FormattedMessage id="home-header.system-manager" />
@@ -167,7 +189,7 @@ class HomeHeader extends Component {
                                     }}
                                     >
                                         <i
-                                            class="fa fa-user"
+                                            className="fa fa-user"
                                             aria-hidden="true"
                                         ></i>
                                         <FormattedMessage id="home-header.profile" />

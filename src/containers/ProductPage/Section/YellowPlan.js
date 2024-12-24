@@ -16,7 +16,6 @@ const YellowPlan = (props) => {
 
   //dùng để scroll đến vị trí cần thiết khi chuyển trang
   useEffect(() => {
-    console.log(props);
     const targetScrollTop = props.location?.state.targetScrollTop || 0;
     if (yellowPlanRef.current && targetScrollTop) {
       yellowPlanRef.current.scrollIntoView({ behavior: "auto" });
@@ -37,15 +36,28 @@ const YellowPlan = (props) => {
   };
 
   useEffect(() => {
-    handleGetAllProducts();
-  }, []);
+          let isMounted = true; // Biến cờ để kiểm tra xem component đã unmount hay chưa
+  
+          const fetchData = async () => {
+              let response = await getAllProducts("1");
+              if (isMounted && response && response.errCode === 0) {
+                  setArrCheckout(response.products);
+              }
+          };
+  
+          fetchData();
+  
+          return () => {
+              isMounted = false; // Đặt cờ thành false khi component unmount
+          };
+      }, []);
 
-  const handleGetAllProducts = async () => {
-    let response = await getAllProducts("1");
-    if (response && response.errCode === 0) {
-      setArrCheckout(response.products);
-    }
-  };
+  // const handleGetAllProducts = async () => {
+  //   let response = await getAllProducts("1");
+  //   if (response && response.errCode === 0) {
+  //     setArrCheckout(response.products);
+  //   }
+  // };
 
   const handleAddNewCart = async () => {
 		try {
@@ -68,7 +80,7 @@ const YellowPlan = (props) => {
 					id: existingCart.id,
 					product_id: productId,
 					quantity: updatedQuantity,
-				};console.log("Updated quantity:", updatedQuantity);
+				};
 				const updateResponse = await editCartService(updateData);
 				if (updateResponse.errCode !== 0) {
 					alert(updateResponse.errMessage);
