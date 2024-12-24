@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import "./Join.scss";
+import { FormattedMessage } from "react-intl";
 import Aoe from 'aoejs';  // Import Aoejs
 
 const Join = (props) => {
@@ -40,22 +41,17 @@ const Join = (props) => {
         <div className="join-content">
           {/* Thêm data-aoe cho hiệu ứng fadeIn */}
           <h1 className="title-1" data-aoe="fadeIn">
-            Protecting earth's existing Edens
+          <FormattedMessage id={"home-page.Protecting earth's existing Edens"} />
           </h1>
           {/* Thêm data-aoe cho hiệu ứng fadeInRight */}
           <h1 className="title-2" data-aoe="fadeIn">
-            Regenerating landscapes to thrive
+          <FormattedMessage id={"home-page.Regenerating landscapes to thrive"} />
           </h1>
           <p className="description" data-aoe="fadeIn">
-            It’s vitally important that we humans collectively
-            protect our planet’s life support systems, turn
-            carbon into breathable oxygen, and facilitate land
-            regeneration to support biodiversity, helping local
-            communities thrive. Together, we can help the earth
-            heal.
+          <FormattedMessage id={"home-page.description"} />
           </p>
           <button className="btn" data-aoe="fadeIn" onClick={()=> handleNavigate('/campaign')}>
-            <span>Discover Now <i class="fa fa-chevron-down"></i></span>
+            <span><FormattedMessage id={"home-page.Discover Now"} /> <i class="fa fa-chevron-down"></i></span>
           </button>
         </div>
       </div>

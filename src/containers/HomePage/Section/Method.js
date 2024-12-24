@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import "./Method.scss";
 import Aoe from "aoejs";
+import { FormattedMessage } from "react-intl";
 
 const Method = (props) => {
   // Hook useEffect thay thế componentDidMount
@@ -35,17 +36,10 @@ const Method = (props) => {
       <div className="method-content">
         {/* Thêm hiệu ứng fadeInLeft cho phần tử có className="left-content" */}
         <div className="left-content" data-aoe="fadeInLeft">
-          <h1>Our Unique Carbon Balancing Approach</h1>
-          <h3>Project & Partner Selection</h3>
+          <h1> <FormattedMessage id={"home-page.Our Unique Carbon Balancing Approach"} /></h1>
+          <h3><FormattedMessage id={"home-page.Project & Partner Selection"} /></h3>
           <p>
-            Greenpaw selects partners that protect established
-            biodiverse forests and accelerate the healing and
-            regenerative potential of nature. Your contributions
-            support projects designed to provide a range of
-            resilient, long-term solutions to many of the global
-            challenges we face in the world today. A
-            ‘whole-system approach’ is where everything on the
-            land benefits.
+            <FormattedMessage id={"home-page.description_Method"} />
           </p>
         </div>
 

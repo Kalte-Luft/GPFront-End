@@ -26,5 +26,36 @@
             "manage-cart":"Quản lý giỏ hàng",
             "back-to-home": "◄ Trở về trang chủ"
         }
-    }
+    },
+    "home-page": {
+        "Protecting earth's existing Edens": "Bảo vệ các vườn địa đàng hiện có của trái đất",
+        "Regenerating landscapes to thrive": "Tái sinh cảnh quan để phát triển",
+        "description": "Chúng tôi là một tổ chức phi lợi nhuận hoạt động để bảo vệ và tái sinh rừng, đại dương và đất đai của thế giới. Chúng tôi làm việc với cộng đồng địa phương để bảo vệ và phục hồi hệ sinh thái, và chúng tôi ủng hộ các chính sách bảo vệ môi trường. Mục tiêu của chúng tôi là tạo ra một thế giới nơi con người và thiên nhiên có thể phát triển cùng nhau.",
+        "Discover Now": "Khám phá ngay",
+        "Our Unique Carbon Balancing Approach": "Phương pháp cân bằng carbon độc đáo của chúng tôi",
+        "Project & Partner Selection": "Lựa chọn dự án & đối tác",
+        "description_Method": "Phương pháp cân bằng carbon độc đáo của chúng tôi dựa trên ý tưởng rằng cách tốt nhất để giảm lượng khí thải carbon là bảo vệ và phục hồi hệ sinh thái. Chúng tôi làm việc với cộng đồng địa phương để bảo vệ và phục hồi rừng, đại dương và đất đai, và chúng tôi ủng hộ các chính sách bảo vệ môi trường. Mục tiêu của chúng tôi là tạo ra một thế giới nơi con người và thiên nhiên có thể phát triển cùng nhau.",
+        "Our Partners": "Các đối tác của chúng tôi",
+        "Supporting Climate Action": "Hỗ trợ hành động về biến đổi khí hậu",
+        "1 million species risk of extinction": "1 triệu loài đang đứng trước nguy cơ tuyệt chủng",
+        "Decline in freshwater species in the past 50 yrs": "Sự suy giảm của các loài nước ngọt trong 50 năm qua",
+        "13 million hectares of forest lost each year": "13 triệu hecta rừng mất mỗi năm",
+        "High Ethical Standards": "Tiêu chuẩn đạo đức cao",
+        "Open & Transparent": "Công Khai và minh bạch",
+        "description_EthicalStandards": "Chúng tôi tuân thủ các tiêu chuẩn đạo đức cao nhất trong tất cả công việc của mình. Chúng tôi cam kết mở và minh bạch trong mọi việc chúng tôi làm, và chúng tôi cố gắng xây dựng niềm tin với các đối tác và người ủng hộ của mình.",
+        "Whole-System Approach": "Phương pháp toàn hệ thống",
+        "Creation of oxygen for the planet": "Tạo ra oxy cho hành tinh",
+        "Planting trees, plants and shrubs": "Trồng cây, cây cỏ và cây bụi",
+        "Locking in carbon": "Khóa carbon",
+        "Improving soil quality": "Cải thiện chất lượng đất",
+        "Maximising and cleaning water systems": "Tối đa hóa và làm sạch hệ thống nước",
+        "Creating edible foods": "Tạo ra thực phẩm ăn được",
+        "Protect biodiversity": "Bảo vệ đa dạng sinh học",
+        "Strengthen local communities and support landstewards.": "Tăng cường cộng đồng địa phương và hỗ trợ người bảo vệ đất đai.",
+        "Calculate Your Carbon Footprint": "Tính toán lượng carbon của bạn",
+        "Do you want to help strengthen climate change resilience for your future?": "Bạn có muốn giúp tăng cường sự chống chịu với biến đổi khí hậu cho tương lai của mình không?",
+        "Calculate Your Footprint": "Tính toán lượng carbon của bạn",
+        "1million": "1 triệu",
+        "13mimllion": "13 triệu"
+     }
 }

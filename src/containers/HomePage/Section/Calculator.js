@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import "./Calculator.scss";
 import Aoe from "aoejs"; // Import Aoejs
+import { FormattedMessage } from "react-intl";
+
 const Calculator = (props) => {
     const handleNavigate = (path) => {
         this.props.history.push(path);
@@ -33,9 +35,9 @@ const Calculator = (props) => {
         <div className="calculator-container" >
             <div className="calculator-content">
                 <div className="filter">
-                    <h1 data-aoe="popInBottom">Calculate Your Carbon Footprint</h1>
-                    <p data-aoe="popInBottom">Do you want to help strengthen climate change resilience for your future?</p>
-                    <button className="btn" data-aoe="popInBottom" onClick={()=> handleNavigate('/campaign')}>Calculate Your Footprint <i class="fa fa-chevron-right"></i></button>
+                    <h1 data-aoe="popInBottom"><FormattedMessage id={"home-page.Calculate Your Carbon Footprint"} /></h1>
+                    <p data-aoe="popInBottom"><FormattedMessage id={"home-page.Do you want to help strengthen climate change resilience for your future?"} /></p>
+                    <button className="btn" data-aoe="popInBottom" onClick={()=> handleNavigate('/campaign')}><FormattedMessage id={"home-page.Calculate Your Footprint"} /> <i class="fa fa-chevron-right"></i></button>
                 </div>
             </div>
         </div>

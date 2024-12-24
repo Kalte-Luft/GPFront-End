@@ -2,6 +2,8 @@ import React,{ useEffect }  from "react";
 import { connect } from "react-redux";
 import "./Approach.scss";
 import Aoe from 'aoejs';  // Import Aoejs
+import { FormattedMessage } from "react-intl";
+
 const Approach = () => {
     useEffect(() => {
         const aoe = new Aoe();
@@ -30,21 +32,18 @@ const Approach = () => {
             <div className="approach-content" >
                 <div className="filter">
                     <div className="left-content">
-                        <h1>Whole-System Approach</h1>
+                        <h1><FormattedMessage id={"home-page.Whole-System Approach"} /></h1>
                     </div>
                     <div className="right-content">
-                        <ul>
-                            <li>Creation of oxygen for the planet</li>
-                            <li>Planting trees, plants and shrubs</li>
-                            <li>Locking in carbon</li>
-                            <li>Improving soil quality</li>
-                            <li>Maximising and cleaning water systems</li>
-                            <li>Creating edible foods</li>
-                            <li>Protect biodiversity</li>
-                            <li>
-                                Strengthen local communities and support land
-                                stewards.
-                            </li>
+                        <ul> 
+                            <li><FormattedMessage id={"home-page.Creation of oxygen for the planet"} /></li>
+                            <li><FormattedMessage id={"home-page.Planting trees, plants and shrubs"} /></li>
+                            <li><FormattedMessage id={"home-page.Locking in carbon"} /></li>
+                            <li><FormattedMessage id={"home-page.Improving soil quality"} /></li>
+                            <li><FormattedMessage id={"home-page.Maximising and cleaning water systems"} /></li>
+                            <li><FormattedMessage id={"home-page.Creating edible foods"} /></li>
+                            <li><FormattedMessage id={"home-page.Protect biodiversity"} /></li>
+                            <li><FormattedMessage id={"home-page.Strengthen local communities and support landstewards."} /></li>
                         </ul>
                     </div>
                 </div>

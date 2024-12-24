@@ -1,32 +1,59 @@
 {
-    "home-header":{
+    "home-header": {
         "login": "Login",
         "logout": "Logout",
         "home": "Home",
         "campaign": "Campaign",
         "status": "Status",
         "donate": "Donate",
-        "about": "About" ,
+        "about": "About",
         "contact": "Contact",
-        "welcome": "Welcome, " ,
+        "welcome": "Welcome, ",
         "system-manager": "System Manager",
         "profile": "Profile"
     },
     "menu": {
         "admin": {
-            "system": "System", 
+            "system": "System",
             "manage-user": "Manage Users System",
             "manage-campaign": "Manage Campaign System",
             "manage-partner": "Manage Partner System",
             "manage-donation": "Manage Donation System",
             "manage-product": "Manage Product System",
             "back-to-home": "◄ Back to Home",
-            "manage-cart":"Manage Cart System",
+            "manage-cart": "Manage Cart System",
             "manage-campaign-donation": "Manage Campaign Donation System"
-            
-
-
         }
+    },
+    "home-page": {
+        "Protecting earth's existing Edens": "Protecting earth's existing Edens",
+        "Regenerating landscapes to thrive": "Regenerating landscapes to thrive",
+        "description": "We are a non-profit organization that works to protect and regenerate the world's forests, oceans, and soils. We work with local communities to protect and restore ecosystems, and we advocate for policies that protect the environment. Our goal is to create a world where people and nature can thrive together.",
+        "Discover Now": "Discover Now",
+        "Our Unique Carbon Balancing Approach": "Our Unique Carbon Balancing Approach",
+        "Project & Partner Selection": "Project & Partner Selection",
+        "description_Method": "Our unique carbon balancing approach is based on the idea that the best way to reduce carbon emissions is to protect and restore ecosystems. We work with local communities to protect and restore forests, oceans, and soils, and we support policies that protect the environment. Our goal is to create a world where people and nature can thrive together.",
+        "Our Partners": "Our Partners",
+        "Supporting Climate Action": "Supporting Climate Action",
+        "1 million species risk of extinction": "1 million species risk of extinction",
+        "Decline in freshwater species in the past 50 yrs": "Decline in freshwater species in the past 50 years",
+        "13 million hectares of forest lost each year": "13 million hectares of forest lost each year",
+        "High Ethical Standards": "High Ethical Standards",
+        "Open & Transparent": "Open & Transparent",
+        "description_EthicalStandards": "We hold ourselves to the highest ethical standards in all of our work. We are committed to being open and transparent in everything we do, and we strive to build trust with our partners and supporters.",
+        "Whole-System Approach": "Whole-System Approach",
+        "Creation of oxygen for the planet": "Creation of oxygen for the planet",
+        "Planting trees, plants and shrubs": "Planting trees, plants and shrubs",
+        "Locking in carbon": "Locking in carbon",
+        "Improving soil quality": "Improving soil quality",
+        "Maximising and cleaning water systems": "Maximising and cleaning water systems",
+        "Creating edible foods": "Creating edible foods",
+        "Protect biodiversity": "Protect biodiversity",
+        "Strengthen local communities and support landstewards.": "Strengthen local communities and support landstewards.",
+        "Calculate Your Carbon Footprint": "Calculate Your Carbon Footprint",
+        "Do you want to help strengthen climate change resilience for your future?": "Do you want to help strengthen climate change resilience for your future?",
+        "Calculate Your Footprint": "Calculate Your Footprint",
+        "1million": "1 million",
+        "13mimllion": "13 million"
     }
-
 }
