@@ -23,6 +23,10 @@ const getAllCampaigns = (inputId) => {
     return axios.get(`/api/get-all-campaigns?id=${inputId}`);
 }
 
+const getPartnerByCampaignId = (inputId) => {
+    return axios.get(`/api/get-partners-by-campaign?id=${inputId}`);
+}
+
 
 export {
     getAllPartners,
@@ -30,4 +34,5 @@ export {
     deletePartnerService,
     editPartnerService,
     getAllCampaigns,
+    getPartnerByCampaignId
 };

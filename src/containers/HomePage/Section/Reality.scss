@@ -1,14 +1,14 @@
 .reality-container {
-    height: 70vh;
+    height: fit-content;
     background-color: #ffffff;
     .reality-content {
-        height: 100%;
+        height: fit-content;
         width: 100%;
         background: url("../../../assets/images/forest.png") center center
             no-repeat;
         background-size: cover;
         .filter {
-            height: 100%;
+            height: fit-content;
             width: 100%;
             background-color: #1A4F45bd;
             display: flex;
@@ -100,6 +100,22 @@
                     font-weight: 700;
                     color: #ffffff;
                     text-align: center;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 895px) {
+    .reality-container {
+        .reality-content {
+            .filter {
+                flex-direction: column; /* Thay đổi flex-direction thành column */
+                .left-content,
+                .center-content,
+                .right-content {
+                    width: 100%; /* Chiếm toàn bộ chiều rộng */
+                    margin-bottom: 20px; /* Thêm khoảng cách giữa các phần */
+                    text-align: center; /* Canh giữa các nội dung */
                 }
             }
         }

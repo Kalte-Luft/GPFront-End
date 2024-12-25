@@ -92,13 +92,9 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    img {
-                        height: 45px;
-                        width: 45px;
-                        border-radius: 60%;
-                        object-fit: cover;
-                        object-position: center center;
-                        position: relative;
+                    i {
+                        font-size: 3.5rem;
+                        color: #000000;
                     }
                     
                 }
@@ -209,6 +205,7 @@
                     justify-content: center;
                     flex-direction: column;
                     align-items: flex-start;
+                    
                     .profile-image-content {
                         height: 100%;
                         width: 100%;
@@ -222,14 +219,7 @@
                             color: #000000;
                             margin-left: 10px;
                         }
-                        img {
-                            height: 100px;
-                            width: 100px;
-                            border-radius: 50%;
-                            object-fit: cover;
-                            object-position: center center;
-                            position: relative;
-                        }
+                        
                         .interact-btn {
                             width: fit-content;
                             height: 100%;

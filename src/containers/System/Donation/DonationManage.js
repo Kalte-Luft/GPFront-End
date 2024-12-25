@@ -71,7 +71,7 @@ class DonationManage extends Component {
         let arrDonations = this.state.arrDonations;
         return (
             <div className="donation-container">
-                <div className="title text-center">Manage donations with Nghia & Khanh</div>
+                <div className="title text-center">Manage donations</div>
                 <div className="donations-table mt-5 mx-3">
                     <table id="customers">
                         <thead>

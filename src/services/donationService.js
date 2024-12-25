@@ -33,6 +33,9 @@ const getAllUsers = (inputId) => {
 const getAllCarts = (inputId) => {
     return axios.get(`/api/get-all-carts?id=${inputId}`);
 }
+const getDonationsCountForCurrentWeek = () => {
+    return axios.get("/api/get-donations-count-for-current-week");
+}
 export {
     getAllDonations,
     createNewDonationService,
@@ -42,4 +45,5 @@ export {
     getAllProducts,
     getAllUsers,
     getAllCarts,
+    getDonationsCountForCurrentWeek,
 };

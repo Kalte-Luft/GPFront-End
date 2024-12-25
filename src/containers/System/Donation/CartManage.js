@@ -93,6 +93,7 @@ class CartManage extends Component {
     doEditCart = async (data) => {
         try {
             let response = await editCartService(data);
+            console.log("doEditCart: ", data);
             if (response && response.errCode === 0) {
                 this.setState({
                     isOpenModalEditCart: false,

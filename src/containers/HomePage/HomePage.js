@@ -15,9 +15,11 @@ class HomePage extends Component {
     scrollbarsRef = createRef();
 
     render() {
+        const { language } = this.props;
+        const webBodyStyle = language === 'vi' ? { fontFamily: 'Arial, Helvetica, sans-serif' } : {};
         return (
             
-                <div className='web-body' ref={this.scrollbarsRef} style={{overflowY:'scroll'}}>
+                <div className='web-body' ref={this.scrollbarsRef} style={webBodyStyle}>
                     <HomeHeader />
                     <Banner scrollbarsRef={this.scrollbarsRef} />
                     <Join/>
@@ -36,7 +38,8 @@ class HomePage extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
     };
 };
 

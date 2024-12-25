@@ -65,7 +65,7 @@ const GreenPlan = (props) => {
 	const handleAddNewCart = async () => {
 		try {
 			// Lấy danh sách giỏ hàng của người dùng
-			const cartResponse = await getCartByUser(userId);
+			const cartResponse = await getCartByUser(userId, "pending");
 			if (cartResponse.errCode !== 0) {
 				alert("Failed to retrieve cart data");
 				return;
@@ -131,13 +131,13 @@ const GreenPlan = (props) => {
 				<div className="GreenPlan-content-right">
 					<div className="title-GreenPlan">
 						<h1>Green Plan</h1>
-						<p>180.000VND</p>
+						<p>5.000VND</p>
 					</div>
 					<div className="buy-product-GreenPlan">
 						<div className="bg">
 							<h3>Would you like to buy this product?</h3>
 							<p>Once you subscribe, we will place a new order with this product.
-								You will be automatically charged 180.000VND or each order.
+								You will be automatically charged 5.000VND or each order.
 								You can easily manage your subscription or cancel it anytime with no additional charges.</p>
 
 							<span>1 item in the bag</span>

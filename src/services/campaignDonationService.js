@@ -30,6 +30,10 @@ const getAllUsers = (inputId) => {
 const getCampaignDonationsByUser = (inputId) => {
     return axios.get(`/api/get-campaign-donations-by-user?id=${inputId}`);
 }
+const getCampaignDonationsByCampaign = (inputId) => {
+    return axios.get(`/api/get-campaign-donations-by-campaign?id=${inputId}`);
+}
+
 export {
     getAllCampaignDonations,
     getCampaignDonationsByUser,
@@ -38,4 +42,5 @@ export {
     createNewCampaignDonationService,
     deleteCampaignDonationService,
     editCampaignDonationService,
+    getCampaignDonationsByCampaign,
 };

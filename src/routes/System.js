@@ -8,7 +8,7 @@ import Header from "../containers/Header/Header";
 import { userIsAdmin } from "../hoc/authentication";
 import CampaignDonationManage from "../containers/System/CampaignDonationManage";
 import DonationManage from "../containers/System/Donation/DonationManage";
-
+import Statistical from "../containers/System/Statistical";
 import ProductManage from "../containers/System/Donation/ProductManage";
 import CartManage from "../containers/System/Donation/CartManage";
 class System extends Component {
@@ -20,6 +20,10 @@ class System extends Component {
                 <div className="system-container" style={{ fontFamily: "Helvetica" }}>
                     <div className="system-list">
                         <Switch>
+                            <Route
+                                path="/system/statistical"
+                                component={userIsAdmin(Statistical)} // Sử dụng HOC
+                            />
                             <Route
                                 path="/system/user-manage"
                                 component={userIsAdmin(UserManage)} // Sử dụng HOC

@@ -17,6 +17,7 @@
     "menu": {
         "admin": {
             "system": "Hệ thống",
+            "statistical": "Thống kê",
             "manage-user": "Quản lý người dùng",
             "manage-campaign": "Quản lý chiến dịch",
             "manage-partner": "Quản lý đối tác",

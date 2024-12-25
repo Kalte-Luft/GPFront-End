@@ -30,3 +30,34 @@
         font-size: 20px;
     }
 }
+@media (max-width: 1100px) {
+    .partners-container {
+        .partners-title {
+            h1 {
+                font-size: 4.5rem; /* Giảm kích thước font cho h1 */
+            }
+            p {
+                font-size: 1.4rem; /* Giảm kích thước font cho p */
+            }
+        }
+        .partners {
+            font-size: 18px; /* Giảm kích thước font cho partners */
+        }
+    }
+}
+
+@media (max-width: 765px) {
+    .partners-container {
+        .partners-title {
+            h1 {
+                font-size: 3.5rem; /* Giảm kích thước font cho h1 */
+            }
+            p {
+                font-size: 1.2rem; /* Giảm kích thước font cho p */
+            }
+        }
+        .partners {
+            font-size: 16px; /* Giảm kích thước font cho partners */
+        }
+    }
+}

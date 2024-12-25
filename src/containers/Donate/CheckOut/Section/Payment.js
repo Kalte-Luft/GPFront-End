@@ -35,7 +35,7 @@ class Payment extends Component {
                 total_amount: "",
                 transfer_content: "",
             });
-        });//console.log("su thay doi cua state ", this.state);
+        });
     };
     
     handleOnChangeInput = (event, id) => {

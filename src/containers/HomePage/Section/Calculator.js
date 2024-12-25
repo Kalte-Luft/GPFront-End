@@ -7,7 +7,7 @@ import { FormattedMessage } from "react-intl";
 
 const Calculator = (props) => {
     const handleNavigate = (path) => {
-        this.props.history.push(path);
+        props.history.push(path);
     }
     useEffect(() => {
         const aoe = new Aoe();

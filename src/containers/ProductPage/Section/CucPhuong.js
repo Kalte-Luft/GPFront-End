@@ -39,33 +39,20 @@ const CucPhuong = (props) => {
 
 
 	useEffect(() => {
-			let isMounted = true; // Biến cờ để kiểm tra xem component đã unmount hay chưa
-	
-			const fetchData = async () => {
-				let response = await getAllProducts("4");
-				if (isMounted && response && response.errCode === 0) {
-					setArrCheckout(response.products);
-				}
-			};
-	
-			fetchData();
-	
-			return () => {
-				isMounted = false; // Đặt cờ thành false khi component unmount
-			};
-		}, []);
+		handleGetAllProducts();
+	}, []);
 
-	// const handleGetAllProducts = async () => {
-	// 	let response = await getAllProducts("4");
-	// 	if (response && response.errCode === 0) { //errCode is a key to check the status of the response === 0 means success
-	// 		setArrCheckout(response.products);
-	// 	}
-	// }
+	const handleGetAllProducts = async () => {
+		let response = await getAllProducts("4");
+		if (response && response.errCode === 0) { //errCode is a key to check the status of the response === 0 means success
+			setArrCheckout(response.products);
+		}
+	}
 
 	const handleAddNewCart = async () => {
 		try {
 			// Lấy danh sách giỏ hàng của người dùng
-			const cartResponse = await getCartByUser(userId);
+			const cartResponse = await getCartByUser(userId, "pending");
 			if (cartResponse.errCode !== 0) {
 				alert("Failed to retrieve cart data");
 				return;

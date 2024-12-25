@@ -5,7 +5,10 @@ import { withRouter } from "react-router-dom";
 import {
 	getCartByUser,
 	deleteCartService,
+	editCartService,
 } from "../../../../services/cartService";
+import {  Modal, ModalHeader, ModalBody } from "reactstrap";
+import {createNewDonationService }	from "../../../../services/donationService";
 
 class Cart extends Component {
 	constructor(props) {
@@ -14,6 +17,8 @@ class Cart extends Component {
 			user_id: this.props.userInfo ? this.props.userInfo.id : "",
 			arrCarts: [],//gồm image, name, quantity, total
 			total_amount: "",
+			status_purchased: "purchased",
+			isOpenModalQR : false,
 		};
 	}
 	handleNavigate = (path) => {
@@ -90,14 +95,88 @@ class Cart extends Component {
 		return result;
 	};
 
+	toggle = () => {
+		this.setState({
+			isOpenModalQR: !this.state.isOpenModalQR,
+		});
+	}
 
+	handleAddNewDonation = async () => {
+		const {total_amount, user_id, arrCarts} = this.state;
+		console.log("biến truyền vào để tạo donation", {total_amount, user_id});
+		try {
+			let response = await createNewDonationService({
+				total_amount: total_amount,
+				user_id: user_id,
+			});
+			if (response && response.errCode === 0) {
+				console.log("Donation created successfully. Updating all carts...");
+
+				try {
+					// Sử dụng Promise.all để thực hiện các lời gọi API đồng thời
+					const updatePromises = arrCarts.map(cart => 
+						editCartService({
+							id: cart.id,
+							product_id: cart.product_id,
+							quantity: cart.quantity,
+							user_id: cart.user_id,
+							status: 'purchased',
+						})
+					);
+
+					// Chờ tất cả lời gọi API hoàn thành
+					await Promise.all(updatePromises);
+
+					console.log("All carts updated successfully.");
+				} catch (error) {
+					console.error("Error updating carts:", error);
+				}	
+				await this.getAllCartsFromReact();
+				alert("Create donation successfully");
+			}
+		} catch (error) {
+			console.log("handleAddNewCampaignDonation error: ", error);
+		}
+	}
 	render() {
 		const { userInfo } = this.props; // Lấy thông tin người dùng từ props
 		const userEmail = userInfo ? userInfo.email : ''; // Nếu có userInfo thì lấy email, nếu không thì để trống
 		let arrCarts = this.state.arrCarts;
-		let arrDonations = this.state.arrDonations;
-		console.log("Cart items:", arrCarts); // Ghi lại thông tin về giỏ hàng
+		let isOpenModalQR = this.state.isOpenModalQR;
 		return (
+			<React.Fragment>
+			{isOpenModalQR && (
+									<Modal
+										isOpen={isOpenModalQR} //này là biến boolean để check xem modal có mở hay không
+										toggle={() => this.toggle()} //này là hàm để đóng mở modal
+										className={"modal-email-container"}
+										size="ml"
+									>
+										<ModalHeader toggle={() => this.toggle()}>
+											Please pay to continue
+										</ModalHeader>
+										<ModalBody>
+											<div className="modal-email-body">
+												<div className="input-container">
+													<label>
+														Before changing your account, you will
+														need to enter the code we sent to{" "}
+														
+													</label>
+													<label
+														style={{
+															marginTop: "10px",
+															fontWeight: "600",
+														}}
+													>
+														Enter the code
+													</label>
+													
+												</div>
+											</div>
+										</ModalBody>
+									</Modal>
+								)}
 			<div className="Cart-container">
 				<div className="banner"></div>
 				<div className="cart_content">
@@ -124,7 +203,6 @@ class Cart extends Component {
 														/>
 
 													)}
-													{console.log("Image URL:", item.product.image)}
 												</div>
 												<div className="cart_item_wrap">
 													<div className="cart_item_wrap_top">
@@ -231,7 +309,9 @@ class Cart extends Component {
 							</div>
 							<div className="right_checkout_needAgreement">
 								<div className="right_checkout_button">
-									<button className="checkout_button">Checkout</button>
+									<button className="checkout_button"
+										onClick={() => this.handleAddNewDonation()}
+									>Checkout</button>
 								</div>
 								<div className="right_checkout_needAgreement_text">
 									<i className="fas fa-lock"></i>
@@ -254,7 +334,7 @@ class Cart extends Component {
 					</div>
 				</div>
 			</div>
-
+			</React.Fragment>
 		);
 	}
 }

@@ -20,6 +20,7 @@
             h1{
                 font-size: 4rem;
                 font-weight: bolder;
+                text-align: center;
                 color: #ffffff;
                 margin-bottom: 20px;
             }
@@ -44,6 +45,47 @@
                 z-index: 10;
                 &:hover{
                     background-color: #bdbdbd;
+                }
+            }
+        }
+    }
+}
+/* Responsive for max-width: 1000px */
+@media (max-width: 1000px) {
+    .calculator-container {
+        .calculator-content {
+            .filter {
+                h1 {
+                    font-size: 3.5rem; /* Giảm kích thước font một chút */
+                }
+
+                p {
+                    font-size: 1.4rem; /* Giảm kích thước font một chút */
+                }
+
+                .btn {
+                    font-size: 1.4rem; /* Giảm kích thước font một chút */
+                }
+            }
+        }
+    }
+}
+
+/* Responsive for max-width: 775px */
+@media (max-width: 775px) {
+    .calculator-container {
+        .calculator-content {
+            .filter {
+                h1 {
+                    font-size: 3rem; /* Giảm kích thước font thêm một chút */
+                }
+
+                p {
+                    font-size: 1.3rem; /* Giảm kích thước font thêm một chút */
+                }
+
+                .btn {
+                    font-size: 1.3rem; /* Giảm kích thước font thêm một chút */
                 }
             }
         }

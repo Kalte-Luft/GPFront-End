@@ -13,7 +13,6 @@ class CheckOut extends Component {
 			<div>
 				<HomeHeader />
 				<Cart />
-				<Payment/>
 				<HomeFooter />
 
 			</div>

@@ -1,6 +1,6 @@
 .footer-container {
     width: 100%;
-    height: 60vh;
+    height: fit-content;
     background-color: #18433c;
     display: flex;
     flex-direction: column;
@@ -8,59 +8,67 @@
     align-items: center;
     .footer-content {
         width: 90%;
-        height: 80%;
+        height: fit-content;
         display: flex;
         flex-direction: row;
         align-items: center;
+        padding: 50px 30px;
         margin-top: 15px;
         .logo {
             background: url("../../assets/images/w1.png") center center
                 no-repeat;
             background-size: contain;
             width: 25%;
-            height: 80%;
+            height: 150px;
             cursor: pointer;
         }
-        .menu {
-            width: 20%;
+        .contact{
             display: flex;
-            justify-content: right;
-            align-items: center;
-            .menu-item {
-                height: 100%;
-                width: 60%;
+            flex-direction: row;
+            width: 40%;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            .menu {
+                width: 30%;
                 display: flex;
-                flex-direction: column;
-                a {
-                    color: #d3d3d3;
-                    font-size: 16px;
-                    text-decoration: none;
-                    cursor: pointer;
-                    margin-top: 10px;
-                    &:hover {
-                        color: #ffffff;
+                justify-content: right;
+                align-items: center;
+                .menu-item {
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    a {
+                        color: #d3d3d3;
+                        font-size: 16px;
+                        text-decoration: none;
+                        cursor: pointer;
+                        margin-top: 10px;
+                        &:hover {
+                            color: #ffffff;
+                        }
                     }
                 }
             }
-        }
-        .branch {
-            width: 20%;
-            display: flex;
-            justify-content: right;
-            align-items: center;
-            .branch-item {
-                height: 100%;
-                width: 60%;
+            .branch {
+                width: 20%;
                 display: flex;
-                flex-direction: column;
-                a {
-                    color: #d3d3d3;
-                    font-size: 16px;
-                    text-decoration: none;
-                    cursor: pointer;
-                    margin-top: 10px;
-                    &:hover {
-                        color: #ffffff;
+                justify-content: right;
+                align-items: center;
+                .branch-item {
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    a {
+                        color: #d3d3d3;
+                        font-size: 16px;
+                        text-decoration: none;
+                        cursor: pointer;
+                        margin-top: 10px;
+                        &:hover {
+                            color: #ffffff;
+                        }
                     }
                 }
             }
@@ -146,6 +154,73 @@
             color: #d3d3d3;
             font-size: 16px;
             text-align: center;
+        }
+    }
+}
+@media (max-width: 1100px) {
+    .footer-container {
+        .footer-content {
+            flex-direction: column; /* Chuyển flex-direction của footer-content thành column */
+            align-items: center;
+            padding: 30px 20px;
+
+            .logo {
+                width: 50%; /* Giảm kích thước logo */
+                height: auto;
+            }
+
+            .contact {
+                width: 80%; /* Giảm độ rộng phần contact */
+            }
+
+            .mail {
+                width: 80%; /* Giảm độ rộng phần mail */
+                gap: 15px;
+            }
+        }
+    }
+}
+
+@media (max-width: 765px) {
+    .footer-container {
+        .footer-content {
+            flex-direction: column; /* Chuyển flex-direction của footer-content thành column */
+            align-items: center;
+            padding: 30px 15px;
+
+            .logo {
+                width: 60%; /* Giảm kích thước logo */
+                height: auto;
+            }
+
+            
+
+            .mail {
+                width: 100%; /* Làm cho mail rộng 100% */
+                gap: 10px;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        .footer-content {
+            flex-direction: column; /* Chuyển flex-direction của footer-content thành column */
+            align-items: center;
+            padding: 20px 10px;
+
+            .logo {
+                width: 70%; /* Giảm kích thước logo */
+                height: auto;
+            }
+
+           
+
+            .mail {
+                width: 100%; /* Làm cho mail rộng 100% */
+                gap: 10px;
+            }
         }
     }
 }

@@ -7,24 +7,26 @@ const HomeFooter = () => {
         <div className="footer-container">
             <div className="footer-content">
 				<div className="logo"></div>
-				<div className="menu">
-					<div className="menu-item">
-						<a>About</a>
-						<a>Contact Us</a>
-						<a>Reality</a>
-						<a>Campaign</a>
-						<a>Donate</a>
-						<a>Terms & Conditions</a>
-						<a>Cookie policy</a>
-						<a>Privacy Policy</a>
+				<div className="contact">
+					<div className="menu">
+						<div className="menu-item">
+							<a>About</a>
+							<a>Contact Us</a>
+							<a>Reality</a>
+							<a>Campaign</a>
+							<a>Donate</a>
+							<a>Terms & Conditions</a>
+							<a>Cookie policy</a>
+							<a>Privacy Policy</a>
+						</div>
 					</div>
-				</div>
-				<div className="branch">
-					<div className="branch-item">
-						<a>Da Nang</a>
-						<a>Binh Dinh</a>
-						<a>Hue</a>
-						<a>Quang Nam</a>
+					<div className="branch">
+						<div className="branch-item">
+							<a>Da Nang</a>
+							<a>Binh Dinh</a>
+							<a>Hue</a>
+							<a>Quang Nam</a>
+						</div>
 					</div>
 				</div>
 				<div className="mail">

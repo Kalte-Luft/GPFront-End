@@ -67,7 +67,7 @@ const OrangePlan = (props) => {
 	const handleAddNewCart = async () => {
 		try {
 			// Lấy danh sách giỏ hàng của người dùng
-			const cartResponse = await getCartByUser(userId);
+			const cartResponse = await getCartByUser(userId, "pending");
 			if (cartResponse.errCode !== 0) {
 				alert("Failed to retrieve cart data");
 				return;

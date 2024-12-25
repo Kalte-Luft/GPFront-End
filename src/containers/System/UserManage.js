@@ -131,7 +131,7 @@ class UserManage extends Component {
                     />
                 )}
 
-                <div className="title text-center">Manage users with Nghia & Khanh</div>
+                <div className="title text-center">Manage users</div>
                 <div className="mx-1">
                     <button
                         className="btn btn-primary px-3"
