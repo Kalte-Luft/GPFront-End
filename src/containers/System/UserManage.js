@@ -135,12 +135,13 @@ class UserManage extends Component {
                 <div className="mx-1">
                     <button
                         className="btn btn-primary px-3"
+                        style={{marginLeft: "10px"}}
                         onClick={() => this.handleAddNewUser()}
                     >
                         <i className="fa fa-plus"></i> Add new user
                     </button>
                 </div>
-                <div className="users-table mt-3 mx-2">
+                <div className="users-table mt-3 mx-2" style={{margin: "0px 10px !important"}}>
                     <table id="customers">
                         <thead>
                             <tr>

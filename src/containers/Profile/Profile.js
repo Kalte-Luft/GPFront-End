@@ -194,10 +194,22 @@ class Profile extends Component {
         }
     };
 
-    handleSaveEmail = () => {
+    handleSaveEmail = async() => {
         if (this.checkValidateEmail()) {
-            // Call API to save email
-            console.log("Email saved:", this.state.email);
+            try {
+                let response = await editUserService({
+                    id: this.state.user_id,
+                    email: this.state.email,
+                });
+                if (response && response.errCode === 0) {
+                    this.setState({
+                        isEditEmail: false,
+                    });
+                    this.getAllUsersFromReact();
+                }
+            } catch (error) {
+                console.log("handleSaveEmail error: ", error);         
+            }
         }
     };
 
@@ -382,7 +394,7 @@ class Profile extends Component {
                                                     <h6>{arrUsers && arrUsers.email ? arrUsers.email : ""}</h6>
                                                 </div>
                                                 <div className="interact-btn">
-                                                    <button className="change-image" onClick={() => this.toggle()}>
+                                                    <button className="change-image" onClick={() => this.onChangeEditEmail()}>
                                                         Edit
                                                     </button>
                                                 </div>

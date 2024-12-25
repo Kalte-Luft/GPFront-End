@@ -11,7 +11,7 @@
 }
 
 #customers tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #d9ecfd88 !important;
 }
 
 #customers tr:hover {
@@ -22,7 +22,7 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #04aa6d;
+    background-color: #3979da !important;
     color: white;
 }
 .btn-edit {
