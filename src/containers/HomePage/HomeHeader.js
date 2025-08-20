@@ -170,7 +170,7 @@ class HomeHeader extends Component {
                                                 href="#"
                                                 onClick={() => {
                                                     this.handleNavigate(
-                                                        "/system"
+                                                        "/system/statistical"
                                                     );
                                                 }}
                                             >

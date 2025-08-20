@@ -15,7 +15,7 @@
     "menu": {
         "admin": {
             "system": "System",
-            "statistical": "Statistical",
+            "statistical": "Dashboard",
             "manage-user": "Manage Users System",
             "manage-campaign": "Manage Campaign System",
             "manage-partner": "Manage Partner System",

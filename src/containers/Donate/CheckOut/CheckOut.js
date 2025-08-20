@@ -4,7 +4,6 @@ import HomeHeader from "../../HomePage/HomeHeader";
 import HomeFooter from "../../HomePage/HomeFooter";
 import "./CheckOut.scss";
 import Cart from "./Section/Cart";
-import Payment from "./Section/Payment";
 
 
 class CheckOut extends Component {
